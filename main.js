@@ -1,4 +1,5 @@
 import * as t from "./node_modules/three/build/three.module.js";
+import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 var w         = window.innerWidth, 
     h         = window.innerHeight;
@@ -28,6 +29,7 @@ animate();
 
 
 /* DRAW LINES */
+/*
 cam.position.z = 100;
 cam.lookAt( 0, 0, 0 );
 const material = new t.LineBasicMaterial( { color: 0x0000ff } );
@@ -46,4 +48,13 @@ function animate() {
 	rend.render( scene, cam );
 }
 animate();
+*/
+
+const loader = new GLTFLoader();
+
+loader.load( 'AnyConv.com__Iphone seceond version finished.gltf', function ( gltf ) {
+	scene.add( gltf.scene );
+}, undefined, function ( error ) {
+	console.error( error );
+} );
 
