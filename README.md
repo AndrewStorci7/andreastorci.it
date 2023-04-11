@@ -1,7 +1,7 @@
 # andreastorci.it
 Source code of my personal site
 
-🛠️ **Working in progress** 🛠️
+🛠️ **Work in progress** 🛠️
 
 ## TODO
 - [ ] Implement React
