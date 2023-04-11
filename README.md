@@ -9,6 +9,6 @@ Source code of my personal site
 - [ ] Implement ThreeJs
   - See documentation and videos
 - [ ] See all the installation
-  - [ ] No npm
-  - [ ] With npm
+  - [x] No npm
+  - [x] With npm
   - [ ] See other
