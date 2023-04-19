@@ -1,0 +1,25 @@
+body { 
+    margin: 0;
+    color: white;
+    font-size: 30px;
+}
+.initial_screen {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+}
+#show_loading {
+    display: none;
+}
+#loading_text {
+    color: white;
+}
+#pre_processing_scene {
+    display: block;
+}
+.btn-light {
+    margin-top: 20px;
+    font-size: 40px;
+    border-radius: 30px;
+}

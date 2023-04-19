@@ -1,13 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <bare type="module" href="src/main.jsx" ></bare>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+        <div class="initial_screen">
+            <div class="container">
+                <div class="position-absolute top-50 start-50 translate-middle">
+                    <div id="pre_processing_scene" >
+                        <span>
+                            Scegli la risoluzione: 
+                        </span>
+                        <div class="d-flex justify-content-center">
+                            <ul id="choose_resolution">
+                                <li>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check_btn_def" value="default" checked>
+                                        <label class="form-check-label" for="check_btn_def">
+                                            Default
+                                        </label>
+                                      </div>                            
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check_btn_low" value="low-power">
+                                        <label class="form-check-label" for="check_btn_low">
+                                            Low
+                                        </label>
+                                      </div>                            
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check_btn_high" value="high-performance">
+                                        <label class="form-check-label" for="check_btn_high">
+                                            High
+                                        </label>
+                                      </div>                            
+                                </li>
+                            </ul>
+                        </div>
+                        <span style="font-size: small;">
+                            If no resolution is selected, by default the resolution is set to "default"
+                        </span>
+                        <div class="d-flex justify-content-center">
+                            <button id="play" type="button" class="btn btn-light">
+                                PLAY
+                            </button>
+                        </div>
+                    </div>
+                    <div id="show_loading">
+                        <div class="d-flex justify-content-center" >
+                            <div class="spinner-border text-light" role="status"></div>            
+                        </div>
+                        <span>Loading... <span id="loading_text"> </span> </span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script type="module">
+import * as THREE from './node_modules/three/build/three.module.js';
+
+//import { WebGL } from './node_modules/three/examples/jsm/capabilities/WebGL.js';
+import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { RGBELoader } from './node_modules/three/examples/jsm/loaders/RGBELoader.js';
+
+let camera, scene, renderer, pf;
+
+$( '.form-check-input' ).click( function() {
+    const t = $( this ).attr( 'id' );
+    console.log( t );
+    $( 'li' ).each( function( i ) {
+        let e = $( this ).find( 'input' );
+        if ( e.attr( 'id' ) !== t ) {
+            e.prop( 'checked', false );
+        }
+    });
+} );
+
+$( '#play' ).click( function() {
+    $( 'li' ).each( function( i ) {
+        let e = $( this ).find( 'input' );
+        if ( e.is( ':checked' ) ) {
+            pf = e.val();
+            $( '#pre_processing_scene' ).css( 'display', 'none' );
+            $( '#show_loading' ).css( 'display', 'block' );
+        }
+    });
+    start( pf );
+    init();
+    render();
+} ); 
+
+function start( pf ) {
+    renderer = new THREE.WebGLRenderer( { antialias: true, powerPreference: pf,  } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    document.body.appendChild( renderer.domElement );
+}
+
+
+function init() {
+
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.25, 100 );
+    camera.position.set( 0, 300, 300 );
+
+    scene = new THREE.Scene();
+
+    new RGBELoader()
+        .load( './public/fireplace_4k.hdr', function ( texture ) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.background = texture;
+            scene.environment = texture;
+
+            render();
+
+            // model
+            const loader = new GLTFLoader()
+            loader.load( './public/scrivania.glb', function ( gltf ) {
+                $( '.initial_screen' ).css( 'display', 'none' );
+                scene.add( gltf.scene );
+                console.log( gltf );
+                render();
+
+            }, function( gltf ) {
+                $( '#loading_text' ).text( ( gltf.loaded / 1000000 ).toFixed(2) + ' MB loaded' );
+                console.log( ( gltf.loaded * 100 ) + '% loaded' );
+            } );
+        } );
+    
+
+    const controls = new OrbitControls( camera, renderer.domElement );
+    controls.addEventListener( 'change', render ); // use if there is no animation loop
+    controls.minDistance = 2;
+    controls.maxDistance = 10;
+    controls.target.set( 0, 0, - 0.2 );
+    controls.update();
+
+    window.addEventListener( 'resize', onWindowResize );
+
+}
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+    render();
+
+}
+
+//
+
+function render() {
+
+	renderer.render( scene, camera );
+
+}
+        </script>
+	</body>
 </html>
