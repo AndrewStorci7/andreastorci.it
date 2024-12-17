@@ -1,0 +1,73 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  /* 
+  OLD VERSION
+  .sidebar {
+    @apply m-[5px] w-[25%] bg-sidebarDark border-[4px] border-borderSidebarDark h-full rounded-xl p-[10px];
+  } */
+  
+  .sidebar {
+    @apply w-[25%] bg-sidebarDark h-full p-[10px];
+  }
+  .avatar-entry {
+    @apply col-span-2 p-[5px] pl-[20px];
+  }
+  .span-underline {
+    @apply font-semibold underline decoration-neutral-100;
+  }
+  .divisor {
+    @apply my-[40px] mx-[20px] 
+  }
+  /* .font-geist-mono {
+    @apply font-[family-name:var(--font-geist-mono)];
+  }
+  .font-geist-sans {
+    @apply font-[family-name:var(--font-geist-sans)];
+  } */
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .font-roboto-mono {
+  font-family: "Roboto Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+} */
+
+.avatar-entry h1 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.avatar-entry h3 {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.span-1 {}
+
