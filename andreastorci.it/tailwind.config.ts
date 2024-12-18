@@ -18,6 +18,13 @@ export default {
         borderSidebarDark: "#525252",
         flax: "#EFD780",
         'picton-blue': "#56ABDC",
+        purple: "#610F7F",
+        russian: "#2F0147",
+        sandy: "#FF9F45",
+        'sandy-light': "#FFDFC2",
+        'antique-white': "#FFEAD6",
+        turquoise: "#41D3BD",
+        'white-smoke': "#F5F5F5",
       },
       fontFamily: {
         'roboto-mono': ['Roboto Mono', 'serif'],

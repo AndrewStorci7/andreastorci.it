@@ -1,9 +1,16 @@
+import Background from "./components/background";
+import Header from "./components/header";
+import MainTitle from "./components/main-title";
 import Sidebar from "./components/sidebar";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="h-screen">
+    <div className="h-screen w-screen">
+      {/* <Sidebar /> */}
+      <Background />
+      <Header />
+      <MainTitle />
       <Sidebar />
     </div>
     

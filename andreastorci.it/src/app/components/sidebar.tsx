@@ -1,46 +1,32 @@
-import Image from "next/image";
-
 /**
  * Sidebar Menu
  * 
  * @author Andrea Storci aka dreean
- * @returns 
- */
+ * 
+*/
+
+'use client'
+
+import Btn from "./inc/btn"
+import MorphingSVG from "./inc/animated/morphing-svg"
+import { useState } from "react"
+
 export default function Sidebar() {
+
+    const [toggle, setToggle] = useState(false)
+
     return (
-        <div className="sidebar">
-            
-            {/* Avatar */}
-            <div className="grid grid-cols-3 w-full h-fit">
-                <div className="rounded-full">
-                    <Image 
-                        // className="dark:invert"
-                        className="rounded-[4px]"
-                        src="/me.webp"
-                        alt="Andrea Storci image"
-                        width={180}
-                        height={10}
-                        priority
-                    />
-                </div>
-                <div className="grid avatar-entry font-poppins content-center">
-                    <h1>Andrea Storci</h1>
-                    <h3><span className="text-flax span-underline">Software</span> & <span className="text-picton-blue span-underline">web</span> developer</h3>
-                </div>
-            </div>
-            
-            {/* Divisore */}
-            <hr className="divisor" />
-            
-            {/* Menu */}
-            <div>
+        <div className="fixed w-[8vw] top-[45%] left bg-white right-[0px]">
+            {/* <MorphingSVG toggle={toggle} setToggle={setToggle} /> */}
+            <Btn refClick="#" className="absolute" />
+            <Btn refClick="#" className="absolute top-[40px]" />
+            <Btn refClick="#" className="absolute top-[80px]" />
+            <Btn refClick="#" className="absolute top-[120px]" />
 
-            </div>
-
-            {/* Divisore */}
-            <hr className="divisor" />
-
-            
+            {/* <Icon className="my-[5px] fixed" useFor="square" height={30} width={30}/>
+            <Icon className="my-[5px] absolute top-[40px]" useFor="square-empty" height={25} width={25}/>
+            <Icon className="my-[5px] absolute top-[80px]" useFor="square-empty" height={25} width={25}/>
+            <Icon className="my-[5px] absolute top-[120px]" useFor="square-empty" height={25} width={25}/> */}
         </div>
     )
 }
