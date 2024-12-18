@@ -9,6 +9,9 @@ import { useEffect, useState } from "react"
 import Icon from "./icon"
 
 interface BtnProps {
+    // active?: number
+    // index: number,
+    // onClick: any,
     refClick: string,
     className?: string,
 }
@@ -16,6 +19,7 @@ interface BtnProps {
 export default function Btn({ refClick, ...props }: BtnProps) {
 
     const [currentSVG, setCurrentSVG] = useState(0);
+    const [size, setSize] = useState(25)
 
     const svgs = [
         "square-empty",
@@ -26,13 +30,8 @@ export default function Btn({ refClick, ...props }: BtnProps) {
         setCurrentSVG((prev) => (prev + 1) % svgs.length);
     };
 
-    const [isClicked, setClicked] = useState(false)
-    const [size, setSize] = useState(25)
-    const [icon, setIcon] = useState("")
-
-    useEffect(() => {
-
-    })
+    // const [isClicked, setClicked] = useState(false)
+    // const [icon, setIcon] = useState("")
 
     return (
         <button

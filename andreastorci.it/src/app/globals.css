@@ -82,15 +82,10 @@ body {
   font-weight: 300;
 }
 
-.container {
-  text-align: center;
-  margin-top: 50px;
-}
-
 .rotating-svg {
-  rotate: 55deg;
+  transform: rotate(55deg);
   display: inline-block;
-  animation: rotate 1s ease-in forwards, fade 1s ease forwards;
+  animation: rotate .5s ease-in forwards, fade .5s ease forwards;
 }
 
 @keyframes rotate {
@@ -98,7 +93,7 @@ body {
     transform: rotate(55deg);
   }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(305deg);
   }
 }
 
