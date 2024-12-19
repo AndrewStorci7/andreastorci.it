@@ -7,7 +7,7 @@
 
 'use client'
 
-import Btn from "./inc/btn"
+import ButtonAnimated from "./inc/animated/btn-animated"
 import MorphingSVG from "./inc/animated/morphing-svg"
 import { useEffect, useState } from "react"
 
@@ -16,19 +16,23 @@ export default function Sidebar() {
 
     return (
         <div className="fixed w-[8vw] top-[45%] left bg-white right-[0px]">
-            <Btn 
+            <ButtonAnimated 
+                useFor="sidebar"
                 refClick="#" 
                 className="absolute" 
             />
-            <Btn 
+            <ButtonAnimated 
+                useFor="sidebar"
                 refClick="#" 
                 className="absolute top-[40px]"
             />
-            <Btn 
+            <ButtonAnimated 
+                useFor="sidebar"
                 refClick="#" 
                 className="absolute top-[80px]" 
             />
-            <Btn 
+            <ButtonAnimated 
+                useFor="sidebar"
                 refClick="#" 
                 className="absolute top-[120px]" 
             />

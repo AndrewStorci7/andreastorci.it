@@ -1,6 +1,6 @@
 import Background from "./components/background";
 import Header from "./components/header";
-import MainTitle from "./components/main-title";
+import MainTitle from "./sections/main-title";
 import Sidebar from "./components/sidebar";
 import Image from "next/image";
 

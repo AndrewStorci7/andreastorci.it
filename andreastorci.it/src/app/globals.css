@@ -41,6 +41,21 @@
   .main-title h3 span {
     @apply font-[800] text-sandy-brown underline;
   }
+  .tiny-menu {
+    @apply w-[400px] h-[400px] bg-white absolute top-[10px] left-[-405px] rounded-[4px];
+  }
+  .current  {
+    @apply w-full h-10 p-[10px] m-[20px] rounded-md;
+  }
+  .current-study {
+    
+  }
+  .current-work {
+
+  }
+  .link {
+     @apply font-[600] underline;
+  }
   /* .font-geist-mono {
     @apply font-[family-name:var(--font-geist-mono)];
   }
@@ -91,11 +106,14 @@ body {
   animation: rotate .5s ease-in forwards, fade .5s ease forwards;
 }
 
-.animate {
-  animation: rotate .5s ease-in forwards, fade .5s ease forwards;
+.toggle-svg {
+  display: inline-block;
+  animation: fade .5s ease forwards;
 }
 
-
+.animate {
+  animation: fade .5s ease-in forwards
+}
 
 @keyframes rotate {
   0% {
