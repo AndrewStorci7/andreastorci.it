@@ -61,7 +61,9 @@ export default function Background() {
                     )
                 })} */}
                 {/* <Image className="absolute top-[400px] right-[500px]" src={'/prova2.svg'} alt="scrubble" height={200} width={200} /> */}
+                <Image className="absolute top-[-67px] right-[300px]" src={'/linea.svg'} alt="scrubble" height={200} width={200} />
                 <Image className="absolute top-[400px] right-[500px]" src={'/stripes.svg'} alt="scrubble" height={200} width={200} />
+                <Image className="absolute top-[-31px] left-[184px]" src={'/cubo.svg'} alt="scrubble" height={200} width={200} />
             </div>
         </div>
     )
