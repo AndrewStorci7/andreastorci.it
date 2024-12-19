@@ -15,7 +15,8 @@ export default function MainTitle() {
                         Developer
                     </h2>
                     <h3 className="pt-[20px]">
-                        lorem ipsum
+                    I am a university student at the University of Parma, balancing my studies with my role as a full-stack developer. 
+                    Passionate about <span>learning</span> and <span>artificial intelligence</span>, I combine academic knowledge with practical experience to grow as a developer and problem-solver, aiming to create impactful solutions.
                     </h3>
                 </div>
                 <div className="grow"></div>

@@ -21,6 +21,8 @@ export default {
         purple: "#610F7F",
         russian: "#2F0147",
         sandy: "#FF9F45",
+        peach: "#FFC085",
+        'sandy-brown': "#FFAB5C",
         'sandy-light': "#FFDFC2",
         'antique-white': "#FFEAD6",
         turquoise: "#41D3BD",

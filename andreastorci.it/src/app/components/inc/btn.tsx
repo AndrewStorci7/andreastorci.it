@@ -19,6 +19,7 @@ interface BtnProps {
 export default function Btn({ refClick, ...props }: BtnProps) {
 
     const [currentSVG, setCurrentSVG] = useState(0);
+    const [clicked, setClicked] = useState(false)
     const [size, setSize] = useState(25)
 
     const svgs = [
@@ -26,18 +27,32 @@ export default function Btn({ refClick, ...props }: BtnProps) {
         "square",
     ];
   
-    const handleSwitch = () => {
-        setCurrentSVG((prev) => (prev + 1) % svgs.length);
+    const handleSwitch = (enter:boolean) => {
+        setCurrentSVG((prev) => {
+            if (!clicked) {
+                if (enter) {
+                    return (prev + 1) % svgs.length;
+                } else {
+                    return (prev - 1 + svgs.length) % svgs.length; // Ensure non-negative index
+                }
+            } else {
+                return 1
+            }
+        })
     };
 
-    // const [isClicked, setClicked] = useState(false)
-    // const [icon, setIcon] = useState("")
+    const handleClick = () => {
+        setCurrentSVG(1)
+        setClicked(!clicked)
+    }
 
     return (
         <button
         // onClick={}
         className="my-[5px]"
-        onClick={handleSwitch}
+        onClick={handleClick}
+        onMouseEnter={() => handleSwitch(true)}
+        onMouseLeave={() => handleSwitch(false)}
         {...props}
         >
             <div className="rotating-svg">

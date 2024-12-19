@@ -36,7 +36,10 @@
     @apply text-7xl font-[900] text-sandy font-poppins;
   }
   .main-title h3 {
-    @apply text-3xl font-[600] text-sandy-light font-poppins;
+    @apply text-2xl font-[600] text-sandy-light font-poppins w-[700px];
+  }
+  .main-title h3 span {
+    @apply font-[800] text-sandy-brown underline;
   }
   /* .font-geist-mono {
     @apply font-[family-name:var(--font-geist-mono)];
@@ -47,14 +50,14 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #FFEAD6;
   --foreground: #160C44;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #160C44;
-    --foreground: #ededed;
+    --foreground: #FFEAD6;
   }
 }
 
@@ -87,6 +90,12 @@ body {
   display: inline-block;
   animation: rotate .5s ease-in forwards, fade .5s ease forwards;
 }
+
+.animate {
+  animation: rotate .5s ease-in forwards, fade .5s ease forwards;
+}
+
+
 
 @keyframes rotate {
   0% {
