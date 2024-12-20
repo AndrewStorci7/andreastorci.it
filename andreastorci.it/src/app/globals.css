@@ -81,6 +81,7 @@ body {
   background: var(--background);
   font-family: "Poppins", serif;
   font-style: normal;
+  overflow-x: hidden;
 }
 
 /* .font-roboto-mono {
