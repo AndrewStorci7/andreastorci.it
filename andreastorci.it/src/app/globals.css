@@ -47,21 +47,18 @@
   .current  {
     @apply w-full h-10 p-[10px] m-[20px] rounded-md;
   }
-  .current-study {
-    
-  }
-  .current-work {
-
-  }
   .link {
      @apply font-[600] underline;
   }
-  /* .font-geist-mono {
-    @apply font-[family-name:var(--font-geist-mono)];
+  .current-eng {
+    @apply w-full mt-[300px] px-[200px] h-[100px];
   }
-  .font-geist-sans {
-    @apply font-[family-name:var(--font-geist-sans)];
-  } */
+  .current-eng h2 {
+    @apply text-6xl font-bold text-sandy-brown; 
+  }
+  .current-eng p {
+    @apply text-base font-[300] pt-[15px] leading-relaxed;
+  }
 }
 
 :root {
