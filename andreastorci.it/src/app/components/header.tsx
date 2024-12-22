@@ -15,7 +15,7 @@ export default function Header() {
     const [click, setClick] = useState(false)
 
     return (
-        <header className="w-screen px-[120px] py-[40px]">
+        <header className="relative w-full py-[40px] z-[999]">
             <div className="flex flex-row">
                 <div className="relative w-[200px] h-[50px]">
                     <Image className="absolute top-[-20px]" src={'/logo.webp'} alt="Logo" height={100} width={300} priority />

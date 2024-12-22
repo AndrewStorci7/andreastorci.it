@@ -8,15 +8,6 @@
 
 
 @layer components {
-  /* 
-  OLD VERSION
-  .sidebar {
-    @apply m-[5px] w-[25%] bg-sidebarDark border-[4px] border-borderSidebarDark h-full rounded-xl p-[10px];
-  } */
-  
-  /* .sidebar {
-    @apply w-[25%] bg-sidebarDark h-full p-[10px];
-  } */
   .avatar-entry {
     @apply col-span-2 p-[5px] pl-[20px];
   }
@@ -27,7 +18,7 @@
     @apply my-[40px] mx-[20px] 
   }
   .main-title {
-    @apply mt-[100px] px-[300px] w-full h-[500px];
+    @apply px-[200px] w-full;
   }
   .main-title h1 {
     @apply text-2xl;
@@ -45,13 +36,13 @@
     @apply w-[400px] h-[400px] bg-white absolute top-[10px] left-[-405px] rounded-[4px];
   }
   .current  {
-    @apply w-full h-10 p-[10px] m-[20px] rounded-md;
+    @apply w-full p-[10px] m-[20px] rounded-md;
   }
   .link {
      @apply font-[600] underline;
   }
   .current-eng {
-    @apply w-full mt-[300px] px-[200px] h-[100px];
+    @apply w-full px-[200px] py-[250px];
   }
   .current-eng h2 {
     @apply text-6xl font-bold text-sandy-brown; 
@@ -79,14 +70,8 @@ body {
   font-family: "Poppins", serif;
   font-style: normal;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
-
-/* .font-roboto-mono {
-  font-family: "Roboto Mono", serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
-} */
 
 .avatar-entry h1 {
   font-size: 30px;
@@ -131,3 +116,22 @@ body {
   }
 }
 
+.background-gradient {
+  background: linear-gradient(to right, #610F7F 65%, #FF9F45 35%) 
+}
+
+.container-lop {
+  height: 100vh;
+  scroll-snap-type: y mandatory; /* Scroll Snap attivo sull'asse verticale */
+  overflow-y: scroll; /* Abilita lo scroll verticale */
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.section {
+  height: 100vh;
+  scroll-snap-align: start; /* Allinea la sezione all'inizio del viewport */
+  scroll-snap-stop: always;
+  justify-content: center;
+  align-items: center;
+}

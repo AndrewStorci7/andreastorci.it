@@ -15,7 +15,7 @@ export default function Sidebar() {
 
 
     return (
-        <div className="fixed w-[8vw] top-[45%] left bg-white right-[0px]">
+        <div className="fixed w-[8vw] top-[45%] left bg-white right-[0px] z-[999]">
             <ButtonAnimated 
                 useFor="sidebar"
                 refClick="#" 
