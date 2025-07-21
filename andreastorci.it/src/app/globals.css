@@ -3,8 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
+/* ALTRI STILI */
+@import './style/fadeInStyle.css'; /* animazioni di fade-in */
+
 :root {
-  /* Palette colori per tranquillità, pace interiore e intelletto */
   --sage-green: #9CAF88;        /* Verde salvia - tranquillità */
   --soft-blue: #A8C8E1;        /* Azzurro delicato - pace */
   --warm-cream: #F8F6F0;       /* Crema caldo - serenità */
@@ -32,65 +34,20 @@ body {
   line-height: 1.6;
 }
 
+.relative {
+  position: relative;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-}
-
-/* Header Navigation */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(248, 246, 240, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(156, 175, 136, 0.2);
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-}
-
-.logo {
-  font-family: 'Space Mono', monospace;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--deep-sage);
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--charcoal);
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--sage-green);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
 }
 
 /* Hero Section */

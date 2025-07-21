@@ -6,7 +6,7 @@
 'use client'
 
 import { useState } from "react"
-import Icon from "./icon"
+import Icon from "./Icon"
 
 interface BtnProps {
     // active?: number

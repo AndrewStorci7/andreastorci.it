@@ -1,0 +1,155 @@
+/* Animazioni FadeIn - Aggiungi al tuo globals.css */
+
+/* Base fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Direzioni diverse */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-down.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Animazioni più complesse */
+.fade-in-rotate {
+  opacity: 0;
+  transform: translateY(30px) rotate(10deg);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-rotate.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.fade-in-blur {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-blur.visible {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+/* Varianti con delay */
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+.fade-in-delay-5 { transition-delay: 0.5s; }
+
+/* Animazioni per gruppi */
+.fade-in-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-stagger.visible > *:nth-child(1) { 
+  transition-delay: 0.1s; 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.fade-in-stagger.visible > *:nth-child(2) { 
+  transition-delay: 0.2s; 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.fade-in-stagger.visible > *:nth-child(3) { 
+  transition-delay: 0.3s; 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.fade-in-stagger.visible > *:nth-child(4) { 
+  transition-delay: 0.4s; 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.fade-in-stagger.visible > *:nth-child(5) { 
+  transition-delay: 0.5s; 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+/* Responsive */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .fade-in-up,
+  .fade-in-down,
+  .fade-in-left,
+  .fade-in-right,
+  .fade-in-scale,
+  .fade-in-rotate,
+  .fade-in-blur {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

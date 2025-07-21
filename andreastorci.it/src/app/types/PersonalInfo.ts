@@ -1,40 +1,10 @@
-interface ContactInfo {
-    email: string;
-    phone?: string;
-    location: string;
-    linkedin?: string;
-    github?: string;
-    website?: string;
-}
-
-interface Experience {
-    title: string;
-    company: string;
-    period: string;
-    description: string;
-    technologies?: string[];
-}
-
-interface Education {
-    degree: string;
-    institution: string;
-    year: string;
-    description?: string;
-}
-
-interface Project {
-    name: string;
-    description: string;
-    technologies: string[];
-    link?: string;
-    image?: string;
-}
-
-interface Skill {
-    name: string;
-    level: number; // 1-10
-    category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
-}
+import type { 
+    Project, 
+    Education, 
+    Skill,
+    ContactInfo,
+    Experience 
+} from "@/types";
 
 interface PersonalData {
     name: string;
@@ -43,10 +13,10 @@ interface PersonalData {
     bio: string;
     avatar?: string;
     contact: ContactInfo;
-    experience: Experience[];
-    education: Education[];
-    projects: Project[];
-    skills: Skill[];
+    experience: Experience;
+    education: Education;
+    projects: Project;
+    skills: Skill;
     languages: {
         name: string;
         level: string;
@@ -58,13 +28,14 @@ interface LanguageData {
 }
 
 class PersonalInfo {
+
     private data: LanguageData | null = null;
     private currentLang: string;
-    private readonly supportedLangs = ["it", "en", "es"];
+    private readonly supportedLangs = ["it-IT", "en-US", "en-GB", "es-ES"];
     private isLoaded = false;
     private loadingPromise: Promise<void> | null = null;
 
-    constructor(lang: string = 'it') {
+    constructor(lang: string) {
         this.validateLanguage(lang);
         this.currentLang = lang;
     }
@@ -103,7 +74,6 @@ class PersonalInfo {
             this.data = data;
             this.isLoaded = true;
         } catch (error) {
-            console.error('Errore nel caricamento dei dati personali:', error);
             throw error;
         }
     }
@@ -123,27 +93,27 @@ class PersonalInfo {
         return data.contact;
     }
 
-    async getExperience(): Promise<Experience[]> {
+    async getExperience(): Promise<Experience> {
         const data = await this.getPersonalData();
         return data.experience;
     }
 
-    async getProjects(): Promise<Project[]> {
+    async getProjects(): Promise<Project> {
         const data = await this.getPersonalData();
         return data.projects;
     }
 
-    async getSkills(): Promise<Skill[]> {
+    async getSkills(): Promise<Skill> {
         const data = await this.getPersonalData();
         return data.skills;
     }
 
-    async getSkillsByCategory(category: Skill['category']): Promise<Skill[]> {
-        const skills = await this.getSkills();
-        return skills.filter(skill => skill.category === category);
-    }
+    // async getSkillsByCategory(category: Skill['data'][number]['category']): Promise<Skill[]> {
+    //     const skills = await this.getSkills();
+    //     return skills.filter(skill => skill['data'][0].category === category);
+    // }
 
-    async getEducation(): Promise<Education[]> {
+    async getEducation(): Promise<Education> {
         const data = await this.getPersonalData();
         return data.education;
     }

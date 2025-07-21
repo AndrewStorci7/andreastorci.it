@@ -1,0 +1,47 @@
+.flag-chooser {
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    margin-top: 10px !important;
+    z-index: auto;
+    left: -40px;
+    min-width: 130px;
+}
+
+.flag-chooser-mobile {
+    /* padding: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.border-flags {
+    margin: 5px 0;
+    border-radius: 1.1rem;
+    border: 1px solid #ccc;
+    width: fit-content;
+    background-color: #f3f2f2;
+}
+
+.flag-chooser li {
+    margin: 0;
+}
+
+.flag-chooser a,
+.flag-chooser-mobile a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.flag-chooser img,
+.flag-chooser-mobile img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}

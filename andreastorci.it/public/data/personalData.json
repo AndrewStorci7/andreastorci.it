@@ -1,17 +1,21 @@
 {
-  "it": {
+  "it-IT": {
     "name": "Andrea",
     "surname": "Storci",
     "title": "Sviluppatore Full-Stack & Designer",
     "bio": "Sviluppatore creativo con passione per l'arte digitale e l'innovazione tecnologica. Creo esperienze web uniche che combinano funzionalità e bellezza estetica.",
     "avatar": "/images/avatar.jpg",
     "contact": {
-      "email": "astorci.andrea@gmail.com",
-      "phone": "+39 340 2644 629",
-      "location": "Parma, Italia",
-      "linkedin": "https://linkedin.com/in/andreastorci",
-      "github": "https://github.com/AndrewStorci7",
-      "website": "https://andreastorci.it"
+      "title": "Lavoriamo Insieme",
+      "data": {
+        "email": "astorci.andrea@gmail.com",
+        "phone": "+39 340 2644 629",
+        "location": "Parma, Italia",
+        "linkedin": "https://linkedin.com/in/andreastorci",
+        "github": "https://github.com/AndrewStorci7",
+        "website": "https://andreastorci.it",
+        "announcements": "Hai un progetto in mente? Sono sempre aperto a nuove sfide e collaborazioni interessanti."
+      }
     },
     "experience": [
       {
@@ -37,54 +41,53 @@
         "description": "Specializzazione in sviluppo software e interfacce utente"
       }
     ],
-    "projects": [
-      {
-        "name": "Portfolio Artistico",
-        "description": "Sito web interattivo con animazioni 3D per mostrare opere d'arte digitali",
-        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-        "link": "https://portfolio.example.com",
-        "image": "/images/project1.jpg"
-      },
-      {
-        "name": "E-commerce Platform",
-        "description": "Piattaforma completa per la vendita online con sistema di pagamenti integrato",
-        "technologies": ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
-        "link": "https://shop.example.com",
-        "image": "/images/project2.jpg"
-      }
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": 9,
-        "category": "frontend"
-      },
-      {
-        "name": "TypeScript",
-        "level": 8,
-        "category": "frontend"
-      },
-      {
-        "name": "Node.js",
-        "level": 7,
-        "category": "backend"
-      },
-      {
-        "name": "Three.js",
-        "level": 6,
-        "category": "frontend"
-      },
-      {
-        "name": "Figma",
-        "level": 8,
-        "category": "design"
-      },
-      {
-        "name": "Problem Solving",
-        "level": 9,
-        "category": "soft"
-      }
-    ],
+    "projects": {
+      "title": "Progetti in Evidenza",
+      "data": [
+        {
+          "name": "Portfolio Artistico",
+          "description": "Sito web interattivo con animazioni 3D per mostrare opere d'arte digitali",
+          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+          "link": "https://portfolio.example.com",
+          "image": "/images/project1.jpg"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Competenze Tecniche",
+      "data": [
+        {
+          "name": "React",
+          "level": 9,
+          "category": "frontend"
+        },
+        {
+          "name": "TypeScript",
+          "level": 8,
+          "category": "frontend"
+        },
+        {
+          "name": "Node.js",
+          "level": 7,
+          "category": "backend"
+        },
+        {
+          "name": "Three.js",
+          "level": 6,
+          "category": "frontend"
+        },
+        {
+          "name": "Figma",
+          "level": 8,
+          "category": "design"
+        },
+        {
+          "name": "Resolución de Problemas",
+          "level": 9,
+          "category": "soft"
+        }
+      ]
+    },
     "languages": [
       {
         "name": "Italiano",
@@ -100,19 +103,23 @@
       }
     ]
   },
-  "en": {
+  "en-GB": {
     "name": "Andrea",
     "surname": "Storci",
     "title": "Full-Stack Developer & Designer",
     "bio": "Creative developer with passion for digital art and technological innovation. I create unique web experiences that combine functionality and aesthetic beauty.",
     "avatar": "/images/avatar.jpg",
     "contact": {
-      "email": "astorci.andrea@gmail.com",
-      "phone": "+39 340 2644 629",
-      "location": "Parma, Italia",
-      "linkedin": "https://linkedin.com/in/andreastorci",
-      "github": "https://github.com/AndrewStorci7",
-      "website": "https://andreastorci.it"
+      "title": "Let's Work Together",
+      "data": {
+        "email": "astorci.andrea@gmail.com",
+        "phone": "+39 340 2644 629",
+        "location": "Parma, Italia",
+        "linkedin": "https://linkedin.com/in/andreastorci",
+        "github": "https://github.com/AndrewStorci7",
+        "website": "https://andreastorci.it",
+        "announcements": "Do you have a project in mind? I'm always open to new challenges and interesting collaborations."
+      }
     },
     "experience": [
       {
@@ -138,82 +145,88 @@
         "description": "Specialization in software development and user interfaces."
       }
     ],
-    "projects": [
-      {
-        "name": "Artistic Portfolio",
-        "description": "Interactive website with 3D animations to showcase digital artworks",
-        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-        "link": "https://portfolio.example.com",
-        "image": "/images/project1.jpg"
-      },
-      {
-        "name": "E-commerce Platform",
-        "description": "Complete platform for online sales with integrated payment system",
-        "technologies": ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
-        "link": "https://shop.example.com",
-        "image": "/images/project2.jpg"
-      }
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": 9,
-        "category": "frontend"
-      },
-      {
-        "name": "TypeScript",
-        "level": 8,
-        "category": "frontend"
-      },
-      {
-        "name": "Node.js",
-        "level": 7,
-        "category": "backend"
-      },
-      {
-        "name": "Three.js",
-        "level": 6,
-        "category": "frontend"
-      },
-      {
-        "name": "Figma",
-        "level": 8,
-        "category": "design"
-      },
-      {
-        "name": "Problem Solving",
-        "level": 9,
-        "category": "soft"
-      }
-    ],
-    "languages": [
-      {
-        "name": "Italian",
-        "level": "Native"
-      },
-      {
-        "name": "English",
-        "level": "Advanced"
-      },
-      {
-        "name": "Spanish",
-        "level": "Intermediate"
-      }
-    ]
+    "projects": {
+      "title": "Featured Projects",
+      "data": [
+        {
+          "name": "Art Portfolio",
+          "description": "Interactive website with 3D animations to showcase digital artworks",
+          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+          "link": "https://portfolio.example.com",
+          "image": "/images/project1.jpg"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "data": [
+        {
+          "name": "React",
+          "level": 9,
+          "category": "frontend"
+        },
+        {
+          "name": "TypeScript",
+          "level": 8,
+          "category": "frontend"
+        },
+        {
+          "name": "Node.js",
+          "level": 7,
+          "category": "backend"
+        },
+        {
+          "name": "Three.js",
+          "level": 6,
+          "category": "frontend"
+        },
+        {
+          "name": "Figma",
+          "level": 8,
+          "category": "design"
+        },
+        {
+          "name": "Resolución de Problemas",
+          "level": 9,
+          "category": "soft"
+        }
+      ]
+    },
+    "languages": {
+      "title": "Languages",
+      "data": [
+        {
+          "name": "Italian",
+          "level": "Native"
+        },
+        {
+          "name": "English",
+          "level": "Advanced"
+        },
+        {
+          "name": "Spanish",
+          "level": "Intermediate"
+        }
+      ]
+    }
   },
-  "es": {
+  "es-ES": {
     "name": "Andrea",
     "surname": "Storci",
     "title": "Desarrollador Full-Stack y Diseñador",
     "bio": "Desarrollador creativo con pasión por el arte digital y la innovación tecnológica. Creo experiencias web únicas que combinan funcionalidad y belleza estética.",
     "avatar": "/images/avatar.jpg",
     "contact": {
-      "email": "astorci.andrea@gmail.com",
-      "phone": "+39 340 2644 629",
-      "location": "Parma, Italia",
-      "linkedin": "https://linkedin.com/in/andreastorci",
-      "github": "https://github.com/AndrewStorci7",
-      "website": "https://andreastorci.it"
+      "title": "Trabajemos Juntos",
+      "data": {
+        "email": "astorci.andrea@gmail.com",
+        "phone": "+39 340 2644 629",
+        "location": "Parma, Italia",
+        "linkedin": "https://linkedin.com/in/andreastorci",
+        "github": "https://github.com/AndrewStorci7",
+        "website": "https://andreastorci.it",
+        "announcements": "¿Tienes un proyecto en mente? Siempre estoy abierto a nuevos retos y colaboraciones interesantes."
+      }
     },
     "experience": [
       {
@@ -239,45 +252,69 @@
         "description": "Especialización en desarrollo de software e interfaces de usuario."
       }
     ],
-    "projects": [
-      {
-        "name": "Portfolio Artístico",
-        "description": "Sitio web interactivo con animaciones 3D para mostrar obras de arte digital",
-        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-        "link": "https://portfolio.example.com",
-        "image": "/images/project1.jpg"
-      }
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": 9,
-        "category": "frontend"
-      },
-      {
-        "name": "TypeScript",
-        "level": 8,
-        "category": "frontend"
-      },
-      {
-        "name": "Problem Solving",
-        "level": 9,
-        "category": "soft"
-      }
-    ],
-    "languages": [
-      {
-        "name": "Italiano",
-        "level": "Nativo"
-      },
-      {
-        "name": "Inglés",
-        "level": "Avanzado"
-      },
-      {
-        "name": "Español",
-        "level": "Intermedio"
-      }
-    ]
+    "projects": {
+      "title": "Proyectos Destacados",
+      "data": [
+        {
+          "name": "Portfolio Artístico",
+          "description": "Sitio web interactivo con animaciones 3D para mostrar obras de arte digital",
+          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+          "link": "https://portfolio.example.com",
+          "image": "/images/project1.jpg"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "data": [
+        {
+          "name": "React",
+          "level": 9,
+          "category": "frontend"
+        },
+        {
+          "name": "TypeScript",
+          "level": 8,
+          "category": "frontend"
+        },
+        {
+          "name": "Node.js",
+          "level": 7,
+          "category": "backend"
+        },
+        {
+          "name": "Three.js",
+          "level": 6,
+          "category": "frontend"
+        },
+        {
+          "name": "Figma",
+          "level": 8,
+          "category": "design"
+        },
+        {
+          "name": "Resolución de Problemas",
+          "level": 9,
+          "category": "soft"
+        }
+      ]
+    },
+    "languages": {
+      "title": "Idiomas",
+      "data": [
+        {
+          "name": "Italiano",
+          "level": "Nativo"
+        },
+        {
+          "name": "Inglés",
+          "level": "Avanzado"
+        },
+        {
+          "name": "Español",
+          "level": "Intermedio"
+        }
+      ]
+    }
   }
 }
