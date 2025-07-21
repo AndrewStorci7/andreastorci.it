@@ -1,0 +1,283 @@
+{
+  "it": {
+    "name": "Andrea",
+    "surname": "Storci",
+    "title": "Sviluppatore Full-Stack & Designer",
+    "bio": "Sviluppatore creativo con passione per l'arte digitale e l'innovazione tecnologica. Creo esperienze web uniche che combinano funzionalità e bellezza estetica.",
+    "avatar": "/images/avatar.jpg",
+    "contact": {
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Parma, Italia",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
+    },
+    "experience": [
+      {
+        "title": "Sviluppatore - Sistemista",
+        "company": "Oppimittinetworking.com",
+        "period": "2022 - Presente",
+        "description": "Sviluppo di applicazioni web moderne utilizzando React, Node.js e TypeScript. Focus su user experience e performance. Riaprazione di dispositivi mobile, personal computer ecc... Creazione di siti web",
+        "technologies": ["React", "Node.js", "TypeScript", "MtSQL", "AWS", "Aruba"]
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "DGTechnologies",
+        "period": "2022 - Presente",
+        "description": "Creazione e collaborazione nello sviluppo di applicazioni mobile con React Native",
+        "technologies": ["React", "React Native", "Figma"]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Laurea in Informatica",
+        "institution": "Università degli studi di Parma",
+        "year": "2022 - Presente",
+        "description": "Specializzazione in sviluppo software e interfacce utente"
+      }
+    ],
+    "projects": [
+      {
+        "name": "Portfolio Artistico",
+        "description": "Sito web interattivo con animazioni 3D per mostrare opere d'arte digitali",
+        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+        "link": "https://portfolio.example.com",
+        "image": "/images/project1.jpg"
+      },
+      {
+        "name": "E-commerce Platform",
+        "description": "Piattaforma completa per la vendita online con sistema di pagamenti integrato",
+        "technologies": ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
+        "link": "https://shop.example.com",
+        "image": "/images/project2.jpg"
+      }
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": 9,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "Three.js",
+        "level": 6,
+        "category": "frontend"
+      },
+      {
+        "name": "Figma",
+        "level": 8,
+        "category": "design"
+      },
+      {
+        "name": "Problem Solving",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Italiano",
+        "level": "Madrelingua"
+      },
+      {
+        "name": "Inglese",
+        "level": "Avanzato"
+      },
+      {
+        "name": "Spagnolo",
+        "level": "Intermedio"
+      }
+    ]
+  },
+  "en": {
+    "name": "Andrea",
+    "surname": "Storci",
+    "title": "Full-Stack Developer & Designer",
+    "bio": "Creative developer with passion for digital art and technological innovation. I create unique web experiences that combine functionality and aesthetic beauty.",
+    "avatar": "/images/avatar.jpg",
+    "contact": {
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Parma, Italia",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
+    },
+    "experience": [
+      {
+        "title": "Developer - System Administrator",
+        "company": "Oppimittinetworking.com",
+        "period": "2022 - Present",
+        "description": "Development of modern web applications using React, Node.js, and TypeScript. Focus on user experience and performance. Repair of mobile devices, personal computers, etc. Website creation.",
+        "technologies": ["React", "Node.js", "TypeScript", "MtSQL", "AWS", "Aruba"]
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "DGTechnologies",
+        "period": "2022 - Present",
+        "description": "Creation and collaboration in the development of mobile applications using React Native.",
+        "technologies": ["React", "React Native", "Figma"]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor's Degree in Computer Science",
+        "institution": "University of Parma",
+        "year": "2022 - Present",
+        "description": "Specialization in software development and user interfaces."
+      }
+    ],
+    "projects": [
+      {
+        "name": "Artistic Portfolio",
+        "description": "Interactive website with 3D animations to showcase digital artworks",
+        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+        "link": "https://portfolio.example.com",
+        "image": "/images/project1.jpg"
+      },
+      {
+        "name": "E-commerce Platform",
+        "description": "Complete platform for online sales with integrated payment system",
+        "technologies": ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
+        "link": "https://shop.example.com",
+        "image": "/images/project2.jpg"
+      }
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": 9,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "Three.js",
+        "level": 6,
+        "category": "frontend"
+      },
+      {
+        "name": "Figma",
+        "level": 8,
+        "category": "design"
+      },
+      {
+        "name": "Problem Solving",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Italian",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Advanced"
+      },
+      {
+        "name": "Spanish",
+        "level": "Intermediate"
+      }
+    ]
+  },
+  "es": {
+    "name": "Andrea",
+    "surname": "Storci",
+    "title": "Desarrollador Full-Stack y Diseñador",
+    "bio": "Desarrollador creativo con pasión por el arte digital y la innovación tecnológica. Creo experiencias web únicas que combinan funcionalidad y belleza estética.",
+    "avatar": "/images/avatar.jpg",
+    "contact": {
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Parma, Italia",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
+    },
+    "experience": [
+      {
+        "title": "Desarrollador - Administrador de sistemas",
+        "company": "Oppimittinetworking.com",
+        "period": "2022 - Presente",
+        "description": "Desarrollo de aplicaciones web modernas utilizando React, Node.js y TypeScript. Enfoque en la experiencia del usuario y el rendimiento. Reparación de dispositivos móviles, ordenadores personales, etc. Creación de sitios web.",
+        "technologies": ["React", "Node.js", "TypeScript", "MtSQL", "AWS", "Aruba"]
+      },
+      {
+        "title": "Desarrollador Full Stack",
+        "company": "DGTechnologies",
+        "period": "2022 - Presente",
+        "description": "Creación y colaboración en el desarrollo de aplicaciones móviles con React Native.",
+        "technologies": ["React", "React Native", "Figma"]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Grado en Informática",
+        "institution": "Universidad de Parma",
+        "year": "2022 - Presente",
+        "description": "Especialización en desarrollo de software e interfaces de usuario."
+      }
+    ],
+    "projects": [
+      {
+        "name": "Portfolio Artístico",
+        "description": "Sitio web interactivo con animaciones 3D para mostrar obras de arte digital",
+        "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
+        "link": "https://portfolio.example.com",
+        "image": "/images/project1.jpg"
+      }
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": 9,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "Problem Solving",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Italiano",
+        "level": "Nativo"
+      },
+      {
+        "name": "Inglés",
+        "level": "Avanzado"
+      },
+      {
+        "name": "Español",
+        "level": "Intermedio"
+      }
+    ]
+  }
+}

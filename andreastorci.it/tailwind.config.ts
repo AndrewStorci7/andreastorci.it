@@ -1,0 +1,47 @@
+import type { Config } from "tailwindcss";
+
+export default {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "sage-green": "#9CAF88",
+        "soft-blue": "#A8C8E1",
+        "warm-cream": "#F8F6F0",
+        "charcoal": "#2C3E50",
+        "dust-blue": "#7B9AAF",
+        "light-sage": "#E8F0E6",
+        "accent-coral": "#E07A5F",
+        "neutral-grey": "#95A5A6",
+        "deep-sage": "#5A6B4F",
+        white: "#FFFFFF",
+        black: "#1A1A1A",
+        // background: "var(--background)",
+        // foreground: "var(--foreground)",
+        // sidebar: "#D0E3CC",
+        // sidebar2: "#F3F8F2",
+        // sidebar3: "#EBFEFF",
+        // sidebarDark: "#343434",
+        // borderSidebarDark: "#525252",
+        // flax: "#EFD780",
+        // 'picton-blue': "#56ABDC",
+        // purple: "#610F7F",
+        // russian: "#2F0147",
+        // sandy: "#FF9F45",
+        // 'sandy-light': "#FFDFC2",
+        // 'antique-white': "#FFEAD6",
+        // turquoise: "#41D3BD",
+        // 'white-smoke': "#F5F5F5",
+      },
+      fontFamily: {
+        'roboto-mono': ['Roboto Mono', 'serif'],
+        poppins: ['Poppins', 'serif'],
+      }
+    },
+  },
+  plugins: [],
+} satisfies Config;
