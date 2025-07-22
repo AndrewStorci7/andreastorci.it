@@ -253,8 +253,8 @@ export default function Header(): JSX.Element {
                 >
                     <Icon 
                         useFor="hamburger" 
-                        width={24} 
-                        height={24}
+                        width={32} 
+                        height={32}
                         className="hamburger-icon"
                     />
                 </button>

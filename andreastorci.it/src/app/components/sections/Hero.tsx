@@ -8,7 +8,11 @@ import React from 'react';
 import Section from '@components/inc/Section';
 import { PersonalData } from '@/types/PersonalInfo';
 
-const HeroSection = ({ data }: { data: PersonalData | null }) => {
+const HeroSection = ({ 
+    data 
+}: { 
+    data: PersonalData | null
+}) => {
 
     return (
         <Section home={true} id='home' className='hero'>
@@ -35,7 +39,7 @@ const HeroSection = ({ data }: { data: PersonalData | null }) => {
                         </div>
                         <h3>{data?.name} {data?.surname}</h3>
                         <p>{data?.title}</p>
-                        <p>{data?.contact?.location}</p>
+                        <p style={{ fontStyle: 'italic', fontSize: '14px' }}>{data?.contact?.data?.location}</p>
                     </div>
                     
                     <div className="floating-element">

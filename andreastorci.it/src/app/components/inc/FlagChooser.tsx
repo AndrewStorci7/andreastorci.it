@@ -37,8 +37,8 @@ const FlagChooser = () => {
         <div className="relative">
             <div className="flag-chooser-mobile -border-flags">
                 <a className="" href="#" onClick={showMenu}>
-                    <img src={language.flag} alt={language.name} />
-                    <span>{language.id}</span>
+                    <img src={language.flag || '/flags/it.png'} alt={language.name || 'Italiano'} />
+                    <span>{language.id || 'IT'}</span>
                 </a>
             </div>
             {show && (

@@ -3,8 +3,10 @@ import type {
     Education, 
     Skill,
     ContactInfo,
-    Experience 
+    Experience,
+    LanguageData
 } from "@/types";
+import OOB from "@/types/OOB";
 
 interface PersonalData {
     name: string;
@@ -23,27 +25,10 @@ interface PersonalData {
     }[];
 }
 
-interface LanguageData {
-    [key: string]: PersonalData;
-}
-
-class PersonalInfo {
-
-    private data: LanguageData | null = null;
-    private currentLang: string;
-    private readonly supportedLangs = ["it-IT", "en-US", "en-GB", "es-ES"];
-    private isLoaded = false;
-    private loadingPromise: Promise<void> | null = null;
+class PersonalInfo extends OOB<LanguageData<PersonalData>> {
 
     constructor(lang: string) {
-        this.validateLanguage(lang);
-        this.currentLang = lang;
-    }
-
-    private validateLanguage(lang: string): void {
-        if (!this.supportedLangs.includes(lang)) {
-            throw new Error(`Lingua selezionata non corretta: deve essere una tra ${this.supportedLangs.join(', ')}`);
-        }
+        super(lang);
     }
 
     private async loadPersonalData(): Promise<void> {
@@ -65,8 +50,8 @@ class PersonalInfo {
                 throw new Error(`Errore nel caricamento dei dati: ${response.status} ${response.statusText}`);
             }
             
-            const data: LanguageData = await response.json();
-            
+            const data: LanguageData<PersonalData> = await response.json();
+
             if (!data[this.currentLang]) {
                 throw new Error(`Dati non disponibili per la lingua: ${this.currentLang}`);
             }
@@ -80,11 +65,11 @@ class PersonalInfo {
 
     async getPersonalData(): Promise<PersonalData> {
         await this.loadPersonalData();
-        
+
         if (!this.data || !this.data[this.currentLang]) {
             throw new Error('Dati non disponibili');
         }
-        
+
         return this.data[this.currentLang];
     }
 
@@ -128,28 +113,6 @@ class PersonalInfo {
         return data.bio;
     }
 
-    async changeLanguage(lang: string): Promise<void> {
-        this.validateLanguage(lang);
-        this.currentLang = lang;
-        
-        // Se i dati sono già caricati, verifica che la nuova lingua sia disponibile
-        if (this.isLoaded && this.data && !this.data[lang]) {
-            throw new Error(`Dati non disponibili per la lingua: ${lang}`);
-        }
-    }
-
-    getCurrentLanguage(): string {
-        return this.currentLang;
-    }
-
-    getSupportedLanguages(): string[] {
-        return [...this.supportedLangs];
-    }
-
-    isDataLoaded(): boolean {
-        return this.isLoaded;
-    }
-
     async reload(): Promise<void> {
         this.data = null;
         this.isLoaded = false;
@@ -158,13 +121,6 @@ class PersonalInfo {
     }
 }
 
-export type { 
-    PersonalData, 
-    ContactInfo, 
-    Experience, 
-    Education, 
-    Project, 
-    Skill 
-};
+export type { PersonalData };
 
 export default PersonalInfo;

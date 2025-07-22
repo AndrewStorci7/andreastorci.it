@@ -2,7 +2,7 @@
   "it-IT": {
     "name": "Andrea",
     "surname": "Storci",
-    "title": "Sviluppatore Full-Stack & Designer",
+    "title": "Software Developer",
     "bio": "Sviluppatore creativo con passione per l'arte digitale e l'innovazione tecnologica. Creo esperienze web uniche che combinano funzionalità e bellezza estetica.",
     "avatar": "/images/avatar.jpg",
     "contact": {
@@ -10,7 +10,7 @@
       "data": {
         "email": "astorci.andrea@gmail.com",
         "phone": "+39 340 2644 629",
-        "location": "Parma, Italia",
+        "location": "Varano de' Melegari, Parma, Italia",
         "linkedin": "https://linkedin.com/in/andreastorci",
         "github": "https://github.com/AndrewStorci7",
         "website": "https://andreastorci.it",
@@ -106,7 +106,7 @@
   "en-GB": {
     "name": "Andrea",
     "surname": "Storci",
-    "title": "Full-Stack Developer & Designer",
+    "title": "Software Developer",
     "bio": "Creative developer with passion for digital art and technological innovation. I create unique web experiences that combine functionality and aesthetic beauty.",
     "avatar": "/images/avatar.jpg",
     "contact": {
@@ -114,7 +114,7 @@
       "data": {
         "email": "astorci.andrea@gmail.com",
         "phone": "+39 340 2644 629",
-        "location": "Parma, Italia",
+        "location": "Varano de' Melegari, Parma, Italy",
         "linkedin": "https://linkedin.com/in/andreastorci",
         "github": "https://github.com/AndrewStorci7",
         "website": "https://andreastorci.it",
@@ -213,7 +213,7 @@
   "es-ES": {
     "name": "Andrea",
     "surname": "Storci",
-    "title": "Desarrollador Full-Stack y Diseñador",
+    "title": "Software Developer",
     "bio": "Desarrollador creativo con pasión por el arte digital y la innovación tecnológica. Creo experiencias web únicas que combinan funcionalidad y belleza estética.",
     "avatar": "/images/avatar.jpg",
     "contact": {
@@ -221,7 +221,7 @@
       "data": {
         "email": "astorci.andrea@gmail.com",
         "phone": "+39 340 2644 629",
-        "location": "Parma, Italia",
+        "location": "Varano de' Melegari, Parma, Italia",
         "linkedin": "https://linkedin.com/in/andreastorci",
         "github": "https://github.com/AndrewStorci7",
         "website": "https://andreastorci.it",

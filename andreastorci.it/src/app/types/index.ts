@@ -1,63 +1,81 @@
-export interface ContactInfo {
+interface CommonInfo {
     title: string;
-    data: {
-        email: string;
-        phone?: string;
-        location: string;
-        linkedin?: string;
-        github?: string;
-        website?: string;
-        announcements?: string;
-    }[]
+    description: string;
+}
+
+export interface MenuItemsName {
+    home: string;
+    skills: string;
+    projects: string;
+    contact: string;
+}
+
+export interface HeroSectionData {
+    primaryBtn: string;
+    secondaryBtn: string;
 }
 
 export interface Experience {
-    title: string;
-    data: {
-        jobTitle: string;
-        company: string;
-        period: string;
-        description: string;
-        technologies?: string[];
-    }[]
+    jobTitle: string;
+    company: string;
+    period: string;
+    description: string;
+    technologies?: string[];
 }
 
 export interface Education {
-    title: string;
-    data: {
-        degree: string;
-        institution: string;
-        year: string;
-        description?: string;
-    }[]
+    degree: string;
+    institution: string;
+    year: string;
+    description?: string;
 }
 
+//#region Skills Section
+export interface SkillsSectionData extends CommonInfo {}
+
 export interface Skill {
-    title: string;
-    data: {
-        name: string;
-        level: number; // 1-5 o 1-10
-        category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
-    }[]
+    // data: SkillsSectionData;
+    name: string;
+    level: number; // 1-5 o 1-10
+    category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
 }
 
+//#endregion Skills Section
 
-export interface Skill {
-    title: string;
-    data: {
-        name: string;
-        level: number; // 1-5 o 1-10
-        category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
-    }[]
+//#region Projects Section
+export interface ProjectsSectionData extends CommonInfo {
+    button: string;
 }
 
 export interface Project {
-    title: string;
-    data: {
-        name: string;
-        description: string;
-        technologies: string[];
-        link?: string;
-        image?: string;
-    }[];
+    // data: ProjectsSectionData;
+    name: string;
+    description: string;
+    technologies: string[];
+    link?: string;
+    image?: string;
+}
+
+//#endregion Projects Section
+
+//#region Contact Section
+export interface ContactSectionData extends CommonInfo {
+    button: string;
+}
+
+export interface ContactInfo {
+    // data: ContactSectionData;
+    email: string;
+    phone?: string;
+    location: string;
+    linkedin?: string;
+    github?: string;
+    website?: string;
+    announcements?: string;
+}
+
+//#endregion Contact Section
+
+export interface LanguageData<Type> {
+    [key: string]: Type;
 }

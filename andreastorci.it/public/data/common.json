@@ -1,0 +1,80 @@
+{
+    "it-IT": {
+        "menu": {
+            "home": "Home",
+            "skills": "Competenze",
+            "projects": "Progetti",
+            "contact": "Contatti"
+        },
+        "hero": {
+            "primaryButton": "Visualizza Progetti",
+            "secondaryButton": "Contattami"
+        },
+        "skills": {
+            "title": "Le mie Competenze",
+            "description": "Scopri le tecnologie e gli strumenti che utilizzo."
+        },
+        "projects": {
+            "title": "I miei Progetti",
+            "description": "Esplora i miei progetti recenti e le mie realizzazioni.",
+            "viewProject": "Visualizza Progetto"
+        },
+        "contacts": {
+            "title": "Contattami",
+            "description": "Hai un progetto in mente? Sono sempre aperto a nuove sfide e collaborazioni interessanti.",
+            "button": "Iniziamo a collaborare"
+        }
+    },
+    "en-GB": {
+        "menu": {
+            "home": "Home",
+            "skills": "Skills",
+            "projects": "Projects",
+            "contact": "Contact"
+        },
+        "hero": {
+            "primaryButton": "View Projects",
+            "secondaryButton": "Contact Me"
+        },
+        "skills": {
+            "title": "My Skills",
+            "description": "Discover the technologies and tools I use."
+        },
+        "projects": {
+            "title": "My Projects",
+            "description": "Explore my recent projects and achievements.",
+            "viewProject": "View Project"
+        },
+        "contacts": {
+            "title": "Contact Me",
+            "description": "Do you have a project in mind? I'm always open to new challenges and exciting collaborations.",
+            "button": "Let's start collaborating"
+        }
+    },
+    "es-ES": {
+        "menu": {
+            "home": "Home",
+            "skills": "Habilidades",
+            "projects": "Proyectos",
+            "contact": "Contacto"
+        },
+        "hero": {
+            "primaryButton": "Ver Proyectos",
+            "secondaryButton": "Contáctame"
+        },
+        "skills": {
+            "title": "Mis Habilidades",
+            "description": "Descubre las tecnologías y herramientas que utilizo."
+        },
+        "projects": {
+            "title": "Mis Proyectos",
+            "description": "Explora mis proyectos recientes y mis logros.",
+            "viewProject": "Ver Proyecto"
+        },
+        "contacts": {
+            "title": "Contáctame",
+            "description": "¿Tienes un proyecto en mente? Siempre estoy abierto a nuevos desafíos y colaboraciones interesantes.",
+            "button": "Empecemos a colaborar"
+        }
+    }
+}

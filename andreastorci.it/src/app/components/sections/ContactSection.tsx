@@ -13,30 +13,36 @@ import "@style/contactSectionStyle.css";
 const ContactSection = ({ data }: { data: PersonalData | null }) => {
 
     return (
-        <Section id='contact' className='contact-section' title={data?.contact.title}>
-            <p className="fade-in announcement">{data?.contact.data.announcements}</p>
+        <Section id='contact' className='contact-section' title={data?.contact.data.title}>
+            <p className="fade-in announcement">{data?.contact.announcements}</p>
             <div className="contact-info fade-in">
                 <div className="contact-item">
-                    <div className="icon">📧</div>
+                    <div className="icon">
+                        <img src="/social/mail.png" alt="Email" />
+                    </div>
                     <div>
                         <h4>Email</h4>
-                        <p>{data?.contact.data.email}</p>
+                        <p>{data?.contact.email}</p>
                     </div>
                 </div>
                 
                 <div className="contact-item">
-                    <div className="icon">📱</div>
+                    <div className="icon">
+                        <img src="/social/whatsapp.png" alt="WhatsApp" />
+                    </div>
                     <div>
                         <h4>Telefono</h4>
-                        <p>{data?.contact.data.phone}</p>
+                        <p>{data?.contact.phone}</p>
                     </div>
                 </div>
                 
                 <div className="contact-item">
-                    <div className="icon">📍</div>
+                    <div className="icon">
+                        <img src="/social/pinpoint.png" alt="Posizione" />
+                    </div>
                     <div>
                         <h4>Posizione</h4>
-                        <p>{data?.contact.data.location}</p>
+                        <p>{data?.contact.location}</p>
                     </div>
                 </div>
             </div>
