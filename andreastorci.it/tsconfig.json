@@ -22,7 +22,7 @@
     ],
     "paths": {
       "@/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*"],
+      "@components/*": ["./src/app/components/*", "./src/app/admin/components/*"],
       "@inc/*": ["./src/app/inc/*"],
       "@style/*": ["./src/app/style/*"],
       "@ctypes/*": ["./src/app/types/*"],

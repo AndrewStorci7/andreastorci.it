@@ -84,3 +84,8 @@ export interface LanguageData<Type> {
 }
 
 export interface FuckWordpress extends CommonInfo {}
+
+export const types = ['visits', 'country'] as const
+export const ranges = ['month', 'week', 'year', 'alltime'] as const
+export type Range = typeof ranges[number];
+export type Type = typeof types[number];

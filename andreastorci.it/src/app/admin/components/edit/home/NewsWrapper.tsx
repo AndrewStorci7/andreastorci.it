@@ -1,3 +1,5 @@
+import { usePageSelector } from "@providers/PageSelectorContext";
+import CircularLoader from "@inc/animated/CircularLoader";
 import React, { useEffect, useState } from "react";
 import "@astyle/newsWrapperStyle.css"
 
@@ -17,11 +19,17 @@ type NewsType = {
 
 const NewsWrapper = () => {
 
-    const [news, setNews] = useState<NewsType[]>()
-    const [error, setError] = useState<string | any>()
+    const { setLoader } = usePageSelector();
+    const [news, setNews] = useState<NewsType[]>();
+    const [error, setError] = useState<string | any>();
+    const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const [clock, setClock] = useState<boolean>(false)
 
+    const DURATION = 10000
+    
     const getNews = async () => {
         try {
+            setLoader(true)
             const req = await fetch('/api/news', {
                 method: 'POST'
             });
@@ -34,6 +42,8 @@ const NewsWrapper = () => {
         } catch (err) {
             console.error(err);
             setError(err);
+        } finally {
+            setLoader(false)
         }
     }
 
@@ -43,36 +53,50 @@ const NewsWrapper = () => {
             return <p>Nessuna news trovata.</p>
         }
 
-        return news.map((_news, index) => {
-            const day = new Date(_news.publishedAt)
-            return (
-                <div key={index} id={String(index)} className={`relative grid grid-col-3 ${index === 0 ? "" : "hidden"}`}>
-                    <div className="news-left-side" style={{
-                        backgroundImage: `url(${_news.urlToImage}`
-                    }} />
-                    <div className="news-right-side grid-span-2">
-                        <div className="space-y-4">
-                            <h3>{_news.title}</h3>
-                            <h5>{_news.author?? "Anonimous"} - <span>{day.toDateString()}</span></h5>
-                            <p>{_news.description}</p>
-                            <div>
-                                <a href={_news.url} className="see-full-article">
-                                    Vai all'articolo
-                                </a>
-                            </div>
+        const currentNews = news[currentIndex]
+        const day = new Date(currentNews.publishedAt)
+
+        return (
+            <div key={currentIndex} id={String(currentIndex)} className="wrapper-container expose">
+                <div className="news-left-side" style={{
+                    backgroundImage: `url(${currentNews.urlToImage}`
+                }} />
+                <div className="flex news-right-side grid-span-2">
+                    <div className="space-y-4">
+                        <h3>{currentNews.title}</h3>
+                        <h5>{currentNews.author?? "Anonimous"} - <span>{day.toDateString()}</span></h5>
+                        <p>{currentNews.content}</p>
+                        <div className="flex grid-col-2 space-between fix-to-bottom">
+                            <a href={currentNews.url} className="see-full-article">
+                                Vai all'articolo
+                            </a>
+                            <CircularLoader start={clock} size={35} duration={DURATION} strokeWidth={4} />
                         </div>
                     </div>
                 </div>
-            )
-        })
+            </div>
+        )
     }
     
     useEffect(() => {
         getNews();
     }, []);
 
+    useEffect(() => {
+        if (!news || news.length === 0) return;
+
+        const interval = setInterval(() => {
+            setClock(prev => !prev)
+            setCurrentIndex((prev) =>
+                prev + 1 < news.length ? prev + 1 : 0
+            );
+        }, DURATION);
+
+        return () => clearInterval(interval);
+    }, [news]);
+
     return (
-        <div className="news-wrapper">
+        <div className="container news-wrapper">
             {renderNews(news ?? null)}
         </div>
     )

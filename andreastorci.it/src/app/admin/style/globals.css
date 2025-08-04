@@ -33,16 +33,36 @@ body {
     width: 100vw;
 }
 
+.h-fit {
+    height: fit-content !important;
+}
+
+.min-h-400pxi {
+    min-height: 400px !important;
+}
+
 .h-100 {
     height: 100%;
+}
+
+.h-100i {
+    height: 100% !important;
 }
 
 .w-100 {
     width: 100%;
 }
 
+.w-100i {
+    width: 100% !important;
+}
+
 .w-50 {
     width: 50%;
+}
+
+.h-400pxi {
+    height: 400px !important;
 }
 
 .bold {
@@ -82,10 +102,29 @@ body {
     gap: 0.5rem;
 }
 
+.grid-col-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.grid-col-5 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.grid-col-6 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
 .grid-col-max {
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 1.5rem;
 } 
+
+.no-gap {
+    gap: 0 !important;
+}
 
 .gap-2 {
     gap: 0.1em;
@@ -118,6 +157,10 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+.disabled {
+    cursor: not-allowed;
+    opacity: .5;
 }
 
 .truncate {
@@ -225,6 +268,11 @@ button:hover {
     margin-left: .5rem;
 }
 
+.space-between {
+    align-content: space-between;
+    justify-content: space-between;
+}
+
 input[type="checkbox"] {
     display: none;
 }
@@ -259,4 +307,16 @@ input[type="checkbox"] {
     /* border: solid #4f46e5; */
     /* border-width: 0 2px 2px 0; */
     /* transform: rotate(45deg); */
+}
+
+.container {
+    border: 2px solid var(--charcoal);
+    width: fit-content;
+    border-radius: 10px;
+    height: fit-content;
+    background-color: var(--white);
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    margin: 10px;
+    padding: 0;
 }

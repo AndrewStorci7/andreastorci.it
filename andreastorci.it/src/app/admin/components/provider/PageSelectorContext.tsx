@@ -42,12 +42,15 @@ export const PageSelectorProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const setLoader = (value: boolean) => {
+        console.log("before setLoader(): ", currentState)
+        console.log("val: ", value)
         setCurrentState(prev => {
             return {
                 ...prev,
                 showLoader: value
             }
         });
+        console.log("after setLoader(): ", currentState)
     }
 
     return (

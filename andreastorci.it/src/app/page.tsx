@@ -38,11 +38,12 @@ export default function Home() {
       setLoading(true);
       setError(null);
       
+      await fetch('/api/logs', { method: 'POST' })
       const personalInfo = new PersonalInfo(lang.sku);
       const commonInfo = new CommonInfo(lang.sku);
       const data = await personalInfo.getPersonalData();
       const commonData = await commonInfo.getData();
-      console.log(data, commonData)
+      // console.log(data, commonData)
       setPd(data);
       setCommonData(commonData);
     } catch (err) {
