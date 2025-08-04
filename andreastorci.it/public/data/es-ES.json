@@ -1,0 +1,151 @@
+{
+  "name": "Andrea",
+  "surname": "Storci",
+  "title": "Software Developer",
+  "bio": "Desarrollador creativo con pasión por el arte digital y la innovación tecnológica. Creo experiencias web únicas que combinan funcionalidad y belleza estética.",
+  "avatar": "/me-ghibli.png",
+  "contact": {
+    "title": "Trabajemos Juntos",
+    "email": "astorci.andrea@gmail.com",
+    "phone": "+39 340 2644 629",
+    "location": "Varano de' Melegari, Parma, Italia",
+    "linkedin": "https://linkedin.com/in/andreastorci",
+    "github": "https://github.com/AndrewStorci7",
+    "website": "https://andreastorci.it"
+  },
+  "experience": [
+    {
+      "title": "Desarrollador - Administrador de sistemas",
+      "company": "Oppimittinetworking.com",
+      "period": "2022 - Presente",
+      "description": "Desarrollo de aplicaciones web modernas utilizando React, Node.js y TypeScript. Enfoque en la experiencia del usuario y el rendimiento. Reparación de dispositivos móviles, ordenadores personales, etc. Creación de sitios web.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "TypeScript",
+        "MtSQL",
+        "AWS",
+        "Aruba"
+      ]
+    },
+    {
+      "title": "Desarrollador Full Stack",
+      "company": "DGTechnologies",
+      "period": "2022 - Presente",
+      "description": "Creación y colaboración en el desarrollo de aplicaciones móviles con React Native.",
+      "technologies": [
+        "React",
+        "React Native",
+        "Figma"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Grado en Informática",
+      "institution": "Universidad de Parma",
+      "year": "2022 - Presente",
+      "description": "Especialización en desarrollo de software e interfaces de usuario."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Gestionale Energy",
+      "type": "Web App",
+      "description": "Gestionale Energy es un software de gestión especializado en la automatización de procesos empresariales relacionados con la producción de balas de plástico. La plataforma permite la gestión completa del ciclo productivo, desde la creación hasta la trazabilidad de las balas, integrando funciones de monitoreo en tiempo real de las actividades en curso. También incluye herramientas de análisis de datos para evaluar el rendimiento general de la producción, optimizar los recursos y mejorar la eficiencia operativa.",
+      "technologies": [
+        "JavaScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "MySQL"
+      ],
+      "link": "https://github.com/AndrewStorci7/GestionaleEnergy",
+      "role": [
+        "Software Developer",
+        "DB Architect",
+        "Full Stack Developer"
+      ],
+      "image": "/tech/logo_oppimitti.png",
+      "sku": "gestionale-energy"
+    },
+    {
+      "name": "ListShot (by Gate Away)",
+      "type": "Applicación Móvil",
+      "description": "ListShot es una aplicación inteligente para la gestión inmobiliaria que utiliza inteligencia artificial para automatizar la generación de información sobre propiedades. A partir de las imágenes cargadas, el sistema analiza e identifica automáticamente características clave del inmueble (por ejemplo, tipología, estado, ambientes, materiales), elaborando de forma rápida y precisa fichas descriptivas, anuncios e informes. ListShot simplifica y agiliza el trabajo de agentes y profesionales del sector, reduciendo el error humano y mejorando la eficiencia operativa en la publicación y gestión de propiedades.",
+      "technologies": [
+        "JavaScript",
+        "React Native",
+        "Node.js",
+        "MongoDB"
+      ],
+      "link": "https://apps.apple.com/it/app/listshot/id6560116549",
+      "role": [
+        "Software Developer"
+      ],
+      "image": "/tech/logo_listshot.png",
+      "sku": "listshot"
+    }
+  ],
+  "skills": [
+    {
+      "name": "C++",
+      "level": 7,
+      "category": "backend"
+    },
+    {
+      "name": "Java",
+      "level": 7,
+      "category": "backend"
+    },
+    {
+      "name": "React",
+      "level": 8,
+      "category": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "level": 7,
+      "category": "frontend"
+    },
+    {
+      "name": "Node.js",
+      "level": 7,
+      "category": "backend"
+    },
+    {
+      "name": "React Native",
+      "level": 8,
+      "category": "frontend"
+    },
+    {
+      "name": "MySQL",
+      "level": 8,
+      "category": "database"
+    },
+    {
+      "name": "MongoDB",
+      "level": 6,
+      "category": "database"
+    },
+    {
+      "name": "Resolución de Problemas",
+      "level": 9,
+      "category": "soft"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Italiano",
+      "level": "Nativo"
+    },
+    {
+      "name": "Inglés",
+      "level": "Avanzado"
+    },
+    {
+      "name": "Español",
+      "level": "Intermedio"
+    }
+  ]
+}

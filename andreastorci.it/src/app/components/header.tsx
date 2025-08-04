@@ -5,9 +5,10 @@
 'use client'
 
 import React, { JSX, useRef, useCallback, useState, useEffect } from 'react';
-import Icon from "@/components/inc/Icon";
+import FlagChooser from '@inc/FlagChooser';
+import { MenuItemsName } from '@ctypes/index';
+import Icon from "@inc/Icon";
 import "@style/headerStyle.css";
-import FlagChooser from './inc/FlagChooser';
 
 interface Theme {
     '--sage-green': string;
@@ -33,13 +34,21 @@ const themes: Theme[] = [
     }
 ];
 
-export default function Header(): JSX.Element {
+
+
+export default function Header({ 
+    commonData 
+}: { 
+    commonData: MenuItemsName | null
+}): JSX.Element {
     
     const clickCountRef = useRef<number>(0);
     const lastScrollRef = useRef<number>(0);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+    // console.log(commonData)
     
     useEffect(() => {
         const handleScroll = (): void => {
@@ -214,7 +223,7 @@ export default function Header(): JSX.Element {
                             href="#home"
                             onClick={(e) => handleSmoothScroll(e, '#home')}
                         >
-                            Home
+                            {commonData?.home}
                         </a>
                     </li>
                     <li>
@@ -222,7 +231,7 @@ export default function Header(): JSX.Element {
                             href="#skills"
                             onClick={(e) => handleSmoothScroll(e, '#skills')}
                         >
-                            Skills
+                            {commonData?.skills}
                         </a>
                     </li>
                     <li>
@@ -230,7 +239,7 @@ export default function Header(): JSX.Element {
                             href="#projects"
                             onClick={(e) => handleSmoothScroll(e, '#projects')}
                         >
-                            Projects
+                            {commonData?.projects}
                         </a>
                     </li>
                     <li>
@@ -238,7 +247,7 @@ export default function Header(): JSX.Element {
                             href="#contact"
                             onClick={(e) => handleSmoothScroll(e, '#contact')}
                         >
-                            Contact
+                            {commonData?.contact}
                         </a>
                     </li>
                 </ul>
@@ -247,16 +256,11 @@ export default function Header(): JSX.Element {
                 <button 
                     className={`hamburger ${isMenuOpen ? 'active' : ''}`}
                     onClick={toggleMenu}
-                    aria-label={isMenuOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'}
+                    // aria-label={isMenuOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'}
                     aria-expanded={isMenuOpen}
                     type="button"
                 >
-                    <Icon 
-                        useFor="hamburger" 
-                        width={32} 
-                        height={32}
-                        className="hamburger-icon"
-                    />
+                    <Icon useFor="hamburger" className="hamburger-icon" />
                 </button>
             </nav>
 

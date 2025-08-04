@@ -1,0 +1,33 @@
+:root {
+    --color-gestionale-energy: #6567e8;
+    --color-listshot: #6567e8;
+}
+
+.listshot,
+.gestionale-energy {
+    position: relative;
+}
+
+.listshot::before,
+.gestionale-energy::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .7;
+    z-index: -1;
+}
+
+.listshot::before {
+    background: linear-gradient(355deg,rgba(252, 187, 4, 1) 0%, rgba(111, 112, 191, 1) 50%, rgba(101, 103, 232, 1) 100%);
+}
+
+.gestionale-energy::before {
+    background: linear-gradient(355deg,rgba(92, 102, 97, 1) 0%, rgba(98, 130, 114, 1) 50%, rgba(84, 148, 116, 1) 100%);
+}
+
+.project-type {
+    font-size: 12px;   
+}

@@ -5,16 +5,21 @@
 'use client'
 
 import React from 'react';
-import Section from '@components/inc/Section';
-import { PersonalData } from '@/types/PersonalInfo';
-
+import Section from '@inc/Section';
+import { ContactInfo, ContactSectionData } from '@ctypes/index';
 import "@style/contactSectionStyle.css";
 
-const ContactSection = ({ data }: { data: PersonalData | null }) => {
+const ContactSection = ({ 
+    data,
+    commonData
+}: { 
+    data: ContactInfo | null ,
+    commonData: ContactSectionData | null
+}) => {
 
     return (
-        <Section id='contact' className='contact-section' title={data?.contact.data.title}>
-            <p className="fade-in announcement">{data?.contact.announcements}</p>
+        <Section id='contact' className='contact-section' title={commonData?.title}>
+            <p className="fade-in announcement">{commonData?.description}</p>
             <div className="contact-info fade-in">
                 <div className="contact-item">
                     <div className="icon">
@@ -22,7 +27,7 @@ const ContactSection = ({ data }: { data: PersonalData | null }) => {
                     </div>
                     <div>
                         <h4>Email</h4>
-                        <p>{data?.contact.email}</p>
+                        <p>{data?.email}</p>
                     </div>
                 </div>
                 
@@ -32,7 +37,7 @@ const ContactSection = ({ data }: { data: PersonalData | null }) => {
                     </div>
                     <div>
                         <h4>Telefono</h4>
-                        <p>{data?.contact.phone}</p>
+                        <p>{data?.phone}</p>
                     </div>
                 </div>
                 
@@ -42,7 +47,7 @@ const ContactSection = ({ data }: { data: PersonalData | null }) => {
                     </div>
                     <div>
                         <h4>Posizione</h4>
-                        <p>{data?.contact.location}</p>
+                        <p>{data?.location}</p>
                     </div>
                 </div>
             </div>
@@ -67,7 +72,7 @@ const ContactSection = ({ data }: { data: PersonalData | null }) => {
             
             <div className="fade-in" style={{ marginTop: '3rem' }}>
                 <a href="mailto:astorci.andrea@gmail.com" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1.2rem 2.5rem' }}>
-                    Iniziamo a Collaborare
+                    {commonData?.button}
                 </a>
             </div>
         </Section>

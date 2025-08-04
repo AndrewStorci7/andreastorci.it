@@ -5,17 +5,23 @@
 'use client'
 
 import React from 'react';
-import Section from '@components/inc/Section';
-import { PersonalData } from '@/types/PersonalInfo';
+import Section from '@inc/Section';
+import { Skill, SkillsSectionData } from '@ctypes/index';
 
-const SkillsSection = ({ data }: { data: PersonalData | null }) => {
+const SkillsSection = ({ 
+    data, 
+    commonData 
+}: { 
+    data: Skill[] | null,
+    commonData: SkillsSectionData | null 
+}) => {
 
-    const renderContent = (data: PersonalData | null) => {
-        if (!data || data.skills.data.length === 0) {
+    const renderContent = (data: Skill[] | null) => {
+        if (!data || data.length === 0) {
             return <p>Nessuna competenza disponibile.</p>;
         }
 
-        return data.skills.data.map((skill, index) => (
+        return data.map((skill, index) => (
             <div key={index} className="skill-card fade-in">
                 <h3>{skill.name}</h3>
                 <div className='skill-tags'>
@@ -27,7 +33,7 @@ const SkillsSection = ({ data }: { data: PersonalData | null }) => {
     }
 
     return (
-        <Section id='skills' className='skills-section' title={data?.skills.title}>
+        <Section id='skills' className='skills-section' title={commonData?.title}>
             <div className="skills-grid">
                 {renderContent(data)}
             </div>

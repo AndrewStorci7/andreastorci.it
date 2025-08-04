@@ -98,6 +98,7 @@ nav {
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 8px;
+    /* background-color: antiquewhite !important; */
     transition: all 0.3s ease;
     z-index: 1001;
 }

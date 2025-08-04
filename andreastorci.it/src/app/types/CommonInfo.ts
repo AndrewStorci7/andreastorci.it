@@ -2,14 +2,20 @@ import {
     SkillsSectionData,
     ProjectsSectionData,
     ContactSectionData,
-    LanguageData
-} from '@/types';
-import OOB from "@/types/OOB";
+    LanguageData,
+    MenuItemsName,
+    HeroSectionData,
+    FuckWordpress
+} from '@ctypes/index';
+import OOB from "@ctypes/OOB";
 
 interface CommonData {
-    skills: SkillsSectionData;
-    projects: ProjectsSectionData;
-    contact: ContactSectionData;
+    menu: MenuItemsName,
+    hero: HeroSectionData,
+    skills: SkillsSectionData,
+    projects: ProjectsSectionData,
+    contacts: ContactSectionData,
+    fuckWordpress: FuckWordpress
 } 
 
 class CommonInfo extends OOB<LanguageData<CommonData>> {
@@ -17,7 +23,6 @@ class CommonInfo extends OOB<LanguageData<CommonData>> {
     constructor(lang: string) {
         super(lang);
     }
-
 
     private async loadCommonData(): Promise<void> {
         if (this.isLoaded) return;
@@ -53,7 +58,8 @@ class CommonInfo extends OOB<LanguageData<CommonData>> {
 
     public async getData(): Promise<CommonData | null> {
         await this.loadCommonData();
-        return this.data[this.currentLang];
+        // if (!this.data) return null;
+        return this.data![this.currentLang];
     }
 
 }

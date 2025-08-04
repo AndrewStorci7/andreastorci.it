@@ -1,0 +1,96 @@
+@import "@style/globals.css";
+
+:root {
+    --bg-javascript: #ffd600;
+    --bg-react: #5580bf;
+    --bg-node: #24a464;
+    --bg-next: #242424;
+    --bg-mysql: #E46D04;
+    --bg-mongodb: #13AA52;
+    --bg-reactnative: #61DAFB;
+}
+
+.image-tech {
+    width: 25px;
+    height: 25px;
+}
+
+.bg-js,
+.bg-ts,
+.bg-react,
+.bg-reactnative,
+.bg-node,
+.bg-next,
+.bg-mysql,
+.bg-mongodb {
+    position: relative;
+}
+
+.tech-tag {
+    /* background: var(--light-sage); */
+    color: var(--deep-sage);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.bg-js::before,
+.bg-react::before,
+.bg-ts::before,
+.bg-node::before,
+.bg-next::before,
+.bg-mysql::before,
+.bg-mongodb::before,
+.bg-reactnative::before {
+    content: "";
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    opacity: .7;
+}
+
+.bg-js::before {
+    border: 1px solid var(--bg-javascript);
+    background-color: var(--bg-javascript);
+    background: linear-gradient(270deg, rgba(255, 248, 212, 1) 0%, rgba(255, 236, 143, 1) 20%, rgba(255, 214, 0, 1) 100%);
+}
+
+.bg-react::before {
+    border: 1px solid var(--bg-react);
+    background: var(--bg-react);
+    background: linear-gradient(270deg, rgba(180, 183, 191, 1) 0%, rgba(140, 154, 189, 1) 20%, rgba(85, 128, 191, 1) 100%);    
+}
+
+.bg-node::before {
+    border: 1px solid var(--bg-node);
+    background: var(--bg-node);
+    background: linear-gradient(270deg, rgba(141, 168, 161, 1) 0%, rgba(95, 158, 126, 1) 20%, rgba(36, 164, 100, 1) 100%);
+} 
+
+.bg-next::before {
+    border: 1px solid var(--bg-next);
+    background: var(--bg-next);
+    background: linear-gradient(270deg,rgba(214, 214, 214, 1) 0%, rgba(133, 133, 133, 1) 20%, rgba(36, 36, 36, 1) 100%);
+}
+
+.bg-mysql::before {
+    border: 1px solid var(--bg-mysql);
+    background: var(--bg-mysql);
+    background: linear-gradient(270deg,rgba(230, 216, 204, 1) 0%, rgba(227, 164, 109, 1) 20%, rgba(228, 109, 4, 1) 100%);
+}
+
+.bg-mongodb::before {
+    border: 1px solid var(--bg-mongodb);
+    background: var(--bg-mongodb);
+    background: linear-gradient(270deg,rgba(139, 179, 156, 1) 0%, rgba(80, 179, 121, 1) 20%, rgba(19, 170, 82, 1) 100%);
+}
+
+.bg-reactnative::before {
+    border: 1px solid var(--bg-reactnative);
+    background: var(--bg-reactnative);
+    background: linear-gradient(270deg,rgba(218, 237, 242, 1) 0%, rgba(167, 226, 242, 1) 20%, rgba(97, 218, 251, 1) 100%);
+}

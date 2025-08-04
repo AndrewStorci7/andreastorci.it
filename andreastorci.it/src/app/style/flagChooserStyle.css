@@ -45,3 +45,10 @@
     height: 24px;
     margin-right: 5px;
 }
+
+@media (max-width: 768px) {
+    .flag-chooser {
+        min-width: 217px;
+        z-index: 999;
+    }
+}

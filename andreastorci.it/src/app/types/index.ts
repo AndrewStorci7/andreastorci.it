@@ -50,10 +50,13 @@ export interface ProjectsSectionData extends CommonInfo {
 export interface Project {
     // data: ProjectsSectionData;
     name: string;
+    type: string;
+    role: string[];
     description: string;
     technologies: string[];
     link?: string;
     image?: string;
+    sku?: string;
 }
 
 //#endregion Projects Section
@@ -79,3 +82,5 @@ export interface ContactInfo {
 export interface LanguageData<Type> {
     [key: string]: Type;
 }
+
+export interface FuckWordpress extends CommonInfo {}

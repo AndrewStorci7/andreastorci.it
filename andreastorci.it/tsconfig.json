@@ -23,8 +23,16 @@
     "paths": {
       "@/*": ["./src/app/*"],
       "@components/*": ["./src/app/components/*"],
+      "@inc/*": ["./src/app/inc/*"],
       "@style/*": ["./src/app/style/*"],
-      "@ctypes/*": ["./src/types/*"],
+      "@ctypes/*": ["./src/app/types/*"],
+      "@admin/*": ["./src/app/admin/*"],
+      "@astyle/*": ["./src/app/admin/style/*"],
+      "@apages/*": ["./src/app/admin/components/pages/*"],
+      "@apages": ["./src/app/admin/components/pages/index.ts"],
+      "@providers/*": ["./src/app/admin/components/provider/*"],
+      "@data": ["./public/data/personalData.json"],
+      "@common/*": ["./src/app/admin/components/common/*"]
     },
     "types": ["node"]
   },

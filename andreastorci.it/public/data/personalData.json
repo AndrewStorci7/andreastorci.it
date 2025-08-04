@@ -4,18 +4,15 @@
     "surname": "Storci",
     "title": "Software Developer",
     "bio": "Sviluppatore creativo con passione per l'arte digitale e l'innovazione tecnologica. Creo esperienze web uniche che combinano funzionalità e bellezza estetica.",
-    "avatar": "/images/avatar.jpg",
+    "avatar": "/me-ghibli.png",
     "contact": {
       "title": "Lavoriamo Insieme",
-      "data": {
-        "email": "astorci.andrea@gmail.com",
-        "phone": "+39 340 2644 629",
-        "location": "Varano de' Melegari, Parma, Italia",
-        "linkedin": "https://linkedin.com/in/andreastorci",
-        "github": "https://github.com/AndrewStorci7",
-        "website": "https://andreastorci.it",
-        "announcements": "Hai un progetto in mente? Sono sempre aperto a nuove sfide e collaborazioni interessanti."
-      }
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Varano de' Melegari, Parma, Italia",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
     },
     "experience": [
       {
@@ -23,7 +20,7 @@
         "company": "Oppimittinetworking.com",
         "period": "2022 - Presente",
         "description": "Sviluppo di applicazioni web moderne utilizzando React, Node.js e TypeScript. Focus su user experience e performance. Riaprazione di dispositivi mobile, personal computer ecc... Creazione di siti web",
-        "technologies": ["React", "Node.js", "TypeScript", "MtSQL", "AWS", "Aruba"]
+        "technologies": ["React", "Node.js", "JavaScript", "MtSQL", "AWS", "Aruba"]
       },
       {
         "title": "Full Stack Developer",
@@ -41,53 +38,75 @@
         "description": "Specializzazione in sviluppo software e interfacce utente"
       }
     ],
-    "projects": {
-      "title": "Progetti in Evidenza",
-      "data": [
-        {
-          "name": "Portfolio Artistico",
-          "description": "Sito web interattivo con animazioni 3D per mostrare opere d'arte digitali",
-          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-          "link": "https://portfolio.example.com",
-          "image": "/images/project1.jpg"
-        }
-      ]
-    },
-    "skills": {
-      "title": "Competenze Tecniche",
-      "data": [
-        {
-          "name": "React",
-          "level": 9,
-          "category": "frontend"
-        },
-        {
-          "name": "TypeScript",
-          "level": 8,
-          "category": "frontend"
-        },
-        {
-          "name": "Node.js",
-          "level": 7,
-          "category": "backend"
-        },
-        {
-          "name": "Three.js",
-          "level": 6,
-          "category": "frontend"
-        },
-        {
-          "name": "Figma",
-          "level": 8,
-          "category": "design"
-        },
-        {
-          "name": "Resolución de Problemas",
-          "level": 9,
-          "category": "soft"
-        }
-      ]
-    },
+    "projects": [
+      {
+        "name": "Gestionale Energy",
+        "type": "Web App",
+        "description": "Gestionale Energy è un software gestionale specializzato nell'automazione dei processi aziendali legati alla produzione di balle di plastica. La piattaforma consente la gestione completa del ciclo produttivo, dalla creazione alla tracciabilità delle balle, integrando funzioni di monitoraggio in tempo reale delle attività in corso. Include inoltre strumenti di analisi dei dati per valutare l’andamento complessivo della produzione, ottimizzare le risorse e migliorare l'efficienza operativa.",
+        "technologies": ["JavaScript", "React", "Next.js", "Node.js", "MySQL"],
+        "link": "https://github.com/AndrewStorci7/GestionaleEnergy",
+        "role": ["Software Developer", "DB Architect", "Full Stack Developer"],
+        "image": "/tech/logo_oppimitti.png",
+        "sku": "gestionale-energy"
+      },
+      {
+        "name": "ListShot (by Gate Away)",
+        "type": "Applicazione Mobile",
+        "description": "ListShot è un'applicazione intelligente per la gestione immobiliare che sfrutta l'intelligenza artificiale per automatizzare la generazione delle informazioni sugli immobili. A partire dalle immagini caricate, il sistema analizza e identifica automaticamente caratteristiche chiave dell'immobile (es. tipologia, stato, ambienti, materiali), compilando in modo rapido e preciso schede descrittive, annunci e report. ListShot semplifica e velocizza il lavoro di agenti e operatori del settore, riducendo l’errore umano e migliorando l'efficienza operativa nella pubblicazione e gestione delle proprietà.",
+        "technologies": ["JavaScript", "React Native", "Node.js", "MongoDB"],
+        "link": "https://apps.apple.com/it/app/listshot/id6560116549",
+        "role": ["Software Developer"],
+        "image": "/tech/logo_listshot.png",
+        "sku": "listshot"
+      }
+    ],
+    "skills": [
+      {
+        "name": "C++",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "Java",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 7,
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React Native",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "MySQL",
+        "level": 8,
+        "category": "database"
+      },
+      {
+        "name": "MongoDB",
+        "level": 6,
+        "category": "database"
+      },
+      {
+        "name": "Risoluzione di problemi",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
     "languages": [
       {
         "name": "Italiano",
@@ -108,18 +127,15 @@
     "surname": "Storci",
     "title": "Software Developer",
     "bio": "Creative developer with passion for digital art and technological innovation. I create unique web experiences that combine functionality and aesthetic beauty.",
-    "avatar": "/images/avatar.jpg",
+    "avatar": "/me-ghibli.png",
     "contact": {
       "title": "Let's Work Together",
-      "data": {
-        "email": "astorci.andrea@gmail.com",
-        "phone": "+39 340 2644 629",
-        "location": "Varano de' Melegari, Parma, Italy",
-        "linkedin": "https://linkedin.com/in/andreastorci",
-        "github": "https://github.com/AndrewStorci7",
-        "website": "https://andreastorci.it",
-        "announcements": "Do you have a project in mind? I'm always open to new challenges and interesting collaborations."
-      }
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Varano de' Melegari, Parma, Italy",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
     },
     "experience": [
       {
@@ -145,88 +161,104 @@
         "description": "Specialization in software development and user interfaces."
       }
     ],
-    "projects": {
-      "title": "Featured Projects",
-      "data": [
-        {
-          "name": "Art Portfolio",
-          "description": "Interactive website with 3D animations to showcase digital artworks",
-          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-          "link": "https://portfolio.example.com",
-          "image": "/images/project1.jpg"
-        }
-      ]
-    },
-    "skills": {
-      "title": "Technical Skills",
-      "data": [
-        {
-          "name": "React",
-          "level": 9,
-          "category": "frontend"
-        },
-        {
-          "name": "TypeScript",
-          "level": 8,
-          "category": "frontend"
-        },
-        {
-          "name": "Node.js",
-          "level": 7,
-          "category": "backend"
-        },
-        {
-          "name": "Three.js",
-          "level": 6,
-          "category": "frontend"
-        },
-        {
-          "name": "Figma",
-          "level": 8,
-          "category": "design"
-        },
-        {
-          "name": "Resolución de Problemas",
-          "level": 9,
-          "category": "soft"
-        }
-      ]
-    },
-    "languages": {
-      "title": "Languages",
-      "data": [
-        {
-          "name": "Italian",
-          "level": "Native"
-        },
-        {
-          "name": "English",
-          "level": "Advanced"
-        },
-        {
-          "name": "Spanish",
-          "level": "Intermediate"
-        }
-      ]
-    }
+    "projects": [
+      {
+        "name": "Gestionale Energy",
+        "type": "Web App",
+        "description": "Gestionale Energy is a management software specialized in automating business processes related to the production of plastic bales. The platform allows complete management of the production cycle, from creation to traceability of the bales, integrating real-time monitoring of ongoing activities. It also includes data analysis tools to assess overall production performance, optimize resources, and improve operational efficiency.",
+        "technologies": ["JavaScript", "React", "Next.js", "Node.js", "MySQL"],
+        "link": "https://github.com/AndrewStorci7/GestionaleEnergy",
+        "role": ["Software Developer", "DB Architect", "Full Stack Developer"],
+        "image": "/tech/logo_oppimitti.png",
+        "sku": "gestionale-energy"
+      },
+      {
+        "name": "ListShot (by Gate Away)",
+        "type": "Mobile Application",
+        "description": "ListShot is a smart application for real estate management that leverages artificial intelligence to automate the generation of property information. Based on uploaded images, the system analyzes and automatically identifies key features of the property (e.g., type, condition, rooms, materials), quickly and accurately compiling descriptive sheets, listings, and reports. ListShot simplifies and speeds up the work of agents and industry professionals, reducing human error and improving operational efficiency in publishing and managing properties.",
+        "technologies": ["JavaScript", "React Native", "Node.js", "MongoDB"],
+        "link": "https://apps.apple.com/it/app/listshot/id6560116549",
+        "role": ["Software Developer"],
+        "image": "/tech/logo_listshot.png",
+        "sku": "listshot"
+      }
+    ],
+    "skills": [
+      {
+        "name": "C++",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "Java",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 7,
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React Native",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "MySQL",
+        "level": 8,
+        "category": "database"
+      },
+      {
+        "name": "MongoDB",
+        "level": 6,
+        "category": "database"
+      },
+      {
+        "name": "Problem solving",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Italian",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Advanced"
+      },
+      {
+        "name": "Spanish",
+        "level": "Intermediate"
+      }
+    ]
   },
   "es-ES": {
     "name": "Andrea",
     "surname": "Storci",
     "title": "Software Developer",
     "bio": "Desarrollador creativo con pasión por el arte digital y la innovación tecnológica. Creo experiencias web únicas que combinan funcionalidad y belleza estética.",
-    "avatar": "/images/avatar.jpg",
+    "avatar": "/me-ghibli.png",
     "contact": {
       "title": "Trabajemos Juntos",
-      "data": {
-        "email": "astorci.andrea@gmail.com",
-        "phone": "+39 340 2644 629",
-        "location": "Varano de' Melegari, Parma, Italia",
-        "linkedin": "https://linkedin.com/in/andreastorci",
-        "github": "https://github.com/AndrewStorci7",
-        "website": "https://andreastorci.it",
-        "announcements": "¿Tienes un proyecto en mente? Siempre estoy abierto a nuevos retos y colaboraciones interesantes."
-      }
+      "email": "astorci.andrea@gmail.com",
+      "phone": "+39 340 2644 629",
+      "location": "Varano de' Melegari, Parma, Italia",
+      "linkedin": "https://linkedin.com/in/andreastorci",
+      "github": "https://github.com/AndrewStorci7",
+      "website": "https://andreastorci.it"
     },
     "experience": [
       {
@@ -252,69 +284,88 @@
         "description": "Especialización en desarrollo de software e interfaces de usuario."
       }
     ],
-    "projects": {
-      "title": "Proyectos Destacados",
-      "data": [
-        {
-          "name": "Portfolio Artístico",
-          "description": "Sitio web interactivo con animaciones 3D para mostrar obras de arte digital",
-          "technologies": ["React", "Three.js", "GSAP", "TypeScript"],
-          "link": "https://portfolio.example.com",
-          "image": "/images/project1.jpg"
-        }
-      ]
-    },
-    "skills": {
-      "title": "Habilidades Técnicas",
-      "data": [
-        {
-          "name": "React",
-          "level": 9,
-          "category": "frontend"
-        },
-        {
-          "name": "TypeScript",
-          "level": 8,
-          "category": "frontend"
-        },
-        {
-          "name": "Node.js",
-          "level": 7,
-          "category": "backend"
-        },
-        {
-          "name": "Three.js",
-          "level": 6,
-          "category": "frontend"
-        },
-        {
-          "name": "Figma",
-          "level": 8,
-          "category": "design"
-        },
-        {
-          "name": "Resolución de Problemas",
-          "level": 9,
-          "category": "soft"
-        }
-      ]
-    },
-    "languages": {
-      "title": "Idiomas",
-      "data": [
-        {
-          "name": "Italiano",
-          "level": "Nativo"
-        },
-        {
-          "name": "Inglés",
-          "level": "Avanzado"
-        },
-        {
-          "name": "Español",
-          "level": "Intermedio"
-        }
-      ]
-    }
+    "projects": [
+      {
+        "name": "Gestionale Energy",
+        "type": "Web App",
+        "description": "Gestionale Energy es un software de gestión especializado en la automatización de procesos empresariales relacionados con la producción de balas de plástico. La plataforma permite la gestión completa del ciclo productivo, desde la creación hasta la trazabilidad de las balas, integrando funciones de monitoreo en tiempo real de las actividades en curso. También incluye herramientas de análisis de datos para evaluar el rendimiento general de la producción, optimizar los recursos y mejorar la eficiencia operativa.",
+        "technologies": ["JavaScript", "React", "Next.js", "Node.js", "MySQL"],
+        "link": "https://github.com/AndrewStorci7/GestionaleEnergy",
+        "role": ["Software Developer", "DB Architect", "Full Stack Developer"],
+        "image": "/tech/logo_oppimitti.png",
+        "sku": "gestionale-energy"
+      },
+      {
+        "name": "ListShot (by Gate Away)",
+        "type": "Applicación Móvil",
+        "description": "ListShot es una aplicación inteligente para la gestión inmobiliaria que utiliza inteligencia artificial para automatizar la generación de información sobre propiedades. A partir de las imágenes cargadas, el sistema analiza e identifica automáticamente características clave del inmueble (por ejemplo, tipología, estado, ambientes, materiales), elaborando de forma rápida y precisa fichas descriptivas, anuncios e informes. ListShot simplifica y agiliza el trabajo de agentes y profesionales del sector, reduciendo el error humano y mejorando la eficiencia operativa en la publicación y gestión de propiedades.",
+        "technologies": ["JavaScript", "React Native", "Node.js", "MongoDB"],
+        "link": "https://apps.apple.com/it/app/listshot/id6560116549",
+        "role": ["Software Developer"],
+        "image": "/tech/logo_listshot.png",
+        "sku": "listshot"
+      }
+    ],
+    "skills": [
+      {
+        "name": "C++",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "Java",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "level": 7,
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "level": 7,
+        "category": "backend"
+      },
+      {
+        "name": "React Native",
+        "level": 8,
+        "category": "frontend"
+      },
+      {
+        "name": "MySQL",
+        "level": 8,
+        "category": "database"
+      },
+      {
+        "name": "MongoDB",
+        "level": 6,
+        "category": "database"
+      },
+      {
+        "name": "Resolución de Problemas",
+        "level": 9,
+        "category": "soft"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Italiano",
+        "level": "Nativo"
+      },
+      {
+        "name": "Inglés",
+        "level": "Avanzado"
+      },
+      {
+        "name": "Español",
+        "level": "Intermedio"
+      }
+    ]
   }
 }

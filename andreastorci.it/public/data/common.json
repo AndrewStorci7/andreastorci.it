@@ -7,8 +7,8 @@
             "contact": "Contatti"
         },
         "hero": {
-            "primaryButton": "Visualizza Progetti",
-            "secondaryButton": "Contattami"
+            "primaryBtn": "Visualizza Progetti",
+            "secondaryBtn": "Contattami"
         },
         "skills": {
             "title": "Le mie Competenze",
@@ -17,12 +17,16 @@
         "projects": {
             "title": "I miei Progetti",
             "description": "Esplora i miei progetti recenti e le mie realizzazioni.",
-            "viewProject": "Visualizza Progetto"
+            "button": "Visualizza Progetto"
         },
         "contacts": {
             "title": "Contattami",
             "description": "Hai un progetto in mente? Sono sempre aperto a nuove sfide e collaborazioni interessanti.",
             "button": "Iniziamo a collaborare"
+        },
+        "fuckWordpress": {
+            "title": "Non uso quella m**da di WordPress",
+            "description": "e no, non puoi accedere alla mia area riservata"
         }
     },
     "en-GB": {
@@ -33,8 +37,8 @@
             "contact": "Contact"
         },
         "hero": {
-            "primaryButton": "View Projects",
-            "secondaryButton": "Contact Me"
+            "primaryBtn": "View Projects",
+            "secondaryBtn": "Contact Me"
         },
         "skills": {
             "title": "My Skills",
@@ -43,12 +47,16 @@
         "projects": {
             "title": "My Projects",
             "description": "Explore my recent projects and achievements.",
-            "viewProject": "View Project"
+            "button": "View Project"
         },
         "contacts": {
             "title": "Contact Me",
             "description": "Do you have a project in mind? I'm always open to new challenges and exciting collaborations.",
             "button": "Let's start collaborating"
+        },
+        "fuckWordpress": {
+            "title": "I don't use that WordPress crap",
+            "description": "and no, you can't access my private area"
         }
     },
     "es-ES": {
@@ -59,8 +67,8 @@
             "contact": "Contacto"
         },
         "hero": {
-            "primaryButton": "Ver Proyectos",
-            "secondaryButton": "Contáctame"
+            "primaryBtn": "Ver Proyectos",
+            "secondaryBtn": "Contáctame"
         },
         "skills": {
             "title": "Mis Habilidades",
@@ -69,12 +77,16 @@
         "projects": {
             "title": "Mis Proyectos",
             "description": "Explora mis proyectos recientes y mis logros.",
-            "viewProject": "Ver Proyecto"
+            "button": "Ver Proyecto"
         },
         "contacts": {
             "title": "Contáctame",
             "description": "¿Tienes un proyecto en mente? Siempre estoy abierto a nuevos desafíos y colaboraciones interesantes.",
             "button": "Empecemos a colaborar"
+        },
+        "fuckWordpress": {
+            "title": "No uso esa m***da de WordPress",
+            "description": "y no, no puedes acceder a mi área privada"
         }
     }
 }
