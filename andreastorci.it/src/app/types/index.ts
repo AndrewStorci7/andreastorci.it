@@ -1,3 +1,5 @@
+import { ReactNode, MouseEventHandler } from "react";
+
 interface CommonInfo {
     title: string;
     description: string;
@@ -85,7 +87,31 @@ export interface LanguageData<Type> {
 
 export interface FuckWordpress extends CommonInfo {}
 
-export const types = ['visits', 'country'] as const
-export const ranges = ['month', 'week', 'year', 'alltime'] as const
-export type Range = typeof ranges[number];
-export type Type = typeof types[number];
+export const LOG_TYPES = ['visits', 'country'] as const
+export const LOG_RANGES = ['month', 'week', 'year', 'alltime'] as const
+export type Range = typeof LOG_RANGES[number];
+export type Type = typeof LOG_TYPES[number];
+
+export const NOTIFICATIONS_TYPES = ['error', 'info', 'completed', 'warning'] as const;
+export type NotificationsTypes = typeof NOTIFICATIONS_TYPES[number];
+
+export const NOTIFICATIONS_PURPOSES = ['alert', 'notification'] as const;
+export type NotificationPurpose = typeof NOTIFICATIONS_PURPOSES[number];
+
+export type NotificationType = {
+    show?: boolean;
+    purpose?: NotificationPurpose;
+    type?: NotificationsTypes;
+    title?: string;
+    message?: string | ReactNode | null;
+    customIcon?: ReactNode;
+    duration?: number;
+    buttons?: Button[]
+}
+
+export type Button = {
+    // onClick: Function,
+    onClick: MouseEventHandler<HTMLButtonElement>
+    text: string
+    type: string
+}

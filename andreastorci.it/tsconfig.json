@@ -30,7 +30,7 @@
       "@astyle/*": ["./src/app/admin/style/*"],
       "@apages/*": ["./src/app/admin/components/pages/*"],
       "@apages": ["./src/app/admin/components/pages/index.ts"],
-      "@providers/*": ["./src/app/admin/components/provider/*"],
+      "@providers": ["./src/app/admin/components/provider/index.ts"],
       "@data": ["./public/data/personalData.json"],
       "@common/*": ["./src/app/admin/components/common/*"]
     },

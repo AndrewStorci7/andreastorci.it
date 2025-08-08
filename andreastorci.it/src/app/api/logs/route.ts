@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
-import { Type, Range, types, ranges } from "@ctypes/index";
+import { Type, Range, LOG_TYPES, LOG_RANGES } from "@ctypes/index";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import path from "path";
@@ -87,11 +87,11 @@ export async function POST(req: Request) {
 
 const fetchData = (type: Type, range: Range, log: LogsType) => {
     try {
-        if (!types.includes(type)) {
-            throw new Error(`type non valido. Può essere solo uno di: ${types.join(', ')}`)
+        if (!LOG_TYPES.includes(type)) {
+            throw new Error(`type non valido. Può essere solo uno di: ${LOG_TYPES.join(', ')}`)
         }
-        if (!ranges.includes(range)) {
-            throw new Error(`type non valido. Può essere solo uno di: ${ranges.join(', ')}`)
+        if (!LOG_RANGES.includes(range)) {
+            throw new Error(`type non valido. Può essere solo uno di: ${LOG_RANGES.join(', ')}`)
         }
 
         switch (range) {

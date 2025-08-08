@@ -6,7 +6,7 @@ import SkillsSection from "@components/sections/SkillSection";
 import LoadingOverlay from "@inc/animated/Loader";
 import ProjectsSection from "@components/sections/Projects";
 import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
-import { showStyledLogo } from "@inc/ANSI";
+import { showDreeanLogo } from "@inc/ANSI";
 import HeroSection from "@components/sections/Hero";
 import { useCookie } from "@inc/Cookies";
 import React, { useState, useEffect } from "react";
@@ -55,7 +55,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    showStyledLogo();
+    showDreeanLogo();
 
     const timer = setTimeout(() => {
       setIsInitialized(true);
