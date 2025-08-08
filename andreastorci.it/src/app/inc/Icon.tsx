@@ -2,11 +2,10 @@
  * get icon component
  * @author Andrea Storci aka dreean
  */
-'use client'
+import { CSSProperties, useState } from "react";
 import Image from "next/image";
 
 import "@style/iconStyle.css"
-import { CSSProperties, useState } from "react";
 
 interface IconProps {
     useFor: string;
@@ -14,6 +13,7 @@ interface IconProps {
     width?: number;
     className?: string;
     style?: CSSProperties | undefined;
+    // color?: string
 }
 
 export default function Icon({ useFor, height = 50, width = 50, ...props}: IconProps) {
@@ -26,6 +26,12 @@ export default function Icon({ useFor, height = 50, width = 50, ...props}: IconP
     }
 
     switch (useFor.toLowerCase()) {
+        case "announce": 
+            return <Image {...props} width={width} height={height} src={'/other/announce.png'} alt="Announce" /> 
+        case "warning":
+            return <Image {...props} width={width} height={height} src={'/other/warning.png'} alt="Warning" /> 
+        case "close":
+            return <Image {...props} width={width} height={height} src={'/svg/close.svg'} alt="Close" />
         case "hamburger":
             return (
                 <div onClick={handleClick}>

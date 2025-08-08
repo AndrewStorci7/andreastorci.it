@@ -1,17 +1,15 @@
-function showDreamLogo() {
+function showDreeanLogo() {
     const logo = `
-  __                                           
- /\\ \\                                          
- \\_\\ \\  _ __    __     __       __      ___    
- /'_\` \\/\\\`'__\\/'__\`\\ /'__\`\\   /'__\`\\  /' _ \`\\  
-/\\ \\L\\ \\ \\ \\/\\/\\  __/\\/\\ \\L\\.\\_\\/\\ \\L\\.\\_\\/\\ \\/\\ \\ 
-\\ \\___,_\\ \\_\\\\ \\____\\ \\__/.\\_\\ \\__/.\\_\\ \\_\\ \\_\\
- \\/__,_ /\\/_/ \\/____/\\/__/\\/_/\\/__/\\/_/\\/_/\\/_/
-                                               
-                                               
+       __                         
+  ____/ /_______  ___  ____ _____ 
+ / __  / ___/ _ \\/ _ \\/ __ \`/ __ \\
+/ /_/ / /  /  __/  __/ /_/ / / / /
+\\__,_/_/   \\___/\\___/\\__,_/_/ /_/ 
+                                  
 `;
     
     console.log(logo);
+    console.log("Hey you! Wanna see the project of the site? \nCheck it out: https://github.com/AndreaStorci7/andreastorci.it")
 }
 
 function showStyledLogo() {
@@ -26,4 +24,4 @@ function showStyledLogo() {
     console.log("%c                                               ", "color: #bb8fce;");
 }
 
-export { showDreamLogo, showStyledLogo };
+export { showDreeanLogo, showStyledLogo };
