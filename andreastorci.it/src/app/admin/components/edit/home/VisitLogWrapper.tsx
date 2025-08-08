@@ -1,8 +1,8 @@
 'use client'
 import { BarChart, Bar, YAxis, XAxis, Tooltip, CartesianGrid, Cell, ResponsiveContainer } from "recharts";
-import { usePageSelector } from "@providers/PageSelectorContext";
-import React, { useCallback, useEffect, useState } from "react";
 import GeneralButtonsGroup from "@common/GeneralButtonsGroup";
+import React, { useEffect, useState } from "react";
+import { usePageSelector } from "@providers";
 import { Type, Range } from "@ctypes/index";
 import "@astyle/visitLogsWrapperStyle.css";
 

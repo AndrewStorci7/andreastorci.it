@@ -1,7 +1,7 @@
-import { usePageSelector } from "@providers/PageSelectorContext";
 import CircularLoader from "@inc/animated/CircularLoader";
 import React, { useEffect, useState } from "react";
-import "@astyle/newsWrapperStyle.css"
+import { usePageSelector } from "@providers";
+import "@astyle/newsWrapperStyle.css";
 
 type NewsType = {
     source: {
@@ -17,7 +17,11 @@ type NewsType = {
     content: string;
 }
 
-const NewsWrapper = () => {
+const NewsWrapper = ({
+    className,
+}: {
+    className?: string
+}) => {
 
     const { setLoader } = usePageSelector();
     const [news, setNews] = useState<NewsType[]>();
@@ -96,7 +100,7 @@ const NewsWrapper = () => {
     }, [news]);
 
     return (
-        <div className="container news-wrapper">
+        <div className={`container news-wrapper ${className}`}>
             {renderNews(news ?? null)}
         </div>
     )

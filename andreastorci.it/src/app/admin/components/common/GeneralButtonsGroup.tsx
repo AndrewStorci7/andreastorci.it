@@ -40,7 +40,7 @@ const GeneralButtonsGroup = ({
             return <div 
                         key={index} 
                         className={`flex center ${disabled ? "disabled" : ""} ${selected === val ? "selected" : ""}`} 
-                        onClick={() => handleChangeSelect(val)}
+                        onClick={() => !disabled && handleChangeSelect(val)}
                     >
                         <p>{val}</p>
                     </div>

@@ -1,6 +1,6 @@
 'use client'
+import { usePageSelector } from "@providers";
 import React from "react";
-import { usePageSelector } from "./provider/PageSelectorContext";
 
 import "@astyle/sidebarStyle.css"
 
@@ -14,7 +14,7 @@ const SideBar = () => {
                 <a 
                     href="#home" 
                     className="logo"
-                    onClick={() => setPage('home')}
+                    onClick={() => setPage('home', "Homepage")}
                 >
                     AS
                 </a>
@@ -24,13 +24,13 @@ const SideBar = () => {
                 <div>
                     <label htmlFor="menu-content">Content</label>
                     <div id="menu-content" className="flex column menu-item menu-content">
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('projects')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('projects', "Progetti")}>
                             Progetti
                         </a>
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('contacts')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('contacts', "Contatti")}>
                             Contatti
                         </a>
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('skills')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('skills', "Competenze")}>
                             Skills
                         </a>
                     </div>
@@ -39,23 +39,17 @@ const SideBar = () => {
                 <div>
                     <label htmlFor="menu-settings">Settings</label>
                     <div id="menu-settings" className="flex column menu-item menu-settings">
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('settings')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('settings', "Impostazioni")}>
                             Impostazioni
                         </a>
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('account')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('account', "Account")}>
                             Account
                         </a>
-                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('info')}>
+                        <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('info', "Informazioni")}>
                             Informazioni
                         </a>
                     </div>
                 </div>
-                {/* <div className="menu-content">
-
-                </div>
-                <div className="menu-projects">
-
-                </div> */}
             </div>
         </div>
     )

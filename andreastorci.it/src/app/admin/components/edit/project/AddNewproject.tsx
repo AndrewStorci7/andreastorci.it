@@ -1,9 +1,9 @@
-import { PersonalData } from '@ctypes/PersonalInfo';
+// import { PersonalData } from '@ctypes/PersonalInfo';
 import MultipleSelect from '@common/MultipleSelect';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { Project } from '@ctypes/index';
 import "@astyle/addnewprojectStyle.css";
-import { usePageSelector } from '@/admin/components/provider/PageSelectorContext';
+import { useNotification, usePageSelector } from '@providers';
 
 interface AddNewProjectProps {
     id: string
@@ -19,6 +19,7 @@ const AddNewproject = ({
     onClose
 }: AddNewProjectProps) => {
 
+    const { showNotification, hideNotification } = useNotification()
     const { setLoader } = usePageSelector();
     // const [newData, setNewData] = useState<PersonalData | null>();
     const [existingData, setData] = useState<Project[] | null>(data)
@@ -40,6 +41,15 @@ const AddNewproject = ({
     }, [data])
 
     // console.log(newProject)
+
+    const handleNotification = (message: string | ReactNode) => {
+        showNotification({
+            purpose: "notification",
+            title: "Errore durante l'aggiunta",
+            message: message,
+            type: "error"
+        })
+    }
 
     const handleUpdate = (attr: string, newVal: any) => {
         setNewProject(prev => {
@@ -113,15 +123,18 @@ const AddNewproject = ({
                 const res = await req.json()
 
                 if (!res?.success) {
-                    throw new Error("Errore nell'aggiornamento dei dati")
+                    // throw new Error("Errore nell'aggiornamento dei dati")
+                    handleNotification(<p>Si e' presentato un errore durante l'aggiutna di un nuovo progetto <b>(errore 100)</b></p>)
                 } else {
                     onClose && onClose()
                 }
             } else {
-                throw new Error("Dati non validi")
+                // throw new Error("Dati non validi")
+                handleNotification(<p>I dati inseriti per l'aggiunta non sono validi <b>(errore 100)</b></p>)
             }
         } catch (err) {
-            console.error(err)
+            // console.error(err)
+            handleNotification(<p>Server traduzione non raggiungibile: {String(err)} <b>(errore 500)</b></p>)
         } finally {
             setLoader(false)
         }

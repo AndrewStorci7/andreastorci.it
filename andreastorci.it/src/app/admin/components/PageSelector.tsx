@@ -1,13 +1,15 @@
-import React from "react";
+'use client'
+import React, { useState, useEffect } from "react";
 import { 
     HomePage, 
     ProjectsPage, 
     ContactsPage,
-    SkillsPage
+    SkillsPage,
+    Settings
 } from "@apages";
 
-import { usePageSelector } from "./provider/PageSelectorContext";
-import { useCookie } from "@inc/Cookies";
+import NewsWrapper from "./edit/home/NewsWrapper";
+import { usePageSelector } from "@providers";
 
 interface PageSelectorProp {
     page?: string
@@ -15,40 +17,63 @@ interface PageSelectorProp {
 }
 
 const PageSelector = ({
-    page,
+    page = "home",
     onChange
 }: PageSelectorProp) => {
     
-    // const { setPage } = usePageSelector();
+    const { currentPage } = usePageSelector();
     // const [currentPage, setCurrentPage] = useCookie({ name: "page" })
+    const [title, setTitle] = useState<string>()
 
-    switch (page) {
-        default:
-        case 'home': {
-            // setPage('home')
-            // setCurrentPage('home')
-            onChange && onChange('home')
-            return <HomePage />;
+    useEffect(() => {
+        switch (page) {
+            default:
+            case 'home':
+                setTitle("Homepage");
+                onChange?.('home');
+                break;
+            case 'projects':
+                setTitle("I Tuoi Progetti");
+                onChange?.('projects');
+                break;
+            case 'contacts':
+                setTitle("Contatti");
+                onChange?.('contacts');
+                break;
+            case 'skills':
+                setTitle("Competenze");
+                onChange?.('skills');
+                break;
+            case 'settings':
+                setTitle("Impostazioni");
+                onChange?.('settings');
+                break;
         }
-        case 'projects': {
-            // setPage('projects')
-            // setCurrentPage('projects')
-            onChange && onChange('projects')
-            return <ProjectsPage />;
+    }, [page, onChange]);
+
+    const renderPage = (page: string | null) => {
+        switch (page) {
+            default:
+            case 'home': return <HomePage />;
+            case 'projects': return <ProjectsPage />;
+            case 'contacts': return <ContactsPage />;
+            case 'skills': return <SkillsPage />;
+            case 'settings': return <Settings />;
         }
-        case 'contacts': {
-            // setPage('contacts')
-            // setCurrentPage('contacts')
-            onChange && onChange('contacts')
-            return <ContactsPage />;
-        }
-        case 'skills': {
-            // setPage('contacts')
-            // setCurrentPage('skills')
-            onChange && onChange('skills')
-            return <SkillsPage />;
-        }    
-    }
+    };
+
+    return (
+        <>
+            <div className="titlepage inline-flex gap-4 items-center">
+                <h1>{currentPage.title}</h1>
+                {currentPage.subtitle && <h3>- {currentPage.subtitle}</h3>}
+            </div>
+            <div className="min-h-300px">
+                <NewsWrapper className="center" />
+            </div>
+            {renderPage(page)}
+        </>
+    )
 }
 
 export default PageSelector;

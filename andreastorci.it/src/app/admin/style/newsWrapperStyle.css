@@ -1,3 +1,8 @@
+:root {
+    --border-radius-container-inner: calc(var(--border-radius-container) - 2px) 0 0 calc(var(--border-radius-container) - 2px);
+    --border-radius-container-inner-resp: calc(var(--border-radius-container) - 2px) calc(var(--border-radius-container) - 2px) 0 0;
+}
+
 .wrapper-container {
     position: relative;
     display: grid;
@@ -12,7 +17,7 @@
     font-size: large;
     color: var(--charcoal);
     border: 1px solid var(--deep-sage);
-    border-radius: 10px;
+    border-radius: var(--border-radius-container);
     padding: 5px 7px;
     /* margin-top: 20px; */
     background-color: var(--warm-cream);
@@ -28,7 +33,7 @@
 } */
 
 .news-image {
-    border-radius: 19px 0px 0px 19px;
+    border-radius: var(--border-radius-container-inner);
     width: 100%;
     height: fit-content;
     /* border-right: 2px solid var(--neutral-grey); */
@@ -91,7 +96,7 @@
     }
 
     .news-left-side {
-        border-radius: 19px 19px 0 0;
+        border-radius: var(--border-radius-container-inner-resp);
         height: 150px;
         border-right: none;
         border-bottom: 2px solid var(--black);

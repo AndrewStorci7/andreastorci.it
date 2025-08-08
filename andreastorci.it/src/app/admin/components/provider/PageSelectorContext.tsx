@@ -2,16 +2,21 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import LoadingOverlay from '@inc/animated/Loader';
 import Cookies from 'js-cookie';
+import { jsonParseCookie } from '@common/functions';
 
 type PageState = {
     page: string;
+    title: string;
+    subtitle?: string
     showLoader?: boolean
 };
 
 type PageSelectorContextType = {
-    currentState: PageState;
-    setPage: (page: string) => void;
+    currentPage: PageState;
+    setPage: (page: string, title: string, subtitle?: string) => void;
     setLoader: (value: boolean) => void;
+    setTitle: (title: string) => void;
+    setSubTitle: (subtitle: string) => void; 
 };
 
 const PageSelectorContext = createContext<PageSelectorContextType | null>(null);
@@ -26,35 +31,61 @@ export const usePageSelector = () => {
 
 export const PageSelectorProvider = ({ children }: { children: ReactNode }) => {
         
+    const cookie = jsonParseCookie("page")
     const [currentState, setCurrentState] = useState<PageState>({
-        page: Cookies.get("page") ?? 'home',
+        page: cookie?.page,
+        title: cookie?.title,
+        subtitle: cookie?.subtitle,
         showLoader: false,
     });
 
-    const setPage = (page: string) => {
+    const setPage = (page: string, title: string, subtitle?: string) => {
         setCurrentState((prev) => {
             if (prev.page !== page) {
-                Cookies.set("page", page);
-                return { ...prev, page };
+                Cookies.set("page", JSON.stringify({ page, title, subtitle }));
+                return { ...prev, page, title, subtitle };
             }
             return prev;
         });
     };
 
+    const setTitle = (title: string) => {
+        setCurrentState((prev) => {
+            return { 
+                ...prev,
+                title, 
+            };
+        });
+    }
+
+    const setSubTitle = (subtitle: string) => {
+        setCurrentState((prev) => {
+            return { 
+                ...prev,
+                subtitle, 
+            };
+        });
+    }
+
     const setLoader = (value: boolean) => {
-        console.log("before setLoader(): ", currentState)
-        console.log("val: ", value)
         setCurrentState(prev => {
             return {
                 ...prev,
                 showLoader: value
             }
         });
-        console.log("after setLoader(): ", currentState)
     }
 
     return (
-        <PageSelectorContext.Provider value={{ currentState, setPage, setLoader }}>
+        <PageSelectorContext.Provider 
+            value={{ 
+                currentPage: currentState, 
+                setPage, 
+                setLoader, 
+                setTitle, 
+                setSubTitle 
+            }}
+        >
             {children}
             <LoadingOverlay show={currentState.showLoader ?? false} />
         </PageSelectorContext.Provider>

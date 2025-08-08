@@ -1,17 +1,15 @@
+import { useProjectContext, usePageSelector, useNotification } from "@providers";
 import React, { ReactNode, useEffect, useState } from "react";
-
-import { useProjectContext } from "@/admin/components/provider/ProjectContext";
-import "@astyle/wrapperPreviewStyle.css"
-import Switch from "./Switch";
-import { Project } from "@ctypes/index";
-import PersonalInfo, { PersonalData } from "@ctypes/PersonalInfo";
 import ProjectsSection from "@components/sections/Projects";
 import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
-import Icon from "@inc/Icon";
-import AddNewproject from "./AddNewproject";
 import { useFadeInObserver } from "@inc/animated/FadeIn";
 import { smoothScroll } from "@common/functions";
-import { usePageSelector } from "../../provider/PageSelectorContext";
+import PersonalInfo from "@ctypes/PersonalInfo";
+import AddNewproject from "./AddNewproject";
+import "@astyle/wrapperPreviewStyle.css";
+import { Project } from "@ctypes/index";
+import Switch from "./Switch";
+import Icon from "@inc/Icon";
 
 type EditProjectType = {
     projects: Project[] | null,
@@ -20,6 +18,7 @@ type EditProjectType = {
 
 const WrapperPreview = () => {
 
+    const { showNotification, hideNotification } = useNotification()
     const [error, setError] = useState<string | null>(null);
     // const [isInitialized, setIsInitialized] = useState(false);
     const [data, setData] = useState<EditProjectType | null>(null); 
@@ -51,16 +50,38 @@ const WrapperPreview = () => {
         return;
     }
 
-    const handleDelete = async (attribute: string, index: number) => {
+    const handleDelete = async (attribute: string, index: number, projName: string, proceed: boolean = false) => {
         try {
-            setLoader(true)
-            await fetch('/api/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ attribute, index })
-            })
-
-            await getData('it-IT');
+            if (proceed) {
+                hideNotification()
+                setLoader(true)
+                await fetch('/api/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ attribute, index })
+                })
+    
+                await getData('it-IT');
+                showNotification({
+                    purpose: "notification",
+                    title: "Dati eliminati correttamente",
+                    message: <p>Il progetto <span className="bold">{projName}</span>{"\n"} e' stato eliminato con successo!</p>,
+                    type: "info",
+                    customIcon: <Icon useFor="announce" width={25} height={25} />,
+                    duration: 5000
+                })
+            } else {
+                showNotification({
+                    title: "Sei sicuro di voler eliminare il progetto ?",
+                    message: <p>Stai per eliminare il progetto <span className="bold">{projName}</span>{"\n"}Vuoi Procedere ?</p>,
+                    purpose: "alert",
+                    type: "error",
+                    buttons: [
+                        { text: "Annulla", type: "default", onClick: () => hideNotification() },
+                        { text: "Elimina", type: "cancel", onClick: () => handleDelete(attribute, index, projName, true) },
+                    ]
+                })
+            }
         } catch (err) {
             console.error(err)
         } finally {
@@ -90,7 +111,7 @@ const WrapperPreview = () => {
                 <td className="truncate">{project.description}</td>
                 <td>{renderTech(project.technologies)}</td>
                 <td onClick={() => handleUpdate('projects', index)}><Icon width={25} height={25} className="pointer" useFor="modify" /></td>
-                <td onClick={() => handleDelete('projects', index)}><Icon width={25} height={25} className="pointer" useFor="delete" /></td>
+                <td onClick={() => handleDelete('projects', index, project.name)}><Icon width={25} height={25} className="pointer" useFor="delete" /></td>
             </tr>
         ))
 

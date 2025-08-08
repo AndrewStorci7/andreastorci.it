@@ -1,13 +1,15 @@
 import React from "react";
-import NewsWrapper from "@components/edit/home/NewsWrapper";
+// import NewsWrapper from "@components/edit/home/NewsWrapper";
 import VisitLogWrapper from "@components/edit/home/VisitLogWrapper";
 
 const HomePage = () => {
 
     return (
         <>
-            <h1>HomePage</h1>
-            <NewsWrapper />
+            {/* <h1>HomePage</h1>
+            <div className="min-h-300px">
+                <NewsWrapper className="center" />
+            </div> */}
             <div className="grid grid-col-3 min-h-400pxi h-fit">
                 <VisitLogWrapper 
                     className="grid-span-2 w-100i h-100i" 

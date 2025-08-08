@@ -1,11 +1,13 @@
-import { AuthProvider } from '@providers/AuthContext';
 import LoginForm from './form/LoginForm';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import React from "react";
+import { 
+    AuthProvider, 
+    PageSelectorProvider 
+} from '@providers';
 
 import "./login.css"
-import { PageSelectorProvider } from '@providers/PageSelectorContext';
 
 export const Login: NextPage = () => {
 

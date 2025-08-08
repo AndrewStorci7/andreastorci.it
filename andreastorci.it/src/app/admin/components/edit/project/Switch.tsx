@@ -1,5 +1,5 @@
 import React from "react";
-import { useProjectContext } from "@/admin/components/provider/ProjectContext";
+import { useProjectContext } from "@providers";
 import Image from "next/image";
 
 const Switch = () => {

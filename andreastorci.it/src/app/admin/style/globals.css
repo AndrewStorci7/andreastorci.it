@@ -6,6 +6,7 @@
     --warm-cream: #F8F6F0;    /* Crema caldo - serenità */
     --charcoal: #2C3E50;      /* Carbone - intelletto */
     --dust-blue: #7B9AAF;     /* Blu polvere - saggezza */
+    --dust-blue-alpha: #B3C5D1;
     --light-sage: #E8F0E6;    /* Verde salvia chiaro */
     --accent-coral: #E07A5F;  /* Corallo per accenti */
     --neutral-grey: #95A5A6;  /* Grigio neutro */
@@ -14,11 +15,21 @@
     --cancel-hover: #C12F3D;
     --white: #FFFFFF;
     --black: #1A1A1A;
+    --border-radius-container: 10px;
 }
 
 body {
     /* margin: 5px; */
     background-color: var(--foreground);
+    font-family: "Mozilla Headline", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.text-white {
+    color: var(--light-sage);
 }
 
 .hidden {
@@ -49,7 +60,8 @@ body {
     height: 100% !important;
 }
 
-.w-100 {
+.w-100,
+.size-full {
     width: 100%;
 }
 
@@ -63,6 +75,10 @@ body {
 
 .h-400pxi {
     height: 400px !important;
+}
+
+.min-h-300px {
+    min-height: 300px;
 }
 
 .bold {
@@ -79,8 +95,16 @@ body {
     height: fit-content;
 }
 
+.w-600px {
+    width: 600px !important;
+}
+
 .pt-20 {
     padding-top: 20px !important;
+}
+
+.inline-flex {
+    display: inline-flex;
 }
 
 .grid {
@@ -146,6 +170,14 @@ body {
     gap: 1rem;
 }
 
+.m-r-2 {
+    margin-right: .5rem;
+}
+
+.m-t-1 {
+    margin-top: .4rem;
+}
+
 .left-side {
 
 }
@@ -159,7 +191,7 @@ body {
     cursor: pointer;
 }
 .disabled {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
     opacity: .5;
 }
 
@@ -207,6 +239,10 @@ form {
     width: fit-content;
 }
 
+.bold {
+    font-weight: 600;
+}
+
 input,
 textarea,
 select {
@@ -234,6 +270,10 @@ button {
 button:hover {
     color: var(--warm-cream);
     background-color: var(--charcoal);
+}
+
+.items-center {
+    align-items: center;
 }
 
 .text-center {
@@ -319,4 +359,26 @@ input[type="checkbox"] {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
     margin: 10px;
     padding: 0;
+}
+
+.logs-wrapper {
+    min-width: 300px !important;
+    height: fit-content !important;
+    display: flex;
+}
+
+.button-cancel {
+    color: var(--warm-cream);
+    background-color: var(--cancel);
+    border: 1px solid var(--background);
+    transition: background-color .2s ease,
+                color .2s ease;
+}
+
+.button-cancel:hover {
+    background-color: var(--cancel-hover);
+}
+
+.titlepage h3 {
+    font-weight: 500;
 }

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-import { useAuth } from '@providers/AuthContext'
+import { useAuth } from '@providers'
 
 interface FormData {
     username: string
@@ -43,6 +43,13 @@ const LoginForm = () => {
             
             if (res.success) {
                 Cookies.set('token', res.token, {
+                    expires: 7,
+                    sameSite: 'strict'
+                });
+                Cookies.set("page", JSON.stringify({ 
+                    page: "home", 
+                    title: "Homepage" 
+                }), {
                     expires: 7,
                     sameSite: 'strict'
                 })
