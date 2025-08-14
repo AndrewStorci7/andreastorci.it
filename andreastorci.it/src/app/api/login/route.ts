@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { readFile } from "fs/promises";
+import { fpath, users } from "@apicnf";
 import crypto from 'crypto';
 import path from 'path';
-import { readFile } from "fs/promises";
 
 const secret = process.env.TOKEN_SECRET;
-const usersFilePath = path.join(process.cwd() + '/public/data', 'users.json');
+const usersFilePath = path.join(process.cwd() + fpath, users);
 
 interface LoginProps {
     type: 'check' | 'login'

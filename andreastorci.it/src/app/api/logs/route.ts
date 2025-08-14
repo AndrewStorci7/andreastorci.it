@@ -3,10 +3,11 @@ import { Type, Range, LOG_TYPES, LOG_RANGES } from "@ctypes/index";
 import { readFile, writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { fpath, logs } from "@apicnf";
 import path from "path";
 
 const ipapi_secret = process.env.IPAPI_SECRET;
-const logsPath = path.join(process.cwd() + '/public/data', 'logs.json');
+const logsPath = path.join(fpath, logs);
 
 // type LogRequestType = {
 //     range: Range,
@@ -31,12 +32,12 @@ export async function POST() {
     try {
         const forwardedFor = (await headers()).get('x-forwarded-for');
         const ip = forwardedFor?.split(',')[0] ?? 'IP non disponibile';
-        const now = new Date()
+        const now = new Date();
         const res = await fetch(`https://api.ipapi.com/api/${ip}?access_key=${ipapi_secret}`);
         const data = await res.json();
         const country: string = data?.country_name?.toLowerCase();
-        const logFile = await readFile(logsPath, 'utf8')
-        const log = JSON.parse(logFile)
+        const logFile = await readFile(logsPath, 'utf8');
+        const log = JSON.parse(logFile);
 
         log.alltime_visits.visits.total += 1;
         log.alltime_visits.visits.days.push(now);
@@ -101,12 +102,12 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: 'Dati non validi' }, { status: 400 });
         }
 
-        const logFile = await readFile(logsPath, 'utf8')
-        const log = JSON.parse(logFile)
-        const data = fetchData(type, range, log) 
+        const logFile = await readFile(logsPath, 'utf8');
+        const log = JSON.parse(logFile);
+        const data = fetchData(type, range, log);
         // console.log(data)
         if (data) {
-            return NextResponse.json({ success: true, data: data })
+            return NextResponse.json({ success: true, data: data });
         } else {
             return NextResponse.json({ success: false, error: "Qualcosa e' andato storto" })
         }

@@ -1,18 +1,13 @@
-import { NextResponse } from 'next/server';
+import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes/index";
 import { readFile, writeFile } from 'fs/promises';
+import { fpath, it, es, en } from "@apicnf";
+import { NextResponse } from 'next/server';
 import path from 'path';
-import { 
-    Project, 
-    Education, 
-    Skill,
-    ContactInfo,
-    Experience
-} from "@ctypes/index";
 
 const pathLangs = {
-    it: path.join(process.cwd() + '/public/data', 'it-IT.json'),
-    es: path.join(process.cwd() + '/public/data', 'es-ES.json'),
-    en: path.join(process.cwd() + '/public/data', 'en-GB.json'),
+    it: path.join(fpath, it),
+    es: path.join(fpath, es),
+    en: path.join(fpath, en),
 }
 
 interface UpdateRouteProp {

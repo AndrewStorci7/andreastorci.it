@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { readFile, writeFile } from 'fs/promises';
+import { fpath, it, es, en } from "@apicnf";
 import { NextResponse } from "next/server";
 import path from 'path';
 
 const pathLangs = {
-    it: path.join(process.cwd() + '/public/data', 'it-IT.json'),
-    es: path.join(process.cwd() + '/public/data', 'es-ES.json'),
-    en: path.join(process.cwd() + '/public/data', 'en-GB.json'),
+    it: path.join(fpath, it),
+    es: path.join(fpath, es),
+    en: path.join(fpath, en),
 }
 
 interface DeleteRouteProp {
