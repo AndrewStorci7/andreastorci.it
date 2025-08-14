@@ -3,11 +3,11 @@
  * @author Andrea Storci aka dreean
  */
 'use client'
-
-import React from 'react';
-import Section from '@inc/Section';
 import { ContactInfo, ContactSectionData } from '@ctypes/index';
 import "@style/contactSectionStyle.css";
+import Section from '@inc/Section';
+import Image from 'next/image';
+import React from 'react';
 
 const ContactSection = ({ 
     data,
@@ -23,7 +23,7 @@ const ContactSection = ({
             <div className="contact-info fade-in">
                 <div className="contact-item">
                     <div className="icon">
-                        <img src="/social/mail.png" alt="Email" />
+                        <Image width={25} height={25} src="/social/mail.png" alt="Email" />
                     </div>
                     <div>
                         <h4>Email</h4>
@@ -33,7 +33,7 @@ const ContactSection = ({
                 
                 <div className="contact-item">
                     <div className="icon">
-                        <img src="/social/whatsapp.png" alt="WhatsApp" />
+                        <Image width={25} height={25} src="/social/whatsapp.png" alt="WhatsApp" />
                     </div>
                     <div>
                         <h4>Telefono</h4>
@@ -43,7 +43,7 @@ const ContactSection = ({
                 
                 <div className="contact-item">
                     <div className="icon">
-                        <img src="/social/pinpoint.png" alt="Posizione" />
+                        <Image width={25} height={25} src="/social/pinpoint.png" alt="Posizione" />
                     </div>
                     <div>
                         <h4>Posizione</h4>
@@ -54,19 +54,19 @@ const ContactSection = ({
             
             <div className="social-links fade-in">
                 <a href="https://github.com/AndrewStorci7" className="social-link">
-                    <img src="/social/github.png" alt="GitHub" />
+                    <Image width={25} height={25} src="/social/github.png" alt="GitHub" />
                 </a>
                 <a href="https://www.linkedin.com/in/andrea-storci-160502214" className="social-link">
-                    <img src="/social/linkedin.png" alt="LinkedIn" />
+                    <Image width={25} height={25} src="/social/linkedin.png" alt="LinkedIn" />
                 </a>
                 {/* <a href="https://twitter.com/dreean_dev" className="social-link">
-                    <img src="/social/twitter.png" alt="Twitter" />
+                    <Image src="/social/twitter.png" alt="Twitter" />
                 </a>
                 <a href="https://reddit.com/u/AndrewDrink7" className="social-link">
-                    <img src="/social/reddit.png" alt="Reddit" />
+                    <Image src="/social/reddit.png" alt="Reddit" />
                 </a> */}
                 <a href="https://instagram.com/andreastorci_" className="social-link">
-                    <img src="/social/instagram.png" alt="Instagram" />
+                    <Image width={25} height={25} src="/social/instagram.png" alt="Instagram" />
                 </a>
             </div>
             

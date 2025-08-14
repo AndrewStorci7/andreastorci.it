@@ -31,6 +31,7 @@
 
 .project-image {
     height: 200px;
+    position: relative;
     /* background: linear-gradient(45deg, var(--soft-blue), var(--sage-green)); */
     display: flex;
     align-items: center;

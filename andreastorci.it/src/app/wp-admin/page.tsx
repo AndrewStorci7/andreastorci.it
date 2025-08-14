@@ -1,17 +1,17 @@
 'use client'
 import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
-import { useCookie } from "@/inc/Cookies";
 import React, { useEffect, useState } from "react";
+import { useCookie } from "@/inc/Cookies";
 import Section from "@/inc/Section";
-import { FuckWordpress } from "@ctypes/index";
 
 import "./style.css"
 import "@style/globals.css"
+import { GeneralData } from "@/types";
 
 const Page = () => {
 
     const [error, setError] = useState<string>("")
-    const [commonData, setCommonData] = useState<FuckWordpress | null>(null)
+    const [commonData, setCommonData] = useState<GeneralData | null>(null)
 
     const [lang] = useCookie({ 
         name: 'language', 
@@ -23,7 +23,7 @@ const Page = () => {
         }
     });
 
-    const getData = async (languageSku?: string) => {
+    const getData = async () => {
         try {
             const commonInfo = new CommonInfo(lang.sku);
             const commonData: CommonData | null = await commonInfo.getData();
@@ -36,7 +36,7 @@ const Page = () => {
 
     useEffect(() => {
         getData()
-    }, [])
+    })
 
     if (error) {
         return (

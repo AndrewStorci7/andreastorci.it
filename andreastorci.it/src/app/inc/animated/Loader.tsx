@@ -5,15 +5,15 @@
  * @returns 
  */
 'use client'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 interface LoadingOverlayProps {
     onLoadingComplete?: () => void;
     show: boolean
 }
 
-const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete, show }) => {
-    
+const LoadingOverlay = ({ show }: LoadingOverlayProps) => {
+
     // const [isLoading, setIsLoading] = useState<boolean>(true);
 
     // useEffect(() => {

@@ -3,8 +3,7 @@ import type {
     Education, 
     Skill,
     ContactInfo,
-    Experience,
-    LanguageData
+    Experience
 } from "@ctypes/index";
 import OOB from "@ctypes/OOB";
 

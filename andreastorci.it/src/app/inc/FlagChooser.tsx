@@ -2,6 +2,7 @@
 import { useCookie } from "@inc/Cookies";
 import React, { useState } from "react";
 import "@style/flagChooserStyle.css";
+import Image from "next/image";
 
 const FlagChooser = () => {
 
@@ -37,7 +38,7 @@ const FlagChooser = () => {
         <div className="relative">
             <div className="flag-chooser-mobile -border-flags">
                 <a className="" href="#" onClick={showMenu}>
-                    <img src={language.flag || '/flags/it.png'} alt={language.name || 'Italiano'} />
+                    <Image width={25} height={25} src={language.flag || '/flags/it.png'} alt={language.name || 'Italiano'} />
                     <span>{language.id || 'IT'}</span>
                 </a>
             </div>
@@ -45,19 +46,19 @@ const FlagChooser = () => {
                 <ul className="flag-chooser border-flags">
                     <li>
                         <a className="" href="#" onClick={() => handleLanguageChange('it-IT')}>
-                            <img src="/flags/it.png" alt="Italian Flag" />
+                            <Image width={25} height={25} src="/flags/it.png" alt="Italian Flag" />
                             <span>IT</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" onClick={() => handleLanguageChange('en-US')}>
-                            <img src="/flags/engb.png" alt="English Flag" />
+                            <Image width={25} height={25} src="/flags/engb.png" alt="English Flag" />
                             <span>EN (UK)</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" onClick={() => handleLanguageChange('es-ES')}>
-                            <img src="/flags/es.png" alt="Spanish Flag" />
+                            <Image width={25} height={25} src="/flags/es.png" alt="Spanish Flag" />
                             <span>ES</span>
                         </a>
                     </li>

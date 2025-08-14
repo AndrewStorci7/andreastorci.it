@@ -4,16 +4,16 @@
  */
 'use client'
 
-import React from 'react';
+import { Skill, GeneralData } from '@ctypes/index';
 import Section from '@inc/Section';
-import { Skill, SkillsSectionData } from '@ctypes/index';
+import React from 'react';
 
 const SkillsSection = ({ 
     data, 
     commonData 
 }: { 
     data: Skill[] | null,
-    commonData: SkillsSectionData | null 
+    commonData: GeneralData | null 
 }) => {
 
     const renderContent = (data: Skill[] | null) => {

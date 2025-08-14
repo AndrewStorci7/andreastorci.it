@@ -1,21 +1,20 @@
 import {
-    SkillsSectionData,
     ProjectsSectionData,
     ContactSectionData,
     LanguageData,
     MenuItemsName,
     HeroSectionData,
-    FuckWordpress
+    GeneralData
 } from '@ctypes/index';
 import OOB from "@ctypes/OOB";
 
 interface CommonData {
     menu: MenuItemsName,
     hero: HeroSectionData,
-    skills: SkillsSectionData,
+    skills: GeneralData,
     projects: ProjectsSectionData,
     contacts: ContactSectionData,
-    fuckWordpress: FuckWordpress
+    fuckWordpress: GeneralData
 } 
 
 class CommonInfo extends OOB<LanguageData<CommonData>> {

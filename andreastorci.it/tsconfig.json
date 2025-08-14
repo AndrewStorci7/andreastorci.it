@@ -22,17 +22,17 @@
     ],
     "paths": {
       "@/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*", "./src/app/admin/components/*"],
+      "@components/*": ["./src/app/components/*", "./src/admin/components/*"],
       "@inc/*": ["./src/app/inc/*"],
       "@style/*": ["./src/app/style/*"],
       "@ctypes/*": ["./src/app/types/*"],
-      "@admin/*": ["./src/app/admin/*"],
-      "@astyle/*": ["./src/app/admin/style/*"],
-      "@apages/*": ["./src/app/admin/components/pages/*"],
-      "@apages": ["./src/app/admin/components/pages/index.ts"],
-      "@providers": ["./src/app/admin/components/provider/index.ts"],
+      "@admin/*": ["./src/admin/*"],
+      "@astyle/*": ["./src/admin/style/*"],
+      "@apages/*": ["./src/admin/components/pages/*"],
+      "@apages": ["./src/admin/components/pages/index.ts"],
+      "@providers": ["./src/admin/components/provider/index.ts"],
       "@data": ["./public/data/personalData.json"],
-      "@common/*": ["./src/app/admin/components/common/*"]
+      "@common/*": ["./src/admin/components/common/*"]
     },
     "types": ["node"]
   },

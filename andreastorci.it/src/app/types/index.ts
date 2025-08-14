@@ -1,6 +1,6 @@
 import { ReactNode, MouseEventHandler } from "react";
 
-interface CommonInfo {
+export interface GeneralData {
     title: string;
     description: string;
 }
@@ -33,8 +33,6 @@ export interface Education {
 }
 
 //#region Skills Section
-export interface SkillsSectionData extends CommonInfo {}
-
 export interface Skill {
     // data: SkillsSectionData;
     name: string;
@@ -45,7 +43,7 @@ export interface Skill {
 //#endregion Skills Section
 
 //#region Projects Section
-export interface ProjectsSectionData extends CommonInfo {
+export interface ProjectsSectionData extends GeneralData {
     button: string;
 }
 
@@ -64,7 +62,7 @@ export interface Project {
 //#endregion Projects Section
 
 //#region Contact Section
-export interface ContactSectionData extends CommonInfo {
+export interface ContactSectionData extends GeneralData {
     button: string;
 }
 
@@ -84,8 +82,6 @@ export interface ContactInfo {
 export interface LanguageData<Type> {
     [key: string]: Type;
 }
-
-export interface FuckWordpress extends CommonInfo {}
 
 export const LOG_TYPES = ['visits', 'country'] as const
 export const LOG_RANGES = ['month', 'week', 'year', 'alltime'] as const
@@ -114,4 +110,10 @@ export type Button = {
     onClick: MouseEventHandler<HTMLButtonElement>
     text: string
     type: string
+}
+
+export type MenuItem = {
+    pageId: string
+    onClick: (arg?: string) => void
+    disabled?: boolean
 }

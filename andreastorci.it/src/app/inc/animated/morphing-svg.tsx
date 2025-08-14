@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Animated button
  * @author Andrea Storci aka dreean
  */
-
 import { motion } from "framer-motion" 
 
 interface MorphingSVGProps {

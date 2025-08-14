@@ -1,5 +1,6 @@
-import { readFile, writeFile } from "fs/promises";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Type, Range, LOG_TYPES, LOG_RANGES } from "@ctypes/index";
+import { readFile, writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import path from "path";
@@ -7,10 +8,10 @@ import path from "path";
 const ipapi_secret = process.env.IPAPI_SECRET;
 const logsPath = path.join(process.cwd() + '/public/data', 'logs.json');
 
-type LogRequestType = {
-    range: Range,
-    type: Type,
-}
+// type LogRequestType = {
+//     range: Range,
+//     type: Type,
+// }
 
 type SingleVisit = {
     total: number,
@@ -24,12 +25,9 @@ type FilteredLogsType = {
 
 type LogsType = {
     alltime_visits: FilteredLogsType,
-    // visits_this_week: FilteredLogsType,
-    // visits_this_month: FilteredLogsType,
-    // visits_this_year: FilteredLogsType,
 }
 
-export async function POST(req: Request) {
+export async function POST() {
     try {
         const forwardedFor = (await headers()).get('x-forwarded-for');
         const ip = forwardedFor?.split(',')[0] ?? 'IP non disponibile';
@@ -42,12 +40,6 @@ export async function POST(req: Request) {
 
         log.alltime_visits.visits.total += 1;
         log.alltime_visits.visits.days.push(now);
-        // log.visits_this_week.visits.total += 1;
-        // log.visits_this_week.visits.days.push(now);
-        // log.visits_this_month.visits.total += 1;
-        // log.visits_this_month.visits.days.push(now);
-        // log.visits_this_year.visits.total += 1;
-        // log.visits_this_year.visits.days.push(now);
 
         if (country) {
             if (log.alltime_visits.visits_country[country]) {
@@ -55,24 +47,6 @@ export async function POST(req: Request) {
             } else {
                 log.alltime_visits.visits_country[country] = 1
             }
-
-            // if (log.visits_this_week.visits_country[country]) {
-            //     log.visits_this_week.visits_country[country] += 1
-            // } else {
-            //     log.visits_this_week.visits_country[country] = 1
-            // }
-
-            // if (log.visits_this_month.visits_country[country]) {
-            //     log.visits_this_month.visits_country[country] += 1
-            // } else {
-            //     log.visits_this_month.visits_country[country] = 1
-            // }
-
-            // if (log.visits_this_year.visits_country[country]) {
-            //     log.visits_this_year.visits_country[country] += 1
-            // } else {
-            //     log.visits_this_year.visits_country[country] = 1
-            // }
         }
 
         await writeFile(logsPath, JSON.stringify(log, null, 2), 'utf-8')

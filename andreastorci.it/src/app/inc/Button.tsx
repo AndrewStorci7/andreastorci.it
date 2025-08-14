@@ -5,7 +5,7 @@
 
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Icon from "@inc/Icon"
 
 interface BtnProps {
@@ -20,6 +20,7 @@ export default function Btn({ refClick, ...props }: BtnProps) {
 
     const [currentSVG, setCurrentSVG] = useState(0);
     const [size, setSize] = useState(25)
+    const [ref, setRef] = useState(refClick)
 
     const svgs = [
         "square-empty",
@@ -30,8 +31,14 @@ export default function Btn({ refClick, ...props }: BtnProps) {
         setCurrentSVG((prev) => (prev + 1) % svgs.length);
     };
 
+    useEffect(() => {
+        setSize(25)
+        setRef(refClick)
+    })
+
     // const [isClicked, setClicked] = useState(false)
     // const [icon, setIcon] = useState("")
+    console.log(ref)
 
     return (
         <button

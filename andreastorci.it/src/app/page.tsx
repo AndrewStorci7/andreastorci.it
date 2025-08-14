@@ -33,7 +33,7 @@ export default function Home() {
 
   useFadeInObserver('.fade-in');
   
-  const getData = async (languageSku: string) => {
+  const getData = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -66,7 +66,7 @@ export default function Home() {
   
   useEffect(() => {
     if (isInitialized && lang && lang.sku) {
-      getData(lang.sku);
+      getData();
     }
   }, [isInitialized, lang]);
   

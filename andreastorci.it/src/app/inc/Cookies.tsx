@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 
 interface CookieProps {
@@ -10,7 +11,7 @@ function useCookie({
     defaultValue = ''
 }: CookieProps): [any, (value: any, days?: number) => void, () => void] {
     // Inizializza sempre con defaultValue, mai con document
-    const [value, setValue] = useState(defaultValue);
+    const [value, setValue] = useState<any | null>(defaultValue);
     const [isInitialized, setIsInitialized] = useState(false);
 
     // useEffect per inizializzare il valore del cookie solo lato client
@@ -43,7 +44,7 @@ function useCookie({
                 //     }
                 // }
                 setIsInitialized(true);
-            } catch (error) {
+            } catch {
                 setIsInitialized(true);
             }
         }

@@ -3,14 +3,13 @@
  * @author Andrea Storci aka dreean
  */
 'use client'
-
-import React from 'react'
-import Section from '@inc/Section';
-// import { PersonalData } from '@ctypes/PersonalInfo';
 import { Project, ProjectsSectionData } from '@ctypes/index';
+// import { PersonalData } from '@ctypes/PersonalInfo';
+import "@style/projectsSectionStyle.css";
+import Section from '@inc/Section';
 import Techtag from '@inc/TechTag';
-
-import "@style/projectsSectionStyle.css"
+import Image from 'next/image';
+import React from 'react';
 
 const ProjectsSection = ({
     preview = false,
@@ -30,7 +29,7 @@ const ProjectsSection = ({
         return data.map((project: Project, index: number) => (
             <div key={index} className="project-card fade-in">
                 <div className={`project-image ${project.sku}`}>
-                    {project.image && <img width={400} src={project.image} alt={project.name} />}
+                    {project.image && <Image style={{ objectFit: "contain", width: "70%", height: "auto" }} width={400} height={0} src={project.image} alt={project.name} />}
                 </div>
                 <div className='project-content'>
                     <div className='flex'>

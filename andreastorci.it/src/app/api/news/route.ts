@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 
 const newsApiKey = process.env.NEWS_API;
@@ -9,9 +10,9 @@ const formatDate = (date: Date): string => {
     return `${year}-${month}-${day}`;
 }
 
-export async function POST(req: Request) {
+export async function POST() {
     try {
-        var today: Date | string = new Date();
+        let today: Date | string = new Date();
         today.setMonth(today.getMonth() - 1)
         today = formatDate(today)
         // console.log(today)

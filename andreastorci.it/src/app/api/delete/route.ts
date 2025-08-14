@@ -1,13 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { readFile, writeFile } from 'fs/promises';
 import { NextResponse } from "next/server";
 import path from 'path';
-import { 
-    Project, 
-    Education, 
-    Skill,
-    ContactInfo,
-    Experience
-} from "@ctypes/index";
 
 const pathLangs = {
     it: path.join(process.cwd() + '/public/data', 'it-IT.json'),
@@ -53,6 +47,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: true });
     } catch (err) {
         console.error(err);
-        return NextResponse.json({ error: 'Errore interno durante l\'elimina' }, { status: 500 });
+        return NextResponse.json({ error: `Errore interno durante l'elimina ${err}` }, { status: 500 });
     }
 }

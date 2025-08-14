@@ -9,32 +9,43 @@ import FlagChooser from '@inc/FlagChooser';
 import { MenuItemsName } from '@ctypes/index';
 import Icon from "@inc/Icon";
 import "@style/headerStyle.css";
+import { changeFavicon } from '@/inc/functions';
 
 interface Theme {
-    '--sage-green': string;
-    '--soft-blue': string;
-    '--accent-coral': string;
+    favicon: string,
+    theme: {
+        '--sage-green': string;
+        '--soft-blue': string;
+        '--accent-coral': string;
+    }
 }
 
 const themes: Theme[] = [
     {
-        '--sage-green': '#9CAF88',
-        '--soft-blue': '#A8C8E1',
-        '--accent-coral': '#E07A5F'
+        favicon: '/favicon/1/favicon.ico',
+        theme: {
+            '--sage-green': '#9CAF88',
+            '--soft-blue': '#A8C8E1',
+            '--accent-coral': '#E07A5F'
+        }
     },
     {
-        '--sage-green': '#7B68EE',
-        '--soft-blue': '#98FB98',
-        '--accent-coral': '#FFB6C1'
+        favicon: '/favicon/2/favicon.ico',
+        theme: {
+            '--sage-green': '#7B68EE',
+            '--soft-blue': '#98FB98',
+            '--accent-coral': '#FFB6C1'
+        }
     },
     {
-        '--sage-green': '#20B2AA',
-        '--soft-blue': '#87CEEB',
-        '--accent-coral': '#F0E68C'
+        favicon: '/favicon/3/favicon.ico',
+        theme: {
+            '--sage-green': '#20B2AA',
+            '--soft-blue': '#87CEEB',
+            '--accent-coral': '#F0E68C'
+        }
     }
 ];
-
-
 
 const Header = ({ 
     commonData 
@@ -51,6 +62,10 @@ const Header = ({
     // console.log(commonData)
     
     useEffect(() => {
+
+        //imposto come favicon predefinita il tema principale
+        changeFavicon(themes[0].favicon)
+
         const handleScroll = (): void => {
             const currentScroll = window.pageYOffset;
 
@@ -85,9 +100,10 @@ const Header = ({
     }, []);
     
     const changeTheme = useCallback((theme: Theme): void => {
+        changeFavicon(theme.favicon)
         const root = document.documentElement;
         
-        Object.entries(theme).forEach(([property, value]) => {
+        Object.entries(theme.theme).forEach(([property, value]) => {
             root.style.setProperty(property, value);
         });
     }, []);
