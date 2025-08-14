@@ -1,0 +1,14 @@
+.select-item {
+    width: fit-content;
+} 
+
+.circle {
+    border-radius: 50px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--charcoal);
+}
+
+.selected {
+    background-color: var(--deep-sage);
+}

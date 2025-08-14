@@ -1,0 +1,67 @@
+.wrapper {
+    position: relative;
+    border-radius: 10px;
+    /* background-color: var(--light-sage); */
+    /* background-color: black; */
+    width: 100%;
+    min-height: 300px;
+    margin-top: 30px;
+}
+
+.wrapper .switch-container {
+    position: absolute;
+    border: 2px solid #5D6E6F;
+    right: 0;
+    margin: 10px;
+    padding: 2px;
+    border-radius: 20px;
+    width: 90px;
+    height: 40px;
+    background-color: var(--neutral-grey);
+    z-index: 999;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.button {
+    position: absolute;
+    left: 3px;
+    /* right: 0; */
+    border-radius: 16px;
+    background-color: antiquewhite;
+    width: 50%;
+    height: 88%;
+    z-index: -1;
+    transition: transform .3s ease;
+}
+
+.switched {
+    transform: translateX(84%);
+}
+
+/* .add-new-project {
+    text-decoration: none;
+    color: var(--charcoal);
+    border: 1px solid var(--deep-sage);
+    border-radius: 10px;
+    padding: 5px 7px;
+    margin-bottom: 20px;
+    background-color: var(--warm-cream);
+    transition: background-color .1s ease,
+                color .1s ease;
+} */
+
+.preview-container {
+    border: 1px solid var(--neutral-grey);
+    border-radius: 20px;
+}
+
+.fix-for-preview {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+    border-radius: 20px;
+}
+
+.add-new-project:hover {
+    background-color: var(--deep-sage);
+    color: var(--white);
+}

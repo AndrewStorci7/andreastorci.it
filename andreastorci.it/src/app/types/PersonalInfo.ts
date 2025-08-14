@@ -3,10 +3,9 @@ import type {
     Education, 
     Skill,
     ContactInfo,
-    Experience,
-    LanguageData
-} from "@/types";
-import OOB from "@/types/OOB";
+    Experience
+} from "@ctypes/index";
+import OOB from "@ctypes/OOB";
 
 interface PersonalData {
     name: string;
@@ -15,17 +14,18 @@ interface PersonalData {
     bio: string;
     avatar?: string;
     contact: ContactInfo;
-    experience: Experience;
-    education: Education;
-    projects: Project;
-    skills: Skill;
+    experience: Experience[];
+    education: Education[];
+    projects: Project[];
+    skills: Skill[];
     languages: {
         name: string;
         level: string;
     }[];
 }
 
-class PersonalInfo extends OOB<LanguageData<PersonalData>> {
+// class PersonalInfo extends OOB<LanguageData<PersonalData>> {
+class PersonalInfo extends OOB<PersonalData> {
 
     constructor(lang: string) {
         super(lang);
@@ -44,15 +44,16 @@ class PersonalInfo extends OOB<LanguageData<PersonalData>> {
 
     private async fetchData(): Promise<void> {
         try {
-            const response = await fetch('/data/personalData.json');
+            const response = await fetch(`/data/${this.currentLang}.json`);
             
             if (!response.ok) {
                 throw new Error(`Errore nel caricamento dei dati: ${response.status} ${response.statusText}`);
             }
             
-            const data: LanguageData<PersonalData> = await response.json();
+            // const data: LanguageData<PersonalData> = await response.json();
+            const data: PersonalData = await response.json();
 
-            if (!data[this.currentLang]) {
+            if (!data) {
                 throw new Error(`Dati non disponibili per la lingua: ${this.currentLang}`);
             }
             
@@ -66,11 +67,11 @@ class PersonalInfo extends OOB<LanguageData<PersonalData>> {
     async getPersonalData(): Promise<PersonalData> {
         await this.loadPersonalData();
 
-        if (!this.data || !this.data[this.currentLang]) {
+        if (!this.data || !this.data) {
             throw new Error('Dati non disponibili');
         }
 
-        return this.data[this.currentLang];
+        return this.data;
     }
 
     async getContactInfo(): Promise<ContactInfo> {
@@ -78,17 +79,18 @@ class PersonalInfo extends OOB<LanguageData<PersonalData>> {
         return data.contact;
     }
 
-    async getExperience(): Promise<Experience> {
+    async getExperience(): Promise<Experience[]> {
         const data = await this.getPersonalData();
         return data.experience;
     }
 
-    async getProjects(): Promise<Project> {
+    async getProjects(): Promise<Project[]> {
         const data = await this.getPersonalData();
+        console.log(data.projects)
         return data.projects;
     }
 
-    async getSkills(): Promise<Skill> {
+    async getSkills(): Promise<Skill[]> {
         const data = await this.getPersonalData();
         return data.skills;
     }
@@ -98,7 +100,7 @@ class PersonalInfo extends OOB<LanguageData<PersonalData>> {
     //     return skills.filter(skill => skill['data'][0].category === category);
     // }
 
-    async getEducation(): Promise<Education> {
+    async getEducation(): Promise<Education[]> {
         const data = await this.getPersonalData();
         return data.education;
     }

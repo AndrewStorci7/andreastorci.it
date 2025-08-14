@@ -1,17 +1,17 @@
 'use client'
-import { useFadeInObserver } from "@components/inc/animated/FadeIn";
-import PersonalInfo, { PersonalData } from "@/types/PersonalInfo";
+import { useFadeInObserver } from "@inc/animated/FadeIn";
+import PersonalInfo, { PersonalData } from "@ctypes/PersonalInfo";
 import ContactSection from "@components/sections/ContactSection";
 import SkillsSection from "@components/sections/SkillSection";
-import LoadingOverlay from "@components/inc/animated/Loader";
+import LoadingOverlay from "@inc/animated/Loader";
 import ProjectsSection from "@components/sections/Projects";
-import CommonInfo, { CommonData } from "./types/CommonInfo";
-import { showStyledLogo } from "@components/inc/ANSI";
+import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
+import { showDreeanLogo } from "@inc/ANSI";
 import HeroSection from "@components/sections/Hero";
-import { useCookie } from "@components/inc/Cookies";
+import { useCookie } from "@inc/Cookies";
 import React, { useState, useEffect } from "react";
-import Section from "@components/inc/Section";
-import Header from "@/components/Header";
+import Section from "@inc/Section";
+import Header from "@components/Header";
 
 export default function Home() {
   
@@ -33,15 +33,17 @@ export default function Home() {
 
   useFadeInObserver('.fade-in');
   
-  const getData = async (languageSku: string) => {
+  const getData = async () => {
     try {
       setLoading(true);
       setError(null);
       
+      await fetch('/api/logs', { method: 'POST' })
       const personalInfo = new PersonalInfo(lang.sku);
       const commonInfo = new CommonInfo(lang.sku);
       const data = await personalInfo.getPersonalData();
       const commonData = await commonInfo.getData();
+      // console.log(data, commonData)
       setPd(data);
       setCommonData(commonData);
     } catch (err) {
@@ -53,7 +55,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    showStyledLogo();
+    showDreeanLogo();
 
     const timer = setTimeout(() => {
       setIsInitialized(true);
@@ -64,12 +66,12 @@ export default function Home() {
   
   useEffect(() => {
     if (isInitialized && lang && lang.sku) {
-      getData(lang.sku);
+      getData();
     }
   }, [isInitialized, lang]);
   
   if (loading) {
-    return <LoadingOverlay />
+    return <LoadingOverlay show={true} />
   }
   
   if (error) {
@@ -86,11 +88,11 @@ export default function Home() {
   
   return (
     <div className="h-screen w-screen">
-      <Header />
-      <HeroSection data={pd} />
-      <SkillsSection data={pd} />
-      <ProjectsSection data={pd} />
-      <ContactSection data={pd} />
+      <Header commonData={commonData?.menu ?? null} />
+      <HeroSection data={pd} commonData={commonData?.hero ?? null} />
+      <SkillsSection data={pd?.skills ?? null} commonData={commonData?.skills ?? null} />
+      <ProjectsSection data={pd?.projects ?? null} commonData={commonData?.projects ?? null} />
+      <ContactSection data={pd?.contact ?? null} commonData={commonData?.contacts ?? null} />
     </div>
   );
 }

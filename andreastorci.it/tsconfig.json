@@ -22,9 +22,17 @@
     ],
     "paths": {
       "@/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*"],
+      "@components/*": ["./src/app/components/*", "./src/admin/components/*"],
+      "@inc/*": ["./src/app/inc/*"],
       "@style/*": ["./src/app/style/*"],
-      "@ctypes/*": ["./src/types/*"],
+      "@ctypes/*": ["./src/app/types/*"],
+      "@admin/*": ["./src/admin/*"],
+      "@astyle/*": ["./src/admin/style/*"],
+      "@apages/*": ["./src/admin/components/pages/*"],
+      "@apages": ["./src/admin/components/pages/index.ts"],
+      "@providers": ["./src/admin/components/provider/index.ts"],
+      "@data": ["./public/data/personalData.json"],
+      "@common/*": ["./src/admin/components/common/*"]
     },
     "types": ["node"]
   },
