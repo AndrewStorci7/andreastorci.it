@@ -1,0 +1,67 @@
+.logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--deep-sage);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.logo:hover {
+    color: var(--sage-green);
+    transform: scale(1.05);
+}
+
+/* Indicatore per Easter egg */
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent-coral);
+    transition: width 0.3s ease;
+}
+
+.logo:hover::after {
+    width: 100%;
+}
+
+.sidebar {
+    padding: 10px 20px;
+    /* border-radius: 5px; */
+    width: 200px !important;
+    /* height: 100vh; */
+    background-color: var(--background);
+    color: var(--white);
+}
+
+.menu {
+    margin-top: 20px;
+}
+
+.menu label {
+    /* margin-top: 30px; */
+    color: var(--foreground);
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.menu .menu-item {
+    margin-left: 15px;
+}
+
+.menu-item > .submenu-item {
+    width: 95% !important;
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin: 2px 5px;
+    background-color: var(--sage-green);
+    cursor: pointer;
+}
+

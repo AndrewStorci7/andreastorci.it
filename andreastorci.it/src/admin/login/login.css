@@ -1,0 +1,9 @@
+@import "@astyle/globals.css"; 
+
+.login-container {
+    border: 1px solid var(--background);
+    background-color: var(--foreground) !important;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
