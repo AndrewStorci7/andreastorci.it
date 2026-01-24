@@ -11,6 +11,7 @@ import { CommonData } from "@ctypes/CommonInfo";
 import { showDreeanLogo } from "@inc/ANSI";
 import { useCookie } from "@inc/Cookies";
 import Header from "@components/Header";
+import Footer from "@components/Footer";
 import Section from "@inc/Section";
 
 export default function Home() {
@@ -93,6 +94,7 @@ export default function Home() {
       <SkillsSection data={pd?.skills ?? null} commonData={commonData?.skills_section ?? null} />
       <ProjectsSection data={pd?.projects ?? null} commonData={commonData?.projects_section ?? null} />
       <ContactSection data={pd?.contact ?? null} commonData={commonData?.contacts_section ?? null} />
+      <Footer />
     </div>
   );
 }

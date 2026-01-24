@@ -39,9 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     })
 
     const checkIfAlreadyLogged = async () => {
-        console.log(token)
         if (token) {
-            // eventualmente puoi fare una fetch per verificare il token
             const req = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -52,7 +50,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 router.push('/admin/login')
             } else {
                 router.push('/admin')
-                console.log("loggato e token valido")
             }
         } else {
             router.push('/admin/login')

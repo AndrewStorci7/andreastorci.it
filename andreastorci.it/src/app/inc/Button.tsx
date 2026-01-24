@@ -38,11 +38,10 @@ export default function Btn({ refClick, ...props }: BtnProps) {
 
     // const [isClicked, setClicked] = useState(false)
     // const [icon, setIcon] = useState("")
-    console.log(ref)
+    // console.log(ref)
 
     return (
         <button
-        // onClick={}
         className="my-[5px]"
         onClick={handleSwitch}
         {...props}

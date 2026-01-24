@@ -11,8 +11,6 @@ export async function POST() {
         const res = await fetch(`https://api.ipapi.com/api/${ip}?access_key=${ipapi_secret}`);
         const data = await res.json();
         const country: string = data?.country_name?.toLowerCase();
-        console.log(data);
-        console.log(country);
         const countrypath = `alltime_visits.visits_country.${country}`;
 
         const now = new Date().toISOString();

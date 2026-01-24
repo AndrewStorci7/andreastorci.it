@@ -117,3 +117,6 @@ export type MenuItem = {
     onClick: (arg?: string) => void
     disabled?: boolean
 }
+
+export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
+export type Languages = typeof LANGUAGES_TYPES[number];

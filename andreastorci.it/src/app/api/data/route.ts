@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
 import { PersonalData } from "@ctypes/PersonalInfo";
-import db from "@lib/mongodb";
 import { CommonData } from "@ctypes/CommonInfo";
+import { NextResponse } from "next/server";
+import { Languages, LANGUAGES_TYPES } from "@ctypes/index";
+import db from "@lib/mongodb";
 
 interface LanguageToFetch {
-    language: string
+    language: Languages
 }
 
 interface AllDataFetched extends PersonalData, CommonData {};
@@ -12,6 +13,11 @@ interface AllDataFetched extends PersonalData, CommonData {};
 export async function POST(req: Request) {
     try {
         const data: LanguageToFetch = await req.json();
+
+        if (!LANGUAGES_TYPES.includes(data.language)) {
+            return NextResponse.json({ success: false, message: "Lingua inserita non ancora supportata" });
+        }
+
         const PersonalData = db.collection<AllDataFetched>(data.language);
         const dataFetched = await PersonalData.findOne({}); 
 
