@@ -1,17 +1,17 @@
 'use client'
-import { useFadeInObserver } from "@inc/animated/FadeIn";
 import PersonalInfo, { PersonalData } from "@ctypes/PersonalInfo";
 import ContactSection from "@components/sections/ContactSection";
 import SkillsSection from "@components/sections/SkillSection";
-import LoadingOverlay from "@inc/animated/Loader";
 import ProjectsSection from "@components/sections/Projects";
-import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
-import { showDreeanLogo } from "@inc/ANSI";
+import { useFadeInObserver } from "@inc/animated/FadeIn";
 import HeroSection from "@components/sections/Hero";
-import { useCookie } from "@inc/Cookies";
 import React, { useState, useEffect } from "react";
-import Section from "@inc/Section";
+import LoadingOverlay from "@inc/animated/Loader";
+import { CommonData } from "@ctypes/CommonInfo";
+import { showDreeanLogo } from "@inc/ANSI";
+import { useCookie } from "@inc/Cookies";
 import Header from "@components/Header";
+import Section from "@inc/Section";
 
 export default function Home() {
   
@@ -40,9 +40,9 @@ export default function Home() {
       
       await fetch('/api/logs', { method: 'POST' })
       const personalInfo = new PersonalInfo(lang.sku);
-      const commonInfo = new CommonInfo(lang.sku);
+      // const commonInfo = new CommonInfo(lang.sku);
       const data = await personalInfo.getPersonalData();
-      const commonData = await commonInfo.getData();
+      const commonData = await personalInfo.getCommonInfos();
       // console.log(data, commonData)
       setPd(data);
       setCommonData(commonData);
@@ -88,11 +88,11 @@ export default function Home() {
   
   return (
     <div className="h-screen w-screen">
-      <Header commonData={commonData?.menu ?? null} />
-      <HeroSection data={pd} commonData={commonData?.hero ?? null} />
-      <SkillsSection data={pd?.skills ?? null} commonData={commonData?.skills ?? null} />
-      <ProjectsSection data={pd?.projects ?? null} commonData={commonData?.projects ?? null} />
-      <ContactSection data={pd?.contact ?? null} commonData={commonData?.contacts ?? null} />
+      <Header commonData={commonData?.menu_section ?? null} />
+      <HeroSection data={pd} commonData={commonData?.hero_section ?? null} />
+      <SkillsSection data={pd?.skills ?? null} commonData={commonData?.skills_section ?? null} />
+      <ProjectsSection data={pd?.projects ?? null} commonData={commonData?.projects_section ?? null} />
+      <ContactSection data={pd?.contact ?? null} commonData={commonData?.contacts_section ?? null} />
     </div>
   );
 }

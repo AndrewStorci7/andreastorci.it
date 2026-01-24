@@ -21,6 +21,7 @@
       }
     ],
     "paths": {
+      "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/app/*"],
       "@components/*": ["./src/app/components/*", "./src/app/admin/components/*"],
       "@inc/*": ["./src/app/inc/*"],

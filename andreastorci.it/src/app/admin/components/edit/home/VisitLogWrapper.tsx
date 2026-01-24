@@ -179,27 +179,26 @@ const VisitLogWrapper = ({
             setLoader(true);
             const req = await fetch(`/api/logs?type=${_type}&range=${_range}`) 
             const res = await req.json()
-            console.log(res)
+            const countries = res.data.alltime_visits.visits_country;
+            const visits = res.data.alltime_visits.visits; 
+
             if (res.success) {
                 if (type === "country") {
-                    const aggr = aggregateVisitsByCountry(res.data.countries)
+                    const aggr = aggregateVisitsByCountry(countries)
                     setData(aggr)
                     console.log(aggr)
                 } else {
-                    // console.log(res.data.days)
                     let filtered;
                     if (range === "week") {
-                        // console.log("week")
-                        filtered = filterVisitsThisWeek(res.data.days)
+                        filtered = filterVisitsThisWeek(visits.days)
                     } else {
-                        filtered = res.data.days
+                        filtered = visits.days
                     }
                     const aggr = aggregateVisitsByDay(filtered);
                     const completed = fillMissingDates(range, aggr) ;
                     setData(completed)
-                    // console.log(completed)
                 }
-                setTotal(res.data.total)
+                setTotal(visits.total)
             }
         } catch (err) {
             console.error(err)

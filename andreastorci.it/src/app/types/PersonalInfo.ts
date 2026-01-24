@@ -3,9 +3,15 @@ import type {
     Education, 
     Skill,
     ContactInfo,
-    Experience
+    Experience,
+    ProjectsSectionData,
+    ContactSectionData,
+    MenuItemsName,
+    HeroSectionData,
+    GeneralData
 } from "@ctypes/index";
 import OOB from "@ctypes/OOB";
+import { CommonData } from "@ctypes/CommonInfo";
 
 interface PersonalData {
     name: string;
@@ -22,6 +28,14 @@ interface PersonalData {
         name: string;
         level: string;
     }[];
+
+    /// Dati delle sezioni
+    menu_section: MenuItemsName,
+    hero_section: HeroSectionData,
+    skills_section: GeneralData,
+    projects_section: ProjectsSectionData,
+    contacts_section: ContactSectionData,
+    fuckWordpress: GeneralData
 }
 
 // class PersonalInfo extends OOB<LanguageData<PersonalData>> {
@@ -44,8 +58,14 @@ class PersonalInfo extends OOB<PersonalData> {
 
     private async fetchData(): Promise<void> {
         try {
-            const response = await fetch(`/data/${this.currentLang}.json`);
             
+            // const response = await fetch(`/data/${this.currentLang}.json`);
+            const response = await fetch("/api/data", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ language: this.currentLang })
+            });
+
             if (!response.ok) {
                 throw new Error(`Errore nel caricamento dei dati: ${response.status} ${response.statusText}`);
             }
@@ -113,6 +133,20 @@ class PersonalInfo extends OOB<PersonalData> {
     async getBio(): Promise<string> {
         const data = await this.getPersonalData();
         return data.bio;
+    }
+
+    async getCommonInfos(): Promise<CommonData> {
+        const data = await this.getPersonalData();
+        const commonData: CommonData = {
+            menu_section: data.menu_section,
+            hero_section: data.hero_section,
+            skills_section: data.skills_section,
+            projects_section: data.projects_section,
+            contacts_section: data.contacts_section,
+            fuckWordpress: data.fuckWordpress
+        }
+
+        return commonData;
     }
 
     async reload(): Promise<void> {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "@style/techTagStyle.css";
 
 interface TechTagProps {
-    key?: string | number,
+    key: string | number,
     type: string 
 }
 

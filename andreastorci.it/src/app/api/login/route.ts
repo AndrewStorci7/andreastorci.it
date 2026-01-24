@@ -1,11 +1,9 @@
+import db, { type UserTable } from "@lib/mongodb"; 
 import { NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import { fpath, users } from "@apicnf";
 import crypto from 'crypto';
-import path from 'path';
 
 const secret = process.env.TOKEN_SECRET;
-const usersFilePath = path.join(process.cwd() + fpath, users);
+const collection = db.collection<UserTable>("users");
 
 interface LoginProps {
     type: 'check' | 'login'
@@ -19,9 +17,13 @@ const hashSHA256 = (data: string): string => {
 }
 
 const validateCredential = async (username: string, password: string) => {
-    const usersJSON = await readFile(usersFilePath, 'utf8')
-    const users = JSON.parse(usersJSON);
-    return users[username] && users[username] === password
+    const data = await collection.findOne({ username });
+
+    if (data) {
+        return password == data.password;
+    }
+
+    return false;
 }
 
 const generateToken = (ip: string) => {

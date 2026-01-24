@@ -1,10 +1,10 @@
 import { useProjectContext, usePageSelector, useNotification } from "@providers";
 import ProjectsSection from "@components/sections/Projects";
-import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
 import { useFadeInObserver } from "@inc/animated/FadeIn";
 import React, { useEffect, useState } from "react";
 import { smoothScroll } from "@common/functions";
 import PersonalInfo from "@ctypes/PersonalInfo";
+import { CommonData } from "@ctypes/CommonInfo";
 import AddNewproject from "./AddNewproject";
 import "@astyle/wrapperPreviewStyle.css";
 import { Project } from "@ctypes/index";
@@ -31,9 +31,9 @@ const WrapperPreview = () => {
     const getData = async (languageSku: string) => {
         try {
             const personalInfo = new PersonalInfo(languageSku);
-            const commonInfo = new CommonInfo(languageSku);
+            // const commonInfo = new CommonInfo(languageSku);
             const projects = await personalInfo.getProjects();
-            const commonData = await commonInfo.getData();
+            const commonData = await personalInfo.getCommonInfos();
             setData({ projects, commonData });
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Errore sconosciuto');
@@ -143,7 +143,7 @@ const WrapperPreview = () => {
                 <ProjectsSection 
                     preview
                     data={data?.projects ?? null} 
-                    commonData={data?.commonData?.projects ?? null} 
+                    commonData={data?.commonData?.projects_section ?? null} 
                 />
             </div>
         )

@@ -1,5 +1,5 @@
 'use client'
-import CommonInfo, { CommonData } from "@ctypes/CommonInfo";
+import { CommonData } from "@ctypes/CommonInfo";
 import React, { useEffect, useState } from "react";
 import { useCookie } from "@/inc/Cookies";
 import Section from "@/inc/Section";
@@ -7,6 +7,7 @@ import Section from "@/inc/Section";
 import "./style.css"
 import "@style/globals.css"
 import { GeneralData } from "@/types";
+import PersonalInfo from "@/types/PersonalInfo";
 
 const Page = () => {
 
@@ -25,8 +26,8 @@ const Page = () => {
 
     const getData = async () => {
         try {
-            const commonInfo = new CommonInfo(lang.sku);
-            const commonData: CommonData | null = await commonInfo.getData();
+            const commonInfo = new PersonalInfo(lang.sku);
+            const commonData: CommonData | null = await commonInfo.getCommonInfos();
             console.log(commonData)
             setCommonData(commonData?.fuckWordpress ?? null);
         } catch (err) {
@@ -36,7 +37,7 @@ const Page = () => {
 
     useEffect(() => {
         getData()
-    })
+    }, [])
 
     if (error) {
         return (
