@@ -88,6 +88,8 @@ const AddNewproject = ({
                 // const lastProjectAdded = updatedData?.projects[updatedData?.projects.length - 1]; 
                 // console.log(lastProjectAdded)
 
+                //// momentaneamente commentato siccome non è ancora pronto il server di traduzione
+                /*
                 const reqTransEn = await fetch('/api/translate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -107,14 +109,15 @@ const AddNewproject = ({
 
                 const resEn = await reqTransEn.json()
                 const resEs = await reqTransEs.json()
+                */
 
                 const req = await fetch('/api/update', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         dataIt: newProject,
-                        dataEs: resEs.translation,
-                        dataEn: resEn.translation,
+                        // dataEs: resEs.translation,
+                        // dataEn: resEn.translation,
                         updateProp: 'projects'
                     })
                 });

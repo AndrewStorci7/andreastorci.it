@@ -1,5 +1,5 @@
-import { useProjectContext, usePageSelector, useNotification } from "@providers";
-import ProjectsSection from "@components/sections/Projects";
+import { usePageSelector, useNotification } from "@providers";
+// import ProjectsSection from "@components/sections/Projects";
 import { useFadeInObserver } from "@inc/animated/FadeIn";
 import React, { useEffect, useState } from "react";
 import { smoothScroll } from "@common/functions";
@@ -8,8 +8,10 @@ import { CommonData } from "@ctypes/CommonInfo";
 import AddNewproject from "./AddNewproject";
 import "@astyle/wrapperPreviewStyle.css";
 import { Project } from "@ctypes/index";
-import Switch from "./Switch";
+// import Switch from "./Switch";
 import Icon from "@inc/Icon";
+import Table from "../../table/Table";
+import { VoicesProps } from "../../table/types";
 
 type EditProjectType = {
     projects: Project[] | null,
@@ -21,20 +23,37 @@ const WrapperPreview = () => {
     const { showNotification, hideNotification } = useNotification()
     const [, setError] = useState<string | null>(null);
     // const [isInitialized, setIsInitialized] = useState(false);
-    const [data, setData] = useState<EditProjectType | null>(null); 
-    const { currentState } = useProjectContext();
+    // const [data, setData] = useState<EditProjectType | null>(null); 
+    // const { currentState } = useProjectContext();
     const { setLoader } = usePageSelector()
-    const [showAdd, setShowAdd] = useState<boolean>(false)
+    // const [showAdd, setShowAdd] = useState<boolean>(false);
+    const voices: VoicesProps[] = [
+        { name: "Nome", width: 2 }, 
+        { name: "Tipo", width: 1 }, 
+        { name: "Descrizione", width: 4 }, 
+        { name: "Linguaggi", width: 3 }
+    ]
+    const [contents, setContents] = useState<any[]>([]);
 
     useFadeInObserver('.fade-in');
 
     const getData = async (languageSku: string) => {
         try {
             const personalInfo = new PersonalInfo(languageSku);
-            // const commonInfo = new CommonInfo(languageSku);
             const projects = await personalInfo.getProjects();
             const commonData = await personalInfo.getCommonInfos();
-            setData({ projects, commonData });
+            
+            const newContents = projects.map((project) => Object.values(project).slice(0, 4))
+            newContents.map((project, i) => {
+                const values = Object.values(project);
+                const firstThree = values.slice(0, 3);
+                const fourthElement = values[3]; 
+                return [...firstThree, fourthElement];
+            });
+
+            console.log(newContents)
+            
+            setContents(newContents);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Errore sconosciuto');
         }
@@ -98,71 +117,18 @@ const WrapperPreview = () => {
         ))
     }
 
-    const renderContentList = (projects: Project[] | null) => {
-        // console.log(typeof projects, projects)
-        if (!projects || projects?.length === 0) {
-            return <p>Nessun progetto disponibile.</p>;
-        }
-
-        const content = projects.map((project: Project, index: number) => (
-            <tr key={index + 1} className="relative table-row">
-                <td>{index + 1}</td>
-                <td>{project.name}</td>
-                <td>{project.type}</td>
-                <td className="truncate">{project.description}</td>
-                <td>{renderTech(project.technologies)}</td>
-                {/* <td onClick={() => handleUpdate('projects', index)}><Icon width={25} height={25} className="pointer" useFor="modify" /></td> */}
-                <td onClick={() => {}}><Icon width={25} height={25} className="pointer" useFor="modify" /></td>
-                <td onClick={() => handleDelete('projects', index, project.name)}><Icon width={25} height={25} className="pointer" useFor="delete" /></td>
-            </tr>
-        ))
-
-        return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome progetto</th>
-                        <th>Tipo</th>
-                        <th>Descrizione</th>
-                        <th>Linguaggi</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {content}
-                </tbody>
-            </table>
-        )
-    }
-
-    const renderContentPreview = () => {
-        return (
-            <div className="preview-container">
-                <ProjectsSection 
-                    preview
-                    data={data?.projects ?? null} 
-                    commonData={data?.commonData?.projects_section ?? null} 
-                />
-            </div>
-        )
-    }
-
-    const handleClose = async () => {
-        await getData('it-IT');
-        setShowAdd(false)
-    }
+    // const handleClose = async () => {
+    //     await getData('it-IT');
+    //     setShowAdd(false)
+    // }
 
     return (
         <div className="wrapper relative">
-            <Switch />
-            
-            {currentState.type === 'preview' ?
+            {/* {currentState.type === 'preview' ?
                 renderContentPreview()
-            : (
+            : ( */}
                 <>
-                    <button 
+                    {/* <button 
                         className="add-new-project pointer" 
                         onClick={() => {
                             setShowAdd(prev => !prev);
@@ -170,11 +136,12 @@ const WrapperPreview = () => {
                         }}
                     >
                         Add new project
-                    </button>
-                    {renderContentList(data?.projects ?? null)}
-                    <AddNewproject id="add-new-project" onClose={handleClose} show={showAdd} data={data?.projects ?? null} />
+                    </button> */}
+                    {/* {renderContentList(data?.projects ?? null)} */}
+                    <Table voices={voices} contents={contents} />
+                    {/* <AddNewproject id="add-new-project" onClose={handleClose} show={showAdd} data={data?.projects ?? null} /> */}
                 </>
-            )}
+            {/* )} */}
         </div>
     );
 }

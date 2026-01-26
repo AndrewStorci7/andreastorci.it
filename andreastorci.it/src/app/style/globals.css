@@ -8,7 +8,8 @@
 
 :root {
   --sage-green: #9CAF88;    /* Verde salvia - tranquillità */
-  --soft-blue: #A8C8E1;     /* Azzurro delicato - pace */
+  --soft-blue: rgb(168, 200, 225);     /* Azzurro delicato - pace */
+  --soft-blue-light: rgba(168, 200, 225, .5);
   --warm-cream: #F8F6F0;    /* Crema caldo - serenità */
   --charcoal: #2C3E50;      /* Carbone - intelletto */
   --dust-blue: #7B9AAF;     /* Blu polvere - saggezza */
@@ -108,6 +109,10 @@ body {
 .btn-secondary:hover {
   background: var(--sage-green);
   color: var(--white);
+}
+
+.bold {
+  font-weight: bold;
 }
 
 /* Floating Elements */
@@ -215,6 +220,18 @@ body {
   border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.margin-l-auto {
+  margin-left: auto;
+}
+
+.margin-r-auto {
+  margin-right: auto;
+}
+
+.margin-t-auto {
+  margin-top: auto;
 }
 
 /* Footer */

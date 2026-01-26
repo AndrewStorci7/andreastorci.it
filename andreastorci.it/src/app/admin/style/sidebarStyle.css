@@ -65,3 +65,7 @@
     cursor: pointer;
 }
 
+.version-footer span {
+    font-size: 10px;
+}
+

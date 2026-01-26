@@ -3,10 +3,12 @@ import { usePageSelector } from "@providers";
 import React from "react";
 
 import "@astyle/sidebarStyle.css"
+import { version } from "../../../../package.json";
 
 const SideBar = () => {
 
     const { setPage } = usePageSelector();
+    const currentYear = new Date().getFullYear();
     
     return (
         <div className="full-h sidebar flex column">
@@ -49,6 +51,12 @@ const SideBar = () => {
                             Informazioni
                         </a>
                     </div>
+                </div>
+            </div>
+            <div className="margin-t-auto version-footer">
+                <div className="">
+                    <span>Copyright © 2025-{currentYear}</span><br/>
+                    <span>andreastorci.it | v{version}</span>
                 </div>
             </div>
         </div>
