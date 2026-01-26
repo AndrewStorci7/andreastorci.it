@@ -8,7 +8,8 @@ import type {
     ContactSectionData,
     MenuItemsName,
     HeroSectionData,
-    GeneralData
+    GeneralData,
+    ResponseFromAPI
 } from "@ctypes/index";
 import OOB from "@ctypes/OOB";
 import { CommonData } from "@ctypes/CommonInfo";
@@ -71,13 +72,13 @@ class PersonalInfo extends OOB<PersonalData> {
             }
             
             // const data: LanguageData<PersonalData> = await response.json();
-            const data: PersonalData = await response.json();
+            const data: ResponseFromAPI = await response.json();
 
-            if (!data) {
-                throw new Error(`Dati non disponibili per la lingua: ${this.currentLang}`);
+            if (!data.success) {
+                throw new Error(`Dati non disponibili per la lingua: ${this.currentLang} - ${data.message || data.error}`);
             }
             
-            this.data = data;
+            this.data = data.data;
             this.isLoaded = true;
         } catch (error) {
             throw error;
@@ -106,7 +107,6 @@ class PersonalInfo extends OOB<PersonalData> {
 
     async getProjects(): Promise<Project[]> {
         const data = await this.getPersonalData();
-        console.log(data.projects)
         return data.projects;
     }
 

@@ -1,5 +1,12 @@
 import { ReactNode, MouseEventHandler } from "react";
 
+export interface ResponseFromAPI {
+    success: boolean,
+    data?: any,
+    message?: string,
+    error?: string 
+} 
+
 export interface GeneralData {
     title: string;
     description: string;
