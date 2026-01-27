@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes/index";
+import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes";
 import { NextResponse } from "next/server";
 
 interface TranslateProp {

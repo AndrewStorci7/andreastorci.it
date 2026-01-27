@@ -2,8 +2,21 @@
 
 .login-container {
     border: 1px solid var(--background);
-    background-color: var(--foreground) !important;
+    /* background-color: var(--foreground) !important; */
+    background-color: #2B2B2B54;
     padding: 20px;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
+
+.login-button {
+    background-color: rgba(53, 150, 229, .5);
+    box-shadow: "0 0 15px rgba(53, 150, 229, 0.4), inset 0 0 10px rgba(53, 150, 229, 0.1)";
+    border: none;
+    font-size: large;
+    padding: 10px 20px;
+    /*width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;*/
 }

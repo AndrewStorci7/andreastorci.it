@@ -1,7 +1,7 @@
 import { PersonalData } from "@ctypes/PersonalInfo";
 import { CommonData } from "@ctypes/CommonInfo";
 import { NextResponse } from "next/server";
-import { Languages, LANGUAGES_TYPES } from "@ctypes/index";
+import { Languages, LANGUAGES_TYPES } from "@ctypes";
 import db from "@lib/mongodb";
 
 interface LanguageToFetch {

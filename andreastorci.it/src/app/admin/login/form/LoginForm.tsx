@@ -1,8 +1,9 @@
 'use client'
-import { useState } from 'react'
+import { UserType } from '@components/provider/AuthContext'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
 import { useAuth } from '@providers'
+import { useState } from 'react'
+import Cookies from 'js-cookie'
 
 interface FormData {
     username: string
@@ -11,13 +12,13 @@ interface FormData {
 
 const LoginForm = () => {
 
-    const { setUser } = useAuth();
+    const { setUser, error, setError } = useAuth();
     const router = useRouter()
     const [formData, setFormData] = useState<FormData>({
         username: '',
         password: '',
     })
-    const [error, setError] = useState<string | null>(null)
+    // const [errorInner, setErrorInner] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ const LoginForm = () => {
         setError(null)
 
         try {
-            const req = await fetch('/api/login', {
+            const req = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -53,10 +54,10 @@ const LoginForm = () => {
                     expires: 7,
                     sameSite: 'strict'
                 })
-                setUser({ surname: formData.username })
+                setUser({ surname: formData.username } as UserType)
                 router.push('/admin')
             } else {
-                setError(res.message)
+                setError(res.error)
             }
         } catch {
             setError('Credenziali non valide. Riprova.')
@@ -69,15 +70,34 @@ const LoginForm = () => {
 
     return (
         <form className="text-center space-y-4" onSubmit={handleSubmit}>
-            {error && (
-                <div className="rounded-md bg-red-50 p-4">
-                <div className="flex">
-                    <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">{error}</h3>
+            {(error) && (
+                <div style={{
+                    width: "300px",
+                    // border: "1px solid #3D3D3D",
+                    borderRadius: "10px",
+                    padding: "10px",
+                    marginBottom: "10px",
+                    backgroundColor: "rgba(252, 93, 93, 0.6)",
+                    boxShadow: "0 0 15px rgba(252, 93, 93, 0.4), inset 0 0 10px rgba(252, 93, 93, 0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: 'center'
+                }}>
+                    <div>
+                        <h3>Errore nell'autenticazione</h3>
+                        <p>{error}</p>
                     </div>
                 </div>
-                </div>
             )}
+            {/* {error && (
+                <div className="rounded-md bg-red-50 p-4">
+                    <div className="flex">
+                        <div className="ml-3">
+                            <h3 className="text-sm font-medium text-red-800">{error}</h3>
+                        </div>
+                    </div>
+                </div>
+            )} */}
             
             <div className="text-center space-y-2">
                 <div className='space-x-2'>
@@ -133,7 +153,7 @@ const LoginForm = () => {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed login-button"
                 >
                     {isLoading ? (
                         <span>Caricamento...</span>

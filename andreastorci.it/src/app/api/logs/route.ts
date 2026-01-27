@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import db, { ObjectId, type LogsTable } from "@lib/mongodb";
-import { Type, Range } from "@ctypes/index";
+import { Type, Range } from "@ctypes";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 

@@ -37,6 +37,20 @@
                 margin .5s ease;
 }
 
+.see-more-button {
+    bottom: 0;
+    right: 0;
+}
+
+input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+  
+button:hover {
+    transform: scale(1.05) !important;
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -47,3 +61,14 @@
         transform: translateX(0);
     }
 }
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}  
