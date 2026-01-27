@@ -5,7 +5,7 @@ import {
     MenuItemsName,
     HeroSectionData,
     GeneralData
-} from '@ctypes/index';
+} from '@ctypes';
 // import OOB from "@ctypes/OOB";
 // import { PersonalData } from './PersonalInfo';
 

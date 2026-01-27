@@ -1,11 +1,41 @@
 import { ReactNode, MouseEventHandler } from "react";
 
+export interface PersonalData {
+    name: string;
+    surname: string;
+    title: string;
+    bio: string;
+    avatar?: string;
+    contact: ContactInfo;
+    experience: Experience[];
+    education: Education[];
+    projects: Project[];
+    skills: Skill[];
+    languages: {
+        name: string;
+        level: string;
+    }[];
+
+    /// Dati delle sezioni
+    menu_section: MenuItemsName,
+    hero_section: HeroSectionData,
+    skills_section: GeneralData,
+    projects_section: ProjectsSectionData,
+    contacts_section: ContactSectionData,
+    fuckWordpress: GeneralData
+}
+
 export interface ResponseFromAPI {
-    success: boolean,
+    success?: boolean,
     data?: any,
     message?: string,
     error?: string 
 } 
+
+// export interface ErrorFromAPI {
+//     error?: string,
+//     retryAfter?: number
+// } 
 
 export interface GeneralData {
     title: string;
@@ -44,7 +74,7 @@ export interface Skill {
     // data: SkillsSectionData;
     name: string;
     level: number; // 1-5 o 1-10
-    category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
+    category: string;
 }
 
 //#endregion Skills Section

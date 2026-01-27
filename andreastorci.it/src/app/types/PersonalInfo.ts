@@ -4,46 +4,20 @@ import type {
     Skill,
     ContactInfo,
     Experience,
-    ProjectsSectionData,
-    ContactSectionData,
-    MenuItemsName,
-    HeroSectionData,
-    GeneralData,
+    PersonalData,
     ResponseFromAPI
-} from "@ctypes/index";
+} from "@ctypes";
 import OOB from "@ctypes/OOB";
 import { CommonData } from "@ctypes/CommonInfo";
-
-interface PersonalData {
-    name: string;
-    surname: string;
-    title: string;
-    bio: string;
-    avatar?: string;
-    contact: ContactInfo;
-    experience: Experience[];
-    education: Education[];
-    projects: Project[];
-    skills: Skill[];
-    languages: {
-        name: string;
-        level: string;
-    }[];
-
-    /// Dati delle sezioni
-    menu_section: MenuItemsName,
-    hero_section: HeroSectionData,
-    skills_section: GeneralData,
-    projects_section: ProjectsSectionData,
-    contacts_section: ContactSectionData,
-    fuckWordpress: GeneralData
-}
 
 // class PersonalInfo extends OOB<LanguageData<PersonalData>> {
 class PersonalInfo extends OOB<PersonalData> {
 
+    protected headers;
+
     constructor(lang: string) {
         super(lang);
+        this.headers = { 'Content-Type': 'application/json' }
     }
 
     private async loadPersonalData(): Promise<void> {
@@ -63,7 +37,7 @@ class PersonalInfo extends OOB<PersonalData> {
             // const response = await fetch(`/data/${this.currentLang}.json`);
             const response = await fetch("/api/data", {
                 method: "POST",
-                headers: { 'Content-Type': 'application/json' },
+                headers: this.headers,
                 body: JSON.stringify({ language: this.currentLang })
             });
 
@@ -113,6 +87,20 @@ class PersonalInfo extends OOB<PersonalData> {
     async getSkills(): Promise<Skill[]> {
         const data = await this.getPersonalData();
         return data.skills;
+    }
+
+    async addOneSkill(newData: Skill): Promise<ResponseFromAPI> {
+        
+        const update = await fetch("/api/data/addSkill", {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(newData)
+        }); 
+
+        const resp = await update.json();
+        console.log(resp)
+
+        return resp
     }
 
     // async getSkillsByCategory(category: Skill['data'][number]['category']): Promise<Skill[]> {
