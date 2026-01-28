@@ -2,6 +2,7 @@ import React from 'react'
 import { DEFAULT_WIDTH_TABLE, VoicesProps, WIDTH_END } from './types'
 import "./style/main.css"
 import { styles } from './style/style'
+import { setStyleCol } from './inc/common'
 
 interface TableHeaderProps {
     voices: VoicesProps[]
@@ -16,20 +17,16 @@ export default function TableHeader({
             throw new Error("La prop `voices` è vuota, devi inserire almeno una voce per la tabella");
         
         return voices.map((e, i) => {
-            const props: VoicesProps = {
-                name: e.name,
-                width: (e.width && e.width > 0) ? e.width : 2,
-                bold: e.bold ?? true,
-                centered: e.centered ?? false,
-                marginAutoLeft: e.marginAutoLeft ?? false,
-                marginAutoRight: e.marginAutoRight ?? false 
-            }
+            // const props: VoicesProps = {
+            //     name: e.name,
+            //     width: (e.width && e.width > 0) ? e.width : 2,
+            //     bold: e.bold ?? true,
+            //     centered: e.centered ?? false,
+            //     marginAutoLeft: e.marginAutoLeft ?? false,
+            //     marginAutoRight: e.marginAutoRight ?? false 
+            // }
 
-            const headerCol = (props.width == 5) ? styles.headerCol5 :
-                              (props.width == 4) ? styles.headerCol4 :
-                              (props.width == 3) ? styles.headerCol3 :
-                              (props.width == 1) ? styles.headerCol1 :
-                              styles.headerCol2;
+            const headerCol = setStyleCol(e, "header");
 
             return (
                 <div 

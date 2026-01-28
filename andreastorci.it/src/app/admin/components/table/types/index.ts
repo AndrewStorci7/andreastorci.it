@@ -7,6 +7,19 @@ export interface VoicesProps {
     marginAutoRight?: boolean
 }
 
+export interface DataInterface {
+    dataKeys: string[]
+    dataValues: any[]
+}
+
+// export interface TableAddNewItemProps {
+//     show?: boolean,
+//     data?: DataInterface
+//     handleSave?: Function,
+//     handleCancel?: Function,
+//     settings: VoicesProps[]
+// }
+
 /**
  * Costante della lunghezza delle due colonne finali
  * sia nell'intestazione che del contenuto

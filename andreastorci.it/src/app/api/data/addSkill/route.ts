@@ -7,8 +7,8 @@ const collection = db.collection<PersonalData>("it-IT");
 
 const SkillSchema = z.object({
     name: z.string().max(50),
+    level: z.coerce.number().max(10),
     category: z.string().max(50),
-    level: z.number().max(10)
 });
 
 export async function POST(req: Request) {

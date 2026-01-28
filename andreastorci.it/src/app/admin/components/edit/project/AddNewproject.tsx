@@ -2,7 +2,7 @@
 import { useNotification, usePageSelector } from '@providers';
 import React, { useState, useEffect, ReactNode } from 'react';
 import MultipleSelect from '@common/MultipleSelect';
-import { Project } from '@ctypes/index';
+import { Project } from '@ctypes';
 import "@astyle/addnewprojectStyle.css";
 
 interface AddNewProjectProps {

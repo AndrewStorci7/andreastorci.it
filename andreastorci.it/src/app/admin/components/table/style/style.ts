@@ -1,5 +1,11 @@
 import React from "react"
 
+// const fixButtonMarginBottom: Record<string, React.CSSProperties> = {
+//     fixButton: {
+//         marginBottom: 0,
+//     }
+// }
+
 export const styles: Record<string, React.CSSProperties> = {
     container: {
         minHeight: '100vh',
@@ -28,16 +34,30 @@ export const styles: Record<string, React.CSSProperties> = {
     addButton: {
         display: 'flex',
         alignItems: 'center',
+        fontSize: "15px",
         gap: '0.5rem',
-        background: 'linear-gradient(to right, #3b82f6, #2563eb)',
+        backgroundImage: 'linear-gradient(to right, #2973EA, #6A8BC4)',
+        backgroundSize: '200% auto',
+        backgroundPosition:'left',
         color: 'white',
         padding: '0.75rem 1.5rem',
+        margin: "10px",
         borderRadius: '0.75rem',
         fontWeight: '500',
         border: 'none',
         cursor: 'pointer',
         transition: 'all 0.3s',
         boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.3)'
+    },
+    addButtonHovered: {
+        // ...fixButtonMarginBottom.fixButton,
+        // backgroundImage: 'linear-gradient(to right, #8AB5F9, #8FAFF5)',
+        backgroundPosition:'right center',
+    },
+    addingRow: {
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderLeft: '3px solid #3b82f6',
+        animation: 'slideIn 0.3s ease-out'
     },
     tableContainer: {
         backgroundColor: 'rgba(30, 41, 59, 0.5)',
@@ -54,6 +74,14 @@ export const styles: Record<string, React.CSSProperties> = {
         padding: '1rem 1.5rem',
         background: 'linear-gradient(to right, rgba(51, 65, 85, 0.5), rgba(30, 41, 59, 0.5))',
         borderBottom: '1px solid #334155'
+    },
+    headerColFull: {
+        gridColumn: 'span 12',
+        fontSize: '0.875rem',
+        fontWeight: '600',
+        color: '#cbd5e1',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em'
     },
     headerCol3: {
         gridColumn: 'span 3',
@@ -109,9 +137,28 @@ export const styles: Record<string, React.CSSProperties> = {
         backgroundColor: 'transparent',
         borderBottom: '1px solid rgba(51, 65, 85, 0.5)'
     },
+    tableAddRow: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        gap: '1rem',
+        // padding: '0.5rem 1.5rem',
+        transition: 'all 0.3s',
+        backgroundColor: '#9DABC1',
+        borderBottom: '1px solid rgba(51, 65, 85, 0.5)'
+    },
     tableRowHovered: {
         backgroundColor: 'rgba(51, 65, 85, 0.3)',
         transform: 'scale(1.001)'
+    },
+    tableAddRowHovered: {
+        backgroundColor: '#8394AF',
+        transform: 'scale(1.01)'
+    },
+    rowColFull: {
+        gridColumn: 'span 12',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     rowCol3: {
         gridColumn: 'span 3',
@@ -158,6 +205,13 @@ export const styles: Record<string, React.CSSProperties> = {
         backgroundColor: '#3b82f6',
         transform: 'scale(1.5)'
     },
+    indicatorNew: {
+        width: '0.5rem',
+        height: '0.5rem',
+        borderRadius: '50%',
+        backgroundColor: '#3b82f6',
+        animation: 'pulse 2s infinite'
+    },
     cellTextBold: {
         color: '#e2e8f0',
         fontWeight: '500'
@@ -166,6 +220,7 @@ export const styles: Record<string, React.CSSProperties> = {
         color: '#cbd5e1'
     },
     actionButton: {
+        // ...fixButtonMarginBottom.fixButton,
         padding: '0.5rem',
         borderRadius: '0.5rem',
         transition: 'all 0.3s',
@@ -185,9 +240,25 @@ export const styles: Record<string, React.CSSProperties> = {
         backgroundColor: 'rgba(59, 130, 246, 0.2)',
         color: '#60a5fa'
     },
+    seeMoreButton: {
+        backgroundColor: 'rgba(169, 187, 215, 0.2)',
+        color: '#D5D5D5'
+    },
     deleteButton: {
         backgroundColor: 'rgba(239, 68, 68, 0.2)',
         color: '#f87171'
+    },
+    saveButton: {
+        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+        color: '#4ade80',
+        transform: 'scale(1)',
+        opacity: 1
+    },
+    cancelButton: {
+        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+        color: '#f87171',
+        transform: 'scale(1)',
+        opacity: 1
     },
     emptyState: {
         padding: '4rem 0',
@@ -226,5 +297,16 @@ export const styles: Record<string, React.CSSProperties> = {
     footerBold: {
         color: 'white',
         fontWeight: '600'
-    }
+    },
+    input: {
+        width: '100%',
+        padding: '0.5rem 0.75rem',
+        backgroundColor: 'rgba(30, 41, 59, 0.5)',
+        border: '1px solid #475569',
+        borderRadius: '0.5rem',
+        color: '#e2e8f0',
+        fontSize: '0.875rem',
+        outline: 'none',
+        transition: 'all 0.3s'
+    },
 };

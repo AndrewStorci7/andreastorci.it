@@ -1,0 +1,94 @@
+import React, { useEffect, useState } from 'react'
+import { styles } from './style/style'
+import { setStyleCol } from './inc/common';
+import { Check, X } from 'lucide-react';
+import { useTable } from './provider/TableContext';
+
+// interface TableAddNewItemProps {
+//     show: boolean
+//     setShow: () => void
+// }
+
+// export default function TableAddNewItem({
+//     show = false,
+//     setShow
+// }: TableAddNewItemProps) {
+export default function TableAddNewItem() {
+
+    const { 
+        settings, 
+        data, 
+        setData, 
+        handleSave, 
+        showAdd, 
+        setShowAdd 
+    } = useTable();
+
+    // const [newData, setNewData] = useState<DataInterface>({
+    //     dataKeys: data?.dataKeys || [],
+    //     dataValues: data?.dataValues || []
+    // });
+
+    // const setDatasFromProp = () => {
+    //     if (!data || data.dataKeys.length === 0)
+    //         throw new Error("La prop `data` non può essere `null` o vuota")
+    // } 
+
+    const handleCancel = () => {
+        // setData({ data })
+        setShowAdd()
+    }
+
+    const handleChange = (key: string, value: string | number) => {
+        // console.log(key)
+        setData(key, value)
+    }
+
+    const renderInputs = () => {
+        return settings.map((e, i) => {
+            const rowCol = setStyleCol(e, "row");
+
+            return (
+                <div key={i} style={rowCol}>
+                    <div style={(i == 0) ? styles.cellWithIndicator : {}}>
+                        <div style={(i == 0) ? styles.indicatorNew : {}} />
+                        <input
+                            type="text"
+                            placeholder={`Inserisci ${e.name} ...`}
+                            value={data?.dataValues[i]}
+                            onChange={(e) => handleChange(data?.dataKeys[i], e.target.value)}
+                            style={styles.input}
+                        />
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    useEffect(() => {
+        if (!data || data.dataKeys.length === 0)
+            throw new Error("La prop `data` non può essere `null` o vuota")            
+    }, [data])
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
+    return (
+        <>
+            {showAdd && (
+                <div style={{ ...styles.tableRow, ...styles.addingRow }}>
+                    {renderInputs()}
+                    <div style={styles.rowCol2}>
+                        <button onClick={() => handleSave("")} style={{ ...styles.actionButton, ...styles.saveButton }}>
+                            <Check size={18} />
+                        </button>
+                        <button onClick={handleCancel} style={{ ...styles.actionButton, ...styles.cancelButton }}>
+                            <X size={18} />
+                        </button>
+                    </div>
+                </div>
+            )}
+        </>
+    )
+}

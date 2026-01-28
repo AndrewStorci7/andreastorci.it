@@ -1,32 +1,56 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { VoicesProps } from './types'
 import TableHeader from './TableHeader';
 import TableContent from './TableContent';
 import { styles } from './style/style';
+import { Plus } from 'lucide-react';
+import { useTable } from './provider/TableContext';
 
 interface TableProps {
-    voices: VoicesProps[],
-    contents: any[]
+    // voices: VoicesProps[],
+    contents: any[],
+    // addData?: Function
 }
 
 export default function Table({
-    voices,
-    contents
+    // voices,
+    contents,
+    // addData
 }: TableProps) {
 
-    useEffect(() => {
-        if (voices.length == 0)
-            throw new Error("La props `voices` deve almeno contenere un elemento, non può essere vuota");
-        // if (contents.length == 0)
-        //     throw new Error("La props `contents` deve almeno contenere un elemento, non può essere vuota");
-        // if (voices.length !== contents.length)
-        //     throw new Error(`Il numero degli elementi di \`voices\` e di \`contents\` non conicidono: numero degli elementi di \`voices\` -> ${voices.length}, numero degli elementi di \`contents\` -> ${contents.length}`)
-    }, [voices, contents])
+    const { settings, setShowAdd } = useTable();
+
+    const [hovered, setHovered] = useState<boolean>(false);
+    // const [showAdd, setShowAdd] = useState<boolean>(false);
+
+    const onClick = () => {
+        // handlerForAdd?.()
+        // setShowAdd(prev => !prev);
+        setShowAdd();
+    }
 
     return (
-        <div style={styles.tableContainer}>
-            <TableHeader voices={voices} />
-            <TableContent content={contents} settings={voices} />
-        </div>
+        <>
+            <button
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className='' 
+            style={{
+                ...styles.actionButton,
+                ...styles.addButton,
+                ...(hovered ? styles.addButtonHovered : {})
+            }}
+            onClick={onClick}
+            >
+                <Plus size={12} />
+                Aggiungi
+            </button>
+            <div style={styles.tableContainer}>
+                <TableHeader voices={settings} />
+                <TableContent content={contents} 
+                // showAddRow={showAdd} 
+                />
+            </div>
+        </>
     )
 }

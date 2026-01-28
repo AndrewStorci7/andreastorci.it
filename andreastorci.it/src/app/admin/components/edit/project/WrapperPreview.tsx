@@ -7,11 +7,12 @@ import PersonalInfo from "@ctypes/PersonalInfo";
 import { CommonData } from "@ctypes/CommonInfo";
 import AddNewproject from "./AddNewproject";
 import "@astyle/wrapperPreviewStyle.css";
-import { Project } from "@ctypes/index";
+import { Project } from "@ctypes";
 // import Switch from "./Switch";
 import Icon from "@inc/Icon";
 import Table from "../../table/Table";
 import { VoicesProps } from "../../table/types";
+import { TableProvider } from "../../table/provider/TableContext";
 
 type EditProjectType = {
     projects: Project[] | null,
@@ -41,7 +42,7 @@ const WrapperPreview = () => {
         try {
             const personalInfo = new PersonalInfo(languageSku);
             const projects = await personalInfo.getProjects();
-            const commonData = await personalInfo.getCommonInfos();
+            // const commonData = await personalInfo.getCommonInfos();
             
             const newContents = projects.map((project) => Object.values(project).slice(0, 4))
             newContents.map((project, i) => {
@@ -123,26 +124,20 @@ const WrapperPreview = () => {
     // }
 
     return (
-        <div className="wrapper relative">
-            {/* {currentState.type === 'preview' ?
-                renderContentPreview()
-            : ( */}
-                <>
-                    {/* <button 
-                        className="add-new-project pointer" 
-                        onClick={() => {
-                            setShowAdd(prev => !prev);
-                            smoothScroll("add-new-project");
-                        }}
-                    >
-                        Add new project
-                    </button> */}
-                    {/* {renderContentList(data?.projects ?? null)} */}
-                    <Table voices={voices} contents={contents} />
-                    {/* <AddNewproject id="add-new-project" onClose={handleClose} show={showAdd} data={data?.projects ?? null} /> */}
-                </>
-            {/* )} */}
-        </div>
+        <TableProvider
+        settings={voices}
+        // apiEndpoint="/api/data/addProject"
+        handleCancel={() => {}}
+        handleSave={() => {}}
+        data={{ 
+            dataKeys: ["name", ""],
+            dataValues: []
+        }}
+        >
+            <div className="wrapper relative">
+                <Table contents={contents} />
+            </div>
+        </TableProvider>
     );
 }
 
