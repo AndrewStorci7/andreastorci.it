@@ -3,7 +3,7 @@
  * @author Andrea Storci aka dreean
  */
 'use client'
-import { ContactInfo, ContactSectionData } from '@ctypes/index';
+import { ContactInfo, ContactSectionData } from '@ctypes';
 import "@style/contactSectionStyle.css";
 import Section from '@inc/Section';
 import Image from 'next/image';

@@ -1,6 +1,6 @@
 import { useMenuPageSelector, usePageSelector } from "@providers";
 import React, { useEffect, useState } from "react";
-import { MenuItem } from "@ctypes/index";
+import { MenuItem } from "@ctypes";
 import "@astyle/menuStyle.css";
 import hash from 'string-hash';
 

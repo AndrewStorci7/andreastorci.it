@@ -1,0 +1,13 @@
+# file da ignorare da git
+
+credenziali
+
+*.zip
+*.sh
+tests/CRITICAL_FIXES.md
+tests/README.md
+
+configurazione-server.md
+secret.md
+
+tmp

@@ -12,7 +12,7 @@ export default function Page({
     children
 }: PageProp) {
 
-    console.log(pageId)
+    // console.log(pageId)
     if (!show) return null
     return <>{children}</>;
 } 

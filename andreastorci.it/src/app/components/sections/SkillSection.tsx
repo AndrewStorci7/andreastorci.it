@@ -4,7 +4,7 @@
  */
 'use client'
 
-import { Skill, GeneralData } from '@ctypes/index';
+import { Skill, GeneralData } from '@ctypes';
 import Section from '@inc/Section';
 import React from 'react';
 

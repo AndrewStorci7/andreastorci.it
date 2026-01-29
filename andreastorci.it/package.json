@@ -12,15 +12,19 @@
   },
   "dependencies": {
     "framer-motion": "^11.15.0",
+    "isomorphic-dompurify": "^2.30.0",
+    "jose": "^6.1.3",
     "js-cookie": "^3.0.5",
+    "lucide-react": "^0.563.0",
     "mongodb": "^6.20.0",
-    "next": "15.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^16.1.5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-i18next": "^15.6.1",
     "react-is": "^19.1.1",
     "recharts": "^3.1.0",
-    "string-hash": "^1.1.3"
+    "string-hash": "^1.1.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

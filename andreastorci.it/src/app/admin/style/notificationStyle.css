@@ -7,6 +7,8 @@
     --bg-warning: #FDF6D8;
     --border-warning: #bca44c;
     --bg-error: #F7DEE1;
+    --bg-completed: #A5D087;
+    --border-completed: #7CBA4F;
     --border-error: #D34A5A;
 
 }
@@ -120,6 +122,11 @@
 .bg-error {
     border: 2px solid var(--border-error);
     background-color: var(--bg-error);
+}
+
+.bg-completed {
+    border: 2px solid var(--border-completed);
+    background-color: var(--bg-completed);
 }
 
 .button-container {

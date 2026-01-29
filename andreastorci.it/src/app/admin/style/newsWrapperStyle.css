@@ -4,6 +4,7 @@
 }
 
 .wrapper-container {
+    color: var(--charcoal);
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

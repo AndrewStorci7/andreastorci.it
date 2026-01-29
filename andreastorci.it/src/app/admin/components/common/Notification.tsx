@@ -1,7 +1,8 @@
-import { Button, NotificationPurpose, NOTIFICATIONS_PURPOSES, NOTIFICATIONS_TYPES, NotificationsTypes } from "@ctypes/index";
+import { Button, NotificationPurpose, NOTIFICATIONS_PURPOSES, NOTIFICATIONS_TYPES, NotificationsTypes } from "@ctypes";
 import React, { ReactNode, useEffect, useState } from "react";
 import "@astyle/notificationStyle.css"
 import Icon from "@/inc/Icon";
+import { useNotification } from "../provider";
 
 type NotificationContent = {
     title?: string, 
@@ -28,6 +29,7 @@ const Notification = ({
     onClose?: (e: boolean) => void
 }) => {
     
+    const { hideNotification } = useNotification();
     // const [show, setShow] = useState<boolean>(false)
     const [, setTextColor] = useState<NotificationsTypes>();
     const [bgColor, setBgColor] = useState<NotificationsTypes>();
@@ -41,7 +43,10 @@ const Notification = ({
         switch (purpose) {
             case "alert": {
                 return (
-                    <div className={`alert-container mozilla-font ${show ? "show" : ""}`}>
+                    <div 
+                    onClick={() => hideNotification()}
+                    className={`alert-container mozilla-font ${show ? "show" : ""}`}
+                    >
                         <div className={`alert ${show ? "show-alert" : ""} bg-${bgColor}`}>
                             <a className="close-button" onClick={() => onClose && onClose(false)}>
                                 <Icon width={25} height={25} useFor="close" />
@@ -63,7 +68,10 @@ const Notification = ({
             default:
             case "notification": {
                 return (
-                    <div className={`notification mozilla-font ${show || debug ? "show-notification" : ""} bg-${bgColor}`}>
+                    <div 
+                    onClick={() => hideNotification()}
+                    className={`notification mozilla-font ${show || debug ? "show-notification" : ""} bg-${bgColor}`}
+                    >
                         {rnode}
                     </div>
                 )
@@ -79,7 +87,7 @@ const Notification = ({
         setBgColor(type);
         setTextColor(type);
         setRnode(
-            <div className={`flex ${purpose === "notification" ? "row" : "column"}`}>
+            <div className={`text-black flex ${purpose === "notification" ? "row" : "column"}`}>
                 {purpose === "notification" && (
                     <div className="m-r-2 m-t-1">
                         {content?.customIcon}
@@ -95,12 +103,13 @@ const Notification = ({
 
     useEffect(() => {
         if (purpose === "notification") {
-            const _duration = !content.duration || content.duration <= 0 ? 5000 : content.duration;
-            const interval = setInterval(() => {
-                onClose?.(false)
-            }, _duration);
-
-            return () => clearInterval(interval);
+            if (content.duration && content.duration > 0) {
+                const interval = setInterval(() => {
+                    onClose?.(false)
+                }, content.duration);
+    
+                return () => clearInterval(interval);
+            }
         }
     }, [show])
 

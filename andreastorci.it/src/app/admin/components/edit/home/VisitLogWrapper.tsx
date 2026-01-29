@@ -3,7 +3,7 @@ import { BarChart, Bar, YAxis, XAxis, Tooltip, CartesianGrid, Cell, ResponsiveCo
 import GeneralButtonsGroup from "@common/GeneralButtonsGroup";
 import React, { useEffect, useState } from "react";
 import { usePageSelector } from "@providers";
-import { Type, Range } from "@ctypes/index";
+import { Type, Range } from "@ctypes";
 import "@astyle/visitLogsWrapperStyle.css";
 
 type DateType = {
@@ -186,7 +186,7 @@ const VisitLogWrapper = ({
                 if (type === "country") {
                     const aggr = aggregateVisitsByCountry(countries)
                     setData(aggr)
-                    console.log(aggr)
+                    // console.log(aggr)
                 } else {
                     let filtered;
                     if (range === "week") {

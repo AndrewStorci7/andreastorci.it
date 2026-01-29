@@ -1,7 +1,7 @@
 import { MenuPageSelectorProvider, useMenuPageSelector } from "@providers";
 import React, { Children, ReactNode } from "react";
 import Page, { PageProp } from "./subpages/Page";
-import { MenuItem } from "@ctypes/index";
+import { MenuItem } from "@ctypes";
 import Menu from "@common/Menu";
 
 const menuItems = new Map<string, MenuItem>([

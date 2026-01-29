@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes/index";
+import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes";
 import { NextResponse } from "next/server";
+
+const TRANSLATION_URL = process.env.TRANSLATION_URL || ""
 
 interface TranslateProp {
     data: string | Project | Education | Skill | ContactInfo | Experience
@@ -27,12 +29,7 @@ export async function POST(req: Request) {
                 format: "text",
             }
 
-            // const transReq = await fetch("https://libretranslate.com/translate", {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(body)
-            // })
-            const transReq = await fetch("http://localhost:5000/translate", {
+            const transReq = await fetch(TRANSLATION_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
@@ -52,12 +49,7 @@ export async function POST(req: Request) {
                     format: "text"
                 };
 
-                // const response = await fetch("https://libretranslate.com/translate", {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(body)
-                // });
-                const response = await fetch("http://localhost:5000/translate", {
+                const response = await fetch(TRANSLATION_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)

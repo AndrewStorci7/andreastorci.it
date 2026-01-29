@@ -1,4 +1,4 @@
-import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes/index";
+import { Project, Education, Skill, ContactInfo, Experience } from "@ctypes";
 import { NextResponse } from 'next/server';
 
 interface UpdateRouteProp {
@@ -19,9 +19,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'non e\' stato specificato l\'attributo da aggiornare' }, { status: 400 });
         }
 
-
-
         // console.log(data.updateProp)
+        
         // // Italiano
         // const it = await readFile(pathLangs.it, 'utf8')
         // const itJSON = JSON.parse(it)

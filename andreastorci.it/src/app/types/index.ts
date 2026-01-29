@@ -1,5 +1,55 @@
 import { ReactNode, MouseEventHandler } from "react";
 
+export interface User {
+    id: string,
+    name: string,
+    username: string
+}
+
+export interface PersonalData {
+    name: string;
+    surname: string;
+    title: string;
+    bio: string;
+    avatar?: string;
+    contact: ContactInfo;
+    experience: Experience[];
+    education: Education[];
+    projects: Project[];
+    skills: Skill[];
+    languages: {
+        name: string;
+        level: string;
+    }[];
+
+    /// Dati delle sezioni
+    menu_section: MenuItemsName,
+    hero_section: HeroSectionData,
+    skills_section: GeneralData,
+    projects_section: ProjectsSectionData,
+    contacts_section: ContactSectionData,
+    fuckWordpress: GeneralData
+}
+
+export interface ResponseFromAPI {
+    success?: boolean,
+    data?: any,
+    message?: string,
+    error?: string,
+    user?: User
+} 
+
+// export interface ErrorFromAPI {
+//     error?: string,
+//     retryAfter?: number
+// } 
+
+export interface DeleteRouteProp {
+    attribute: 'projects' | 'contact' | 'education' | 'experience' | 'skills' | 'languages',
+    index: number,
+    // lang: string,
+}
+
 export interface GeneralData {
     title: string;
     description: string;
@@ -36,8 +86,8 @@ export interface Education {
 export interface Skill {
     // data: SkillsSectionData;
     name: string;
-    level: number; // 1-5 o 1-10
-    category: 'frontend' | 'backend' | 'design' | 'tools' | 'soft';
+    level: number | ReactNode; // 1-5 o 1-10
+    category: string;
 }
 
 //#endregion Skills Section
@@ -120,3 +170,7 @@ export type MenuItem = {
 
 export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
 export type Languages = typeof LANGUAGES_TYPES[number];
+
+export interface Salam {
+    f: any[] | [] | any | null
+}

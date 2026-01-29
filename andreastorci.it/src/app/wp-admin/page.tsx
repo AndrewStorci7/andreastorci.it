@@ -28,7 +28,7 @@ const Page = () => {
         try {
             const commonInfo = new PersonalInfo(lang.sku);
             const commonData: CommonData | null = await commonInfo.getCommonInfos();
-            console.log(commonData)
+            // console.log(commonData)
             setCommonData(commonData?.fuckWordpress ?? null);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Errore sconosciuto');

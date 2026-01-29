@@ -9,6 +9,7 @@ import {
 import SideBar from "@admin/components/SideBar";
 import "@astyle/globals.css";
 import React from "react";
+import Footer from "@/components/Footer";
 
 const AdminPageContent = () => {
 

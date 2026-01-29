@@ -1,7 +1,7 @@
 import { PersonalData } from "@ctypes/PersonalInfo";
 import { CommonData } from "@ctypes/CommonInfo";
 import { NextResponse } from "next/server";
-import { Languages, LANGUAGES_TYPES } from "@ctypes/index";
+import { Languages, LANGUAGES_TYPES } from "@ctypes";
 import db from "@lib/mongodb";
 
 interface LanguageToFetch {
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         const dataFetched = await PersonalData.findOne({}); 
 
         if (dataFetched) {
-            return NextResponse.json(dataFetched);
+            return NextResponse.json({ success: true, data: dataFetched });
         } else {
             return NextResponse.json({ success: false, message: "Errore nel fetch dei dati, può essere che la lingua richiesta non sia supportata" });
         }

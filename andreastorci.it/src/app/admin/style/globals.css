@@ -1,6 +1,8 @@
 :root {
     --background: #282828;
-    --foreground: #e1e1e1;
+    /* --foreground: #e1e1e1; */
+    --foreground: linear-gradient(-30deg, #041124, #182234);
+    --background-sidebar: linear-gradient(-30deg, #020a16, #0e1726);
     --sage-green: #9CAF88;    /* Verde salvia - tranquillità */
     --soft-blue: #A8C8E1;     /* Azzurro delicato - pace */
     --warm-cream: #F8F6F0;    /* Crema caldo - serenità */
@@ -20,7 +22,9 @@
 
 body {
     /* margin: 5px; */
-    background-color: var(--foreground);
+    /* background-color: var(--foreground); */
+    background: var(--foreground);
+    color: var(--light-sage);
     font-family: "Mozilla Headline", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -29,6 +33,10 @@ body {
 
 .text-white {
     color: var(--light-sage);
+}
+
+.text-black {
+    color: var(--charcoal);
 }
 
 .hidden {
@@ -260,7 +268,7 @@ button {
     border: 1px solid var(--deep-sage);
     border-radius: 10px;
     padding: 5px 7px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     background-color: var(--warm-cream);
     transition: background-color .1s ease,
                 color .1s ease;

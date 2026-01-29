@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
@@ -21,23 +25,67 @@
       }
     ],
     "paths": {
-      "@lib/*": ["./src/lib/*"],
-      "@/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*", "./src/app/admin/components/*"],
-      "@inc/*": ["./src/app/inc/*"],
-      "@style/*": ["./src/app/style/*"],
-      "@ctypes/*": ["./src/app/types/*"],
-      "@admin/*": ["./src/app/admin/*"],
-      "@astyle/*": ["./src/app/admin/style/*"],
-      "@apages/*": ["./src/app/admin/components/pages/*"],
-      "@apages": ["./src/app/admin/components/pages/index.ts"],
-      "@providers": ["./src/app/admin/components/provider/index.ts"],
-      "@data": ["./public/data/personalData.json"],
-      "@common/*": ["./src/app/admin/components/common/*"],
-      "@apicnf": ["./src/app/api/config.ts"]
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@/*": [
+        "./src/app/*"
+      ],
+      "@components/*": [
+        "./src/app/components/*",
+        "./src/app/admin/components/*"
+      ],
+      "@inc/*": [
+        "./src/app/inc/*"
+      ],
+      "@style/*": [
+        "./src/app/style/*"
+      ],
+      "@ctypes/*": [
+        "./src/app/types/*"
+      ],
+      "@ctypes": [
+        "./src/app/types/index.ts"
+      ],
+      "@admin/*": [
+        "./src/app/admin/*"
+      ],
+      "@astyle/*": [
+        "./src/app/admin/style/*"
+      ],
+      "@apages/*": [
+        "./src/app/admin/components/pages/*"
+      ],
+      "@apages": [
+        "./src/app/admin/components/pages/index.ts"
+      ],
+      // "@atable": ["./src/app/admin/components/table/*"],
+      "@providers": [
+        "./src/app/admin/components/provider/index.ts"
+      ],
+      "@data": [
+        "./public/data/personalData.json"
+      ],
+      "@common/*": [
+        "./src/app/admin/components/common/*"
+      ],
+      "@apicnf": [
+        "./src/app/api/config.ts"
+      ]
     },
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/**/*",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

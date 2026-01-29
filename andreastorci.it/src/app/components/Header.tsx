@@ -6,7 +6,7 @@
 
 import React, { JSX, useRef, useCallback, useState, useEffect } from 'react';
 import FlagChooser from '@inc/FlagChooser';
-import { MenuItemsName } from '@ctypes/index';
+import { MenuItemsName } from '@ctypes';
 import Icon from "@inc/Icon";
 import "@style/headerStyle.css";
 import { changeFavicon } from '@/inc/functions';

@@ -7,7 +7,7 @@
 import React from 'react';
 import Section from '@inc/Section';
 import { PersonalData } from '@ctypes/PersonalInfo';
-import { HeroSectionData } from '@ctypes/index';
+import { HeroSectionData } from '@ctypes';
 
 import "@style/heroSection.css";
 
@@ -39,14 +39,6 @@ const HeroSection = ({
                 
                 <div className="hero-visual fade-in">
                     <div className="profile-card">
-                        {/* <div className="profile-image">
-                            {data?.avatar ? (
-                                // <img src={data.avatar} alt={`${data.name} ${data.surname}`} />
-                                null
-                            ) : (
-                                `${data?.name?.[0]}${data?.surname?.[0]}`
-                            )}
-                        </div> */}
                         <div className='color-white desc-on-image'>
                             <h3>{data?.name} {data?.surname}</h3>
                             <p>{data?.title}</p>
