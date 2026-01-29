@@ -11,7 +11,7 @@
 
 .login-button {
     background-color: rgba(53, 150, 229, .5);
-    box-shadow: "0 0 15px rgba(53, 150, 229, 0.4), inset 0 0 10px rgba(53, 150, 229, 0.1)";
+    box-shadow: 0 0 15px rgba(53, 150, 229, 0.4), inset 0 0 10px rgba(53, 150, 229, 0.1);
     border: none;
     font-size: large;
     padding: 10px 20px;

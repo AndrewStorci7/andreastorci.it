@@ -25,7 +25,7 @@ const SideBar = () => {
             <div className="menu gap-max flex column">
                 <div>
                     <label htmlFor="menu-content">Content</label>
-                    <div id="menu-content" className="flex column menu-item menu-content">
+                    <div id="menu-content" className="flex column menu-item menu-content relative">
                         <a id="menu-projects" className="submenu-item menu-projects" onClick={() => setPage('projects', "Progetti")}>
                             Progetti
                         </a>

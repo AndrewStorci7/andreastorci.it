@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from "react"
-import { NotificationType } from "@ctypes/index";
+import { NotificationType } from "@ctypes";
 import Notification from "@common/Notification";
 
 type NotificationsContextType = {

@@ -1,3 +1,8 @@
+:root {
+    --background-menu-buttons: linear-gradient(-45deg, #4C76BD, #104DA8);
+    --box-shadow-menu-buttons: 0 0 15px rgba(16, 77, 168, 0.4), inset 0 0 10px rgba(16, 77, 168, 0.1);
+}
+
 .logo {
     font-family: 'Space Mono', monospace;
     font-size: 1.5rem;
@@ -37,7 +42,8 @@
     /* border-radius: 5px; */
     width: 200px !important;
     /* height: 100vh; */
-    background-color: var(--background);
+    /* background-color: var(--background); */
+    background-image: var(--background-sidebar);
     color: var(--white);
 }
 
@@ -58,11 +64,24 @@
 
 .menu-item > .submenu-item {
     width: 95% !important;
-    border-radius: 4px;
-    padding: 2px 10px;
-    margin: 2px 5px;
-    background-color: var(--sage-green);
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 4px 5px;
+    /* box-shadow: var(--box-shadow-menu-buttons); */
+    box-shadow: 0 0 15px rgba(16, 77, 168, 0.4), inset 0 0 10px rgba(16, 77, 168, 0.1);
+    /* background-color: var(--sage-green); */
+    background-image: var(--background-menu-buttons);
+    background-size: 200% auto;
+    background-position: left center;
     cursor: pointer;
+    transition: background-image .3s ease,
+                margin .3s ease,
+                background-position .3s ease;
+}
+
+.menu-item > .submenu-item:hover {
+    background-position: right center;
+    margin-left: -10px;
 }
 
 .version-footer span {
