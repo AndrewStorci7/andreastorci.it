@@ -124,9 +124,19 @@ export async function middleware(request: NextRequest) {
     );
     response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
+    // response.headers.set(
+    //     'Content-Security-Policy',
+    //     "default-src 'self'; " + 
+    //     "script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none';"
+    // );
     response.headers.set(
         'Content-Security-Policy',
-        "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none';"
+        "default-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " + 
+        "font-src 'self' data: https://fonts.gstatic.com; " +
+        "img-src 'self' data: https://d2908q01vomqb2.cloudfront.net; " +
+        (process.env.NODE_ENV !== "production") ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " : "" + 
+        "object-src 'none';"
     );
 
     if (process.env.NODE_ENV === 'production') {
