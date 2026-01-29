@@ -80,5 +80,5 @@ jobs:
             npm ci
             npm run build
             
-            # Riavvia l'applicazione
-            # pm2 reload andreastorci-app || pm2 start npm --name "andreastorci-app" -- start
+            pm2 reload andreastorci.it || pm2 start npm --name "andreastorci.it" -- start
+            pm2 save
