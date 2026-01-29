@@ -11,13 +11,13 @@ interface TableContextType extends TableProviderInterface {
     setData: (key: string, val: string | number) => void
     indexToDelete: number       // indice dell'elemento da eliminare
     setIndexToDelete: (i: number) => void // setter dell'indice
-    contents: any[] | any       // dati effettivi da visualizzare nella tabella
+    contents: PossibleContent   // dati effettivi da visualizzare nella tabella
     reload: () => void          // ricarica i dati specifici della tabella con attributo impostata con `attribute`
 }
 
 interface TableProviderInterface {
     // apiEndpoint: string     // uri dell'endopint per aggiunta
-    handleSave: (e: Object) => void     // funzione gancio da eseguire in caso di salvataggio
+    handleSave: (e: object) => void     // funzione gancio da eseguire in caso di salvataggio
 
     handleCancel: (...args: unknown[]) => unknown  // funzione gancio da eseguire in caso di annullamento
     data: DataInterface     // oggetto con i dati nuovi del formato chaivi[], valori[]

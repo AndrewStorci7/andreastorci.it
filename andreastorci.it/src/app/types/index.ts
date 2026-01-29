@@ -33,8 +33,7 @@ export interface PersonalData {
 
 export interface ResponseFromAPI {
     success?: boolean,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?: any,
+    data?: PossibleContent | null,
     message?: string,
     error?: string,
     user?: User
@@ -173,7 +172,3 @@ export type PossibleContent =
     | Skill[]
     | Education[]
     | null
-
-export interface Salam {
-    f: any[] | [] | any | null
-}

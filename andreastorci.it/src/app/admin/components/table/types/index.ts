@@ -9,7 +9,7 @@ export interface VoicesProps {
 
 export interface DataInterface {
     dataKeys: string[]
-    dataValues: any[]
+    dataValues: unknown[]
 }
 
 // export interface TableAddNewItemProps {
