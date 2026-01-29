@@ -8,19 +8,14 @@ import { useTable } from './provider/TableContext';
 import PersonalInfo from '@ctypes/PersonalInfo';
 import { useNotification, usePageSelector } from '@providers';
 import Icon from '@inc/Icon';
+import { PossibleContent } from '@ctypes';
 
 interface TableContentProps {
-    content: any[],
-    // settings: VoicesProps[],
-    // handlerForAdd: Function,
-    // showAddRow: boolean
+    content: PossibleContent,
 }
 
 export default function TableContent({
     content,
-    // settings,
-    // handlerForAdd,
-    // showAddRow
 }: TableContentProps) {
 
     const { setLoader } = usePageSelector();
@@ -28,7 +23,6 @@ export default function TableContent({
     const { showNotification, hideNotification } = useNotification();
 
     const [hoveredRow, setHoveredRow] = useState<number>(-1);
-    // const [deleted, setDeleted] = useState<number>(-1);
 
     const handleDelete = async (id: number, proceed: boolean = false) => {
         try {
@@ -74,12 +68,10 @@ export default function TableContent({
         } finally {
             setLoader(false)
         }
-
-        //setData(data.filter(item => item.id !== id));
     };
 
     const renderContents = () => {
-        if (!content || content.length == 0 || !Array.isArray(content)) {
+        if (!content || !Array.isArray(content)) {
             return (
                 <div style={styles.emptyState}>
                     <div style={styles.emptyContent}>
@@ -87,7 +79,6 @@ export default function TableContent({
                             <Plus size={32} />
                         </div>
                         <p style={styles.emptyTitle}>Nessun dato disponibile</p>
-                        {/* <p style={styles.emptySubtitle}>Clicca su "Aggiungi" per iniziare</p> */}
                     </div>
                 </div>
             )
@@ -95,7 +86,7 @@ export default function TableContent({
 
             return content.map((e, i) => {
                 if (!Array.isArray(e))
-                    throw new Error("L'elemento passato non è un array");
+                    throw new Error("L&apos;elemento passato non è un array");
     
                 return (
                     <div 
@@ -103,14 +94,12 @@ export default function TableContent({
                     onMouseEnter={() => setHoveredRow(i)}
                     onMouseLeave={() => setHoveredRow(-1)}
                     style={{
-                        // ...(deleted === i ? styles.deleted : {}),
                         ...styles.tableRow,
                         ...(hoveredRow === i ? styles.tableRowHovered : {}),
                         animation: `slideIn 0.3s ease ${i * 0.1}s backwards`
                     }}
                     >
                         {e.map((val: any, val_i: number) => {
-                            // console.log(val_i, settings[val_i].width);
                             const setting = settings[val_i] ?? {};
                             const rowCol = setStyleCol(setting, "row");
                             
@@ -178,9 +167,7 @@ export default function TableContent({
 
     return (
         <div style={styles.tableBody}>
-            <TableAddNewItem 
-            // show={showAddRow} 
-            />
+            <TableAddNewItem />
             {renderContents()}
         </div>
     )

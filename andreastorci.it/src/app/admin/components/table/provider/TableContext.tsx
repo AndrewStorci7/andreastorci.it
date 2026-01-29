@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 import { LevelSelector } from '@components/edit/skill/LevelSelector'
 import { DataInterface, VoicesProps } from '../types'
 import PersonalInfo from '@ctypes/PersonalInfo'
-import { Project, Salam, Skill } from '@ctypes'
+import { PossibleContent, Project, Salam, Skill } from '@ctypes'
 
 interface TableContextType extends TableProviderInterface {
     showAdd: boolean,           // visibilità della row di aggiunta
@@ -50,7 +50,7 @@ export const TableProvider = ({
 }: Extra) => {
 
     const PersonalData = new PersonalInfo("it-IT"); 
-    const [contents, setContents] = useState<Salam>({ f: [] });
+    const [contents, setContents] = useState<PossibleContent>(null);
     const [index, setIndex] = useState<number>(-1);
     const [showAdd, setShowAdd] = useState<boolean>(false);
     const [newData, setNewData] = useState<DataInterface>({
@@ -103,16 +103,16 @@ export const TableProvider = ({
     }
 
     const reload = async () => {
-        // console.log("Reloading...")
+        // ricaricando i dati
         PersonalData.reload();
 
-        let content: Salam = { f: [] };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let content: PossibleContent | any[] = null;
         switch (attribute) {
             case "projects": {
-                // setContents(PersonalData.getProjects())
-                content.f = await PersonalData.getProjects();
-                content.f = content.f.map((project: Project) => Object.values(project).slice(0, 4))
-                content.f.map((project: Project, i: number) => {
+                content = await PersonalData.getProjects();
+                content = content.map((project: Project) => Object.values(project).slice(0, 4))
+                content.map((project: Project, i: number) => {
                     const values = Object.values(project);
                     const firstThree = values.slice(0, 3);
                     const fourthElement = values[3]; 
@@ -121,23 +121,25 @@ export const TableProvider = ({
                 break;
             }
             case "skills": {
-                content.f = await PersonalData.getSkills();
-                content.f = content.f.map((skill: Skill) => Object.values(skill));
-                content.f.map((e: any[]) => {
-                    let backup = e;
-                    backup[1] = <LevelSelector currentLevel={backup[1]} />
-                    return backup
-                })
+                content = await PersonalData.getSkills();
+                content = content.map((skill: Skill) => Object.values(skill));
+                if (Array.isArray(content)) {
+                    content.map((e: any[]) => {
+                        let backup = e;
+                        backup[1] = <LevelSelector currentLevel={backup[1]} />
+                        return backup
+                    })
+                }
                 break;
             }
             case "contact": {
-                content.f = await PersonalData.getContactInfo();
+                content = await PersonalData.getContactInfo();
                 // TODO
                 break;
             }
         }
 
-        if (content.f && content.f.length > 0) {
+        if (content) {
             setContents(content)
         } else {
             throw new Error(`Errore durante il reload dei dati per ${attribute}`);
@@ -158,7 +160,7 @@ export const TableProvider = ({
             settings,
             handleCancel,
             handleSave: _handleSave,
-            contents: contents.f,
+            contents,
             reload
         }}>
             {children}

@@ -13,6 +13,6 @@ export default function Page({
 }: PageProp) {
 
     // console.log(pageId)
-    if (!show) return null
+    if (!show || !pageId) return null
     return <>{children}</>;
 } 

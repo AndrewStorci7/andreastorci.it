@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNotification } from "@providers";
 import "@astyle/skillsStyle.css"
 import Table from "../table/Table";
@@ -18,7 +18,6 @@ const SkillsPage = () => {
     ];
 
     const handlerForSave = async (newData: Skill) => {
-        // console.log("entrato in save", newData)
         const test = await PersonalData.addOneSkill(newData);
         
         showNotification({
@@ -35,8 +34,6 @@ const SkillsPage = () => {
     }
 
     const handlerForCancel = () => {}
-
-    // useEffect(() => { fetchData() }, []);
 
     return (
         <TableProvider

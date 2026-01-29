@@ -4,7 +4,7 @@ import { useAuth, usePageSelector } from "@providers";
 import { LogOut } from 'lucide-react';
 import "@astyle/sidebarStyle.css";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 
 
 const SideBar = () => {
@@ -12,8 +12,6 @@ const SideBar = () => {
     const { user, logout } = useAuth();
     const { setPage, setLoader } = usePageSelector();
     const currentYear = new Date().getFullYear();
-
-    // const [profileHovered, setHovered] = useState<boolean>(false);
     
     return (
         <div className="full-h sidebar flex column">

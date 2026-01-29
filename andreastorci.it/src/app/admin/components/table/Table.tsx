@@ -5,26 +5,13 @@ import React, { useState } from 'react';
 import { styles } from './style/style';
 import { Plus } from 'lucide-react';
 
-interface TableProps {
-    // voices: VoicesProps[],
-    // contents: any[],
-    // addData?: Function
-}
-
-export default function Table({
-    // voices,
-    // contents,
-    // addData
-}: TableProps) {
+export default function Table() {
 
     const { settings, setShowAdd, contents } = useTable();
 
     const [hovered, setHovered] = useState<boolean>(false);
-    // const [showAdd, setShowAdd] = useState<boolean>(false);
 
     const onClick = () => {
-        // handlerForAdd?.()
-        // setShowAdd(prev => !prev);
         setShowAdd();
     }
 
@@ -46,9 +33,7 @@ export default function Table({
             </button>
             <div style={styles.tableContainer}>
                 <TableHeader voices={settings} />
-                <TableContent content={contents} 
-                // showAddRow={showAdd} 
-                />
+                <TableContent content={contents} />
             </div>
         </>
     )

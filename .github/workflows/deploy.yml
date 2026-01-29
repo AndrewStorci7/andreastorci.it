@@ -1,7 +1,11 @@
 name: Production Release & Security Check
 
+
+
 # Trigger: Questo workflow parte SOLO quando pushi un tag che inizia con 'v'
 on:
+  workflow_dispatch:
+  
   push:
     tags:
       - 'v*'

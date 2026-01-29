@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { styles } from './style/style'
 import { setStyleCol } from './inc/common';
 import { Check, X } from 'lucide-react';
 import { useTable } from './provider/TableContext';
 
-// interface TableAddNewItemProps {
-//     show: boolean
-//     setShow: () => void
-// }
-
-// export default function TableAddNewItem({
-//     show = false,
-//     setShow
-// }: TableAddNewItemProps) {
 export default function TableAddNewItem() {
 
     const { 
@@ -58,9 +49,7 @@ export default function TableAddNewItem() {
             throw new Error("La prop `data` non può essere `null` o vuota")            
     }, [data])
 
-    useEffect(() => {
-        // console.log(data)
-    }, [data])
+    useEffect(() => {}, [data])
 
     return (
         <>

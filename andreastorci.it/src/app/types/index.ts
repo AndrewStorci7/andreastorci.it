@@ -171,6 +171,14 @@ export type MenuItem = {
 export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
 export type Languages = typeof LANGUAGES_TYPES[number];
 
+export type PossibleContent = 
+    | Project[]
+    | ContactInfo
+    | Experience[]
+    | Skill[]
+    | Education[]
+    | null
+
 export interface Salam {
     f: any[] | [] | any | null
 }
