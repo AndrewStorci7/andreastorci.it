@@ -34,8 +34,6 @@ class PersonalInfo extends OOB<PersonalData> {
 
     private async fetchData(): Promise<void> {
         try {
-            
-            // const response = await fetch(`/data/${this.currentLang}.json`);
             const response = await fetch("/api/data", {
                 method: "POST",
                 headers: this.headers,
@@ -46,14 +44,13 @@ class PersonalInfo extends OOB<PersonalData> {
                 throw new Error(`Errore nel caricamento dei dati: ${response.status} ${response.statusText}`);
             }
             
-            // const data: LanguageData<PersonalData> = await response.json();
             const data: ResponseFromAPI = await response.json();
 
             if (!data.success) {
                 throw new Error(`Dati non disponibili per la lingua: ${this.currentLang} - ${data.message || data.error}`);
             }
             
-            this.data = data.data;
+            this.data = data.data as PersonalData;
             this.isLoaded = true;
         } catch (error) {
             throw error;

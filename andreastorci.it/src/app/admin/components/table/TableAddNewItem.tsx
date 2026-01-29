@@ -34,7 +34,7 @@ export default function TableAddNewItem() {
                         <input
                             type="text"
                             placeholder={`Inserisci ${e.name} ...`}
-                            value={data?.dataValues[i]}
+                            value={data?.dataValues[i] as string}
                             onChange={(e) => handleChange(data?.dataKeys[i], e.target.value)}
                             style={styles.input}
                         />
@@ -59,7 +59,7 @@ export default function TableAddNewItem() {
                     <div style={styles.rowCol2}>
                         <button 
                         onClick={() => {
-                            handleSave("")
+                            handleSave({})
                             setShowAdd()
                         }} 
                         style={{ ...styles.actionButton, ...styles.saveButton }}

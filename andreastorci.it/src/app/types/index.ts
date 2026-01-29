@@ -33,7 +33,7 @@ export interface PersonalData {
 
 export interface ResponseFromAPI {
     success?: boolean,
-    data?: PossibleContent | null,
+    data?: PersonalData | PossibleContent | null | undefined,
     message?: string,
     error?: string,
     user?: User
