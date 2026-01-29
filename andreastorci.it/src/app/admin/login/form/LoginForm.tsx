@@ -1,9 +1,9 @@
 'use client'
-import { UserType } from '@components/provider/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@providers'
 import { useState } from 'react'
 import Cookies from 'js-cookie'
+import { User } from '@ctypes'
 
 interface FormData {
     username: string
@@ -43,10 +43,6 @@ const LoginForm = () => {
             const res = await req.json();
             
             if (res.success) {
-                Cookies.set('token', res.token, {
-                    expires: 7,
-                    sameSite: 'strict'
-                });
                 Cookies.set("page", JSON.stringify({ 
                     page: "home", 
                     title: "Homepage" 
@@ -54,7 +50,8 @@ const LoginForm = () => {
                     expires: 7,
                     sameSite: 'strict'
                 })
-                setUser({ surname: formData.username } as UserType)
+                
+                setUser(res.user)
                 router.push('/admin')
             } else {
                 setError(res.error)

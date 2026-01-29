@@ -87,6 +87,7 @@ export async function POST(req: Request) {
         // Genera token JWT
         const token = await generateAuthToken(
             user._id.toString(),
+            user.name,
             username,
             ip
         );
@@ -98,7 +99,8 @@ export async function POST(req: Request) {
             success: true,
             user: {
                 id: user._id.toString(),
-                username: user.name,
+                username: username,
+                name: user.name
             },
         });
     } catch (error) {

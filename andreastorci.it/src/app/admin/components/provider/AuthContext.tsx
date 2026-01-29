@@ -1,17 +1,11 @@
 'use client';
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { ResponseFromAPI } from '@ctypes';
-
-export type UserType = {
-    id: string;
-    name?: string;
-    surname: string;
-};
+import { ResponseFromAPI, User } from '@ctypes';
 
 type AuthContextType = {
-    user: UserType | null;
-    setUser: (user: UserType) => void;
+    user: User | null;
+    setUser: (user: User) => void;
     logout: () => void;
     error: string | null,
     setError: (err: string | null) => void
@@ -28,8 +22,9 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    
     const router = useRouter();
-    const [user, setUser] = useState<UserType | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -46,11 +41,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
             if (response.ok) {
                 const data: ResponseFromAPI = await response.json();
-                if (!data.success) {
-                    setError(data.error || "")
-                } else {
-                    setUser(data.data.user);
+                console.log(data)
+                if (data.user) {
+                    setUser(data.user || null);
                 }
+                // if (!data.success) {
+                //     setError(data.error || "")
+                // } else {
+                //     setUser(data.user || null);
+                // }
             } else {
                 setError("Errore durante la validazione dei token di accesso! Token scaduto o errato")
                 router.push('/admin/login');

@@ -1,5 +1,11 @@
 import { ReactNode, MouseEventHandler } from "react";
 
+export interface User {
+    id: string,
+    name: string,
+    username: string
+}
+
 export interface PersonalData {
     name: string;
     surname: string;
@@ -29,7 +35,8 @@ export interface ResponseFromAPI {
     success?: boolean,
     data?: any,
     message?: string,
-    error?: string 
+    error?: string,
+    user?: User
 } 
 
 // export interface ErrorFromAPI {

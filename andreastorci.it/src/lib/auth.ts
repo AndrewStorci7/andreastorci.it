@@ -7,6 +7,7 @@ const TOKEN_SECRET = new TextEncoder().encode(
 
 export interface AppJWTPayload extends JWTPayload {
     userId: string;
+    fullName: string;
     username: string;
     ip: string;
     // iat: number;
@@ -15,11 +16,13 @@ export interface AppJWTPayload extends JWTPayload {
 
 export async function generateAuthToken(
     userId: string,
+    fullName: string,
     username: string,
     ip: string
 ): Promise<string> {
     const token = await new SignJWT({
         userId,
+        fullName,
         username,
         ip,
     })
