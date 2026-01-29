@@ -1,7 +1,5 @@
 name: Production Release & Security Check
 
-
-
 # Trigger: Questo workflow parte SOLO quando pushi un tag che inizia con 'v'
 on:
   workflow_dispatch:
@@ -45,6 +43,10 @@ jobs:
       - name: Build di Prova
         # Assicura che il progetto compili senza errori Next.js/TS
         run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ secrets.MONGODB_DB }}
+          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
 
   # JOB 2: Continuous Deployment (Rilascio)
   # Parte solo se il Job 1 ha avuto successo
