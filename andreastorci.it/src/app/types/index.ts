@@ -12,7 +12,7 @@ export interface PersonalData {
     title: string;
     bio: string;
     avatar?: string;
-    contact: ContactInfo[];
+    contact: ContactInfo;
     experience: Experience[];
     education: Education[];
     projects: Project[];
@@ -86,7 +86,7 @@ export interface Education {
 export interface Skill {
     // data: SkillsSectionData;
     name: string;
-    level: number; // 1-5 o 1-10
+    level: number | ReactNode; // 1-5 o 1-10
     category: string;
 }
 
@@ -172,5 +172,5 @@ export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
 export type Languages = typeof LANGUAGES_TYPES[number];
 
 export interface Salam {
-    f: any[] | []
+    f: any[] | [] | any | null
 }

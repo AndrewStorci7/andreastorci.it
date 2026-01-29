@@ -7,7 +7,7 @@ export async function POST() {
 
         return NextResponse.json({ success: true });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return NextResponse.json({ error: 'Verification failed' }, { status: 500 });
     }
 }

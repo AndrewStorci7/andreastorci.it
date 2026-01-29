@@ -3,7 +3,7 @@
  * @author Andrea Storci aka dreean
  */
 'use client'
-import { Project, ProjectsSectionData } from '@ctypes/index';
+import { Project, ProjectsSectionData } from '@ctypes';
 // import { PersonalData } from '@ctypes/PersonalInfo';
 import "@style/projectsSectionStyle.css";
 import Section from '@inc/Section';

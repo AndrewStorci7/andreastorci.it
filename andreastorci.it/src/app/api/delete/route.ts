@@ -14,14 +14,16 @@ export async function POST(req: Request) {
             // dati personali
             const pd = await db.collection<PersonalData>(lang).findOne({});
             // attributo da aggiornare 
-            // const attrToUpdate: Project[] | Skill[] | ContactInfo[] | Education[] | Experience[] = pd ? pd[data.attribute] : [];
+            // const attrToUpdate: Project[] | Skill[] | ContactInfo | Education[] | Experience[] = pd ? pd[data.attribute] : [];
             const attrToUpdate = pd ? pd[data.attribute] : null;
 
             if (attrToUpdate) {
-                const updatedArray = attrToUpdate.filter((_: any, i: number) => i !== data.index)
-                await db.collection(lang).updateOne({}, {
-                    $set: { [data.attribute]: updatedArray }
-                })
+                if (Array.isArray(attrToUpdate)) {
+                    const updatedArray = attrToUpdate.filter((_: any, i: number) => i !== data.index)
+                    await db.collection(lang).updateOne({}, {
+                        $set: { [data.attribute]: updatedArray }
+                    })
+                }
             } else {
                 return NextResponse.json(
                     {

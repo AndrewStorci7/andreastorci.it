@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'non e\' stato specificato l\'attributo da aggiornare' }, { status: 400 });
         }
 
-        console.log(data.updateProp)
+        // console.log(data.updateProp)
         
         // // Italiano
         // const it = await readFile(pathLangs.it, 'utf8')

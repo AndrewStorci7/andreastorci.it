@@ -23,7 +23,7 @@ const MultipleSelect = ({
 
     useEffect(() => {
         onChange?.(selectedItems)
-        console.log(selectedItems)
+        // console.log(selectedItems)
     }, [selectedItems])
 
     return (

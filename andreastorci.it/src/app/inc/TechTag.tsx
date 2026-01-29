@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "@style/techTagStyle.css";
 
 interface TechTagProps {
-    key: string | number,
+    // key: string | number,
     type: string 
 }
 
 const Techtag: React.FC<TechTagProps> = ({
-    key,
+    // key,
     type
 }) => {
 
@@ -19,10 +19,7 @@ const Techtag: React.FC<TechTagProps> = ({
     }, [type])
 
     return (
-        <div 
-            key={key} 
-            className={style}
-        >
+        <div className={style}>
             {/* <div className="flex center relative row"> */}
                 {type}
             {/* </div> */}

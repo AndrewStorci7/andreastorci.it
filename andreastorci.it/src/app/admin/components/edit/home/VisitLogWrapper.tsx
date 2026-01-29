@@ -186,7 +186,7 @@ const VisitLogWrapper = ({
                 if (type === "country") {
                     const aggr = aggregateVisitsByCountry(countries)
                     setData(aggr)
-                    console.log(aggr)
+                    // console.log(aggr)
                 } else {
                     let filtered;
                     if (range === "week") {

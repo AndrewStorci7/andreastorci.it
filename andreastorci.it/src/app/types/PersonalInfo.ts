@@ -70,7 +70,7 @@ class PersonalInfo extends OOB<PersonalData> {
         return this.data;
     }
 
-    async getContactInfo(): Promise<ContactInfo[]> {
+    async getContactInfo(): Promise<ContactInfo> {
         const data = await this.getPersonalData();
         return data.contact;
     }

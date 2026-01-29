@@ -6,12 +6,20 @@ const PROTECTED_PATHS = [
     '/api/update',
     '/api/delete',
     '/api/translate',
+    '/api/admin',
+    '/api/update',
+    '/api/data/addSkill'
 ];
 
 // Endpoint con rate limiting stringente
 const RATE_LIMITED_PATHS = [
     '/api/translate',
     '/api/news',
+    '/api/auth/login',
+    '/api/delete',
+    '/api/update',
+    '/api/data',
+    '/api/data/addSkill'
 ];
 
 // Rate limiting storage
@@ -122,21 +130,41 @@ export async function middleware(request: NextRequest) {
         'Referrer-Policy',
         'strict-origin-when-cross-origin'
     );
-    response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
 
     // response.headers.set(
     //     'Content-Security-Policy',
     //     "default-src 'self'; " + 
-    //     "script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none';"
+    //     "script-src 'self' 'unsafe-inline'; " + 
+    //     "style-src 'self' 'unsafe-inline'; " + 
+    //     "img-src 'self' data:; " + 
+    //     "font-src 'self' data:; " + 
+    //     "object-src 'none';"
     // );
+
+    const cspHeader = [
+        "default-src 'self'",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' data: https://fonts.gstatic.com",
+        "img-src 'self' data: https://d2908q01vomqb2.cloudfront.net",
+        process.env.NODE_ENV !== "production"
+            ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+            : "script-src 'self' 'unsafe-inline'", 
+        "object-src 'none'",
+        "base-uri 'self'",   
+        "form-action 'self'",    
+        "frame-ancestors 'none'" 
+    ].join('; ');
+
     response.headers.set(
-        'Content-Security-Policy',
-        "default-src 'self'; " +
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " + 
-        "font-src 'self' data: https://fonts.gstatic.com; " +
-        "img-src 'self' data: https://d2908q01vomqb2.cloudfront.net; " +
-        (process.env.NODE_ENV !== "production") ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " : "" + 
-        "object-src 'none';"
+        'Content-Security-Policy', cspHeader
+        // "default-src 'self'; " +
+        // "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " + 
+        // "font-src 'self' data: https://fonts.gstatic.com; " +
+        // "img-src 'self' data: https://d2908q01vomqb2.cloudfront.net; " +
+        // (process.env.NODE_ENV !== "production") ? 
+        // "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " : "" + 
+        // "object-src 'none';"
     );
 
     if (process.env.NODE_ENV === 'production') {

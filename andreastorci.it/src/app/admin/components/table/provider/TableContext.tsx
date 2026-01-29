@@ -103,7 +103,7 @@ export const TableProvider = ({
     }
 
     const reload = async () => {
-        console.log("Reloading...")
+        // console.log("Reloading...")
         PersonalData.reload();
 
         let content: Salam = { f: [] };
@@ -112,7 +112,7 @@ export const TableProvider = ({
                 // setContents(PersonalData.getProjects())
                 content.f = await PersonalData.getProjects();
                 content.f = content.f.map((project: Project) => Object.values(project).slice(0, 4))
-                content.f.map((project, i) => {
+                content.f.map((project: Project, i: number) => {
                     const values = Object.values(project);
                     const firstThree = values.slice(0, 3);
                     const fourthElement = values[3]; 
@@ -123,12 +123,8 @@ export const TableProvider = ({
             case "skills": {
                 content.f = await PersonalData.getSkills();
                 content.f = content.f.map((skill: Skill) => Object.values(skill));
-                content.f.map((e) => {
+                content.f.map((e: any[]) => {
                     let backup = e;
-                    // const tmp = backup[1];
-                    // backup[1] = backup[2];
-                    // backup[2] = tmp;
-                    // backup[2] = <LevelSelector currentLevel={backup[2]} />
                     backup[1] = <LevelSelector currentLevel={backup[1]} />
                     return backup
                 })
