@@ -10,6 +10,11 @@ jobs:
   # JOB 1: Continuous Integration (Sicurezza e Qualità)
   security-and-quality:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./andreastorci.it
+
     steps:
       - name: Checkout del codice
         uses: actions/checkout@v4
@@ -19,6 +24,7 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
+          cache-dependency-path: andreastorci.it/package-lock.json
 
       - name: Installazione Dipendenze (Clean Install)
         # 'npm ci' è più sicuro di 'install': usa esattamente le versioni del package-lock.json
