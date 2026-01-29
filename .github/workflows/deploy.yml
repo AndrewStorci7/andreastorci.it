@@ -1,0 +1,66 @@
+name: Production Release & Security Check
+
+# Trigger: Questo workflow parte SOLO quando pushi un tag che inizia con 'v'
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  # JOB 1: Continuous Integration (Sicurezza e Qualità)
+  security-and-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Installazione Dipendenze (Clean Install)
+        # 'npm ci' è più sicuro di 'install': usa esattamente le versioni del package-lock.json
+        run: npm ci
+
+      - name: Security Audit (Dipendenze)
+        # Fallisce se ci sono vulnerabilità critiche nelle librerie installate
+        run: npm audit --audit-level=high
+
+      - name: Linting & Static Analysis
+        # Verifica regole ESLint (importante per la tua config eslint.config.mjs)
+        run: npm run lint
+
+      - name: Build di Prova
+        # Assicura che il progetto compili senza errori Next.js/TS
+        run: npm run build
+
+  # JOB 2: Continuous Deployment (Rilascio)
+  # Parte solo se il Job 1 ha avuto successo
+  deploy:
+    needs: security-and-quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          # script_stop: true ferma tutto se un comando fallisce
+          script_stop: true 
+          script: |
+            cd /var/www/andreastorci.it
+            git pull origin main
+            cd andreastorci.it
+            
+            npm ci
+            npm run build
+            
+            # Riavvia l'applicazione
+            # pm2 reload andreastorci-app || pm2 start npm --name "andreastorci-app" -- start
