@@ -33,21 +33,16 @@ export interface PersonalData {
 
 export interface ResponseFromAPI {
     success?: boolean,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data?: any,
     message?: string,
     error?: string,
     user?: User
 } 
 
-// export interface ErrorFromAPI {
-//     error?: string,
-//     retryAfter?: number
-// } 
-
 export interface DeleteRouteProp {
     attribute: 'projects' | 'contact' | 'education' | 'experience' | 'skills' | 'languages',
     index: number,
-    // lang: string,
 }
 
 export interface GeneralData {

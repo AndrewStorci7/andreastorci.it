@@ -99,7 +99,7 @@ export async function middleware(request: NextRequest) {
 
         // Limiti specifici per endpoint
         let maxRequests = 30;
-        let windowMs = 60000; // 1 minuto
+        const windowMs = 60000; // 1 minuto
 
         if (pathname.startsWith('/api/translate')) {
             maxRequests = 10;

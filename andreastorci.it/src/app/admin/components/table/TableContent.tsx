@@ -39,7 +39,7 @@ export default function TableContent({
                     message: (deleteResult.success) ? 
                         <span>Elemento eliminato <span className='bold'>{id}</span></span> :
                         <span>
-                            Non è stato possibile eliminare l'elemento <span className='bold'>{id}</span> <br/>
+                            Non è stato possibile eliminare l&apos;elemento <span className='bold'>{id}</span> <br/>
                             Errore: <span style={{ fontSize: "10px", fontStyle: "italic" }}>
                                 {deleteResult.error}
                             </span>
@@ -86,7 +86,7 @@ export default function TableContent({
 
             return content.map((e, i) => {
                 if (!Array.isArray(e))
-                    throw new Error("L&apos;elemento passato non è un array");
+                    throw new Error("L'elemento passato non è un array");
     
                 return (
                     <div 
@@ -99,6 +99,7 @@ export default function TableContent({
                         animation: `slideIn 0.3s ease ${i * 0.1}s backwards`
                     }}
                     >
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {e.map((val: any, val_i: number) => {
                             const setting = settings[val_i] ?? {};
                             const rowCol = setStyleCol(setting, "row");

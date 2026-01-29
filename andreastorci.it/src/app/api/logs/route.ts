@@ -1,25 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import db, { ObjectId, type LogsTable } from "@lib/mongodb";
-import { Type, Range } from "@ctypes";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { Type, Range } from "@ctypes";
 
 const ipapi_secret = process.env.IPAPI_SECRET;
 const collection = db.collection<LogsTable>("logs");
-
-// type SingleVisit = {
-//     total: number,
-//     days: Date[]
-// }
-
-// type FilteredLogsType = {
-//     visits: SingleVisit,
-//     visits_country: Map<string, number> | null
-// }
-
-// type LogsType = {
-//     alltime_visits: FilteredLogsType,
-// }
 
 /**
  * Update data of logs
@@ -65,31 +50,6 @@ export async function POST() {
         return NextResponse.json({ error: 'Errore interno durante l\'update del log file' }, { status: 500 });
     }
 }
-
-// const fetchData = (type: Type, range: Range, log: LogsTable) => {
-//     try {
-//         if (!LOG_TYPES.includes(type)) {
-//             throw new Error(`type non valido. Può essere solo uno di: ${LOG_TYPES.join(', ')}`)
-//         }
-//         if (!LOG_RANGES.includes(range)) {
-//             throw new Error(`type non valido. Può essere solo uno di: ${LOG_RANGES.join(', ')}`)
-//         }
-
-//         switch (range) {
-//             default:
-//             case 'alltime':
-//                 return type === 'visits' ? 
-//                     log.alltime_visits.visits : 
-//                     { 
-//                         total: log.alltime_visits.visits.total, 
-//                         countries: log.alltime_visits.visits_country,
-//                     };
-//         }
-
-//     } catch (err) {
-//         throw new Error(`Qualcosa e' andato storto nel fetch dei dati di log: ${err}`)
-//     }
-// }
 
 export async function GET(req: Request) {
     try {

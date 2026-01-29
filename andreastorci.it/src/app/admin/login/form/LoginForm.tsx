@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@providers'
 import { useState } from 'react'
 import Cookies from 'js-cookie'
-import { User } from '@ctypes'
 
 interface FormData {
     username: string
@@ -81,20 +80,11 @@ const LoginForm = () => {
                     justifyContent: 'center'
                 }}>
                     <div>
-                        <h3>Errore nell'autenticazione</h3>
+                        <h3>Errore nell&apos;autenticazione</h3>
                         <p>{error}</p>
                     </div>
                 </div>
             )}
-            {/* {error && (
-                <div className="rounded-md bg-red-50 p-4">
-                    <div className="flex">
-                        <div className="ml-3">
-                            <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                        </div>
-                    </div>
-                </div>
-            )} */}
             
             <div className="text-center space-y-2">
                 <div className='space-x-2'>

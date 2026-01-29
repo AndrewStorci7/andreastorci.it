@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { LevelSelector } from '@components/edit/skill/LevelSelector'
-import { DataInterface, VoicesProps } from '../types'
-import PersonalInfo from '@ctypes/PersonalInfo'
-import { PossibleContent, Project, Salam, Skill } from '@ctypes'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { LevelSelector } from '@components/edit/skill/LevelSelector';
+import { PossibleContent, Project, Skill } from '@ctypes';
+import { DataInterface, VoicesProps } from '../types';
+import PersonalInfo from '@ctypes/PersonalInfo';
 
 interface TableContextType extends TableProviderInterface {
     showAdd: boolean,           // visibilità della row di aggiunta
@@ -18,7 +18,8 @@ interface TableContextType extends TableProviderInterface {
 interface TableProviderInterface {
     // apiEndpoint: string     // uri dell'endopint per aggiunta
     handleSave: (e: Object) => void     // funzione gancio da eseguire in caso di salvataggio
-    handleCancel: Function  // funzione gancio da eseguire in caso di annullamento
+
+    handleCancel: (...args: unknown[]) => unknown  // funzione gancio da eseguire in caso di annullamento
     data: DataInterface     // oggetto con i dati nuovi del formato chaivi[], valori[]
     settings: VoicesProps[] // impostazioni di visualizzazione dei vari campi
     // attributo della tabella gestita
@@ -40,7 +41,6 @@ export const useTable = () => {
 }
 
 export const TableProvider = ({
-    // apiEndpoint,
     handleSave,
     handleCancel,
     data,
@@ -59,8 +59,6 @@ export const TableProvider = ({
                     data.dataKeys.map(() => "") :
                     data.dataValues
     });
-
-    // const settingsMemo = useMemo(() => settings, []);
 
     useEffect(() => {
         if (settings.length == 0)
@@ -112,7 +110,7 @@ export const TableProvider = ({
             case "projects": {
                 content = await PersonalData.getProjects();
                 content = content.map((project: Project) => Object.values(project).slice(0, 4))
-                content.map((project: Project, i: number) => {
+                content.map((project: Project) => {
                     const values = Object.values(project);
                     const firstThree = values.slice(0, 3);
                     const fourthElement = values[3]; 
@@ -124,8 +122,9 @@ export const TableProvider = ({
                 content = await PersonalData.getSkills();
                 content = content.map((skill: Skill) => Object.values(skill));
                 if (Array.isArray(content)) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     content.map((e: any[]) => {
-                        let backup = e;
+                        const backup = e;
                         backup[1] = <LevelSelector currentLevel={backup[1]} />
                         return backup
                     })
@@ -156,7 +155,6 @@ export const TableProvider = ({
             attribute,
             indexToDelete: index,
             setIndexToDelete: setIndex,
-            // settings: settingsMemo,
             settings,
             handleCancel,
             handleSave: _handleSave,

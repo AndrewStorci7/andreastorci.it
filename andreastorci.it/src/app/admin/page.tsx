@@ -1,20 +1,13 @@
 'use client'
+import { AuthProvider, NotificationProvider, PageSelectorProvider, usePageSelector } from "@providers";
 import PageSelector from "@admin/components/PageSelector";
-import { 
-    AuthProvider, 
-    NotificationProvider, 
-    PageSelectorProvider, 
-    usePageSelector 
-} from "@providers";
 import SideBar from "@admin/components/SideBar";
 import "@astyle/globals.css";
 import React from "react";
-import Footer from "@/components/Footer";
 
 const AdminPageContent = () => {
 
     const { currentPage } = usePageSelector()
-    // console.log(currentState)
 
     return (    
         <div className="h-fit-content flex row">
@@ -22,10 +15,7 @@ const AdminPageContent = () => {
                 <SideBar />
             </div>
             <div className="right-side pt-20">
-                <PageSelector 
-                    // onChange={setCurrentPage} 
-                    page={currentPage.page} 
-                />
+                <PageSelector page={currentPage.page} />
             </div>
         </div>
     )

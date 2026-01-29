@@ -15,8 +15,8 @@ export interface DataInterface {
 // export interface TableAddNewItemProps {
 //     show?: boolean,
 //     data?: DataInterface
-//     handleSave?: Function,
-//     handleCancel?: Function,
+//     handleSave?: (...args: any[]) => any,
+//     handleCancel?: (...args: any[]) => any,
 //     settings: VoicesProps[]
 // }
 

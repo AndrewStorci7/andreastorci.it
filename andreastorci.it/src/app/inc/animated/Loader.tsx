@@ -13,30 +13,6 @@ interface LoadingOverlayProps {
 }
 
 const LoadingOverlay = ({ show }: LoadingOverlayProps) => {
-
-    // const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    // useEffect(() => {
-    //     const handleLoad = () => {
-    //         setTimeout(() => {
-    //             setIsLoading(false);
-    //             onLoadingComplete?.();
-    //         }, 1000);
-    //     };
-
-    //     if (document.readyState === 'complete') {
-    //         handleLoad();
-    //     } else {
-    //         window.addEventListener('load', handleLoad);
-    //     }
-
-    //     return () => {
-    //         window.removeEventListener('load', handleLoad);
-    //     };
-    // }, [onLoadingComplete]);
-
-    // if (!isLoading) return null;
-
     return (
         <div className={`loading-overlay ${!show ? 'hidden' : ''}`}>
             <div className="loader"></div>
