@@ -75,7 +75,7 @@ jobs:
             cd /var/www/andreastorci.it/andreastorci.it
             npm install
             npm run build
-            git pull origin main
+            git pull origin master
             
             npm ci
             npm run build
