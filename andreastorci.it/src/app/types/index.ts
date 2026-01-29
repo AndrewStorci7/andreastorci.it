@@ -6,7 +6,7 @@ export interface PersonalData {
     title: string;
     bio: string;
     avatar?: string;
-    contact: ContactInfo;
+    contact: ContactInfo[];
     experience: Experience[];
     education: Education[];
     projects: Project[];
@@ -36,6 +36,12 @@ export interface ResponseFromAPI {
 //     error?: string,
 //     retryAfter?: number
 // } 
+
+export interface DeleteRouteProp {
+    attribute: 'projects' | 'contact' | 'education' | 'experience' | 'skills' | 'languages',
+    index: number,
+    // lang: string,
+}
 
 export interface GeneralData {
     title: string;
@@ -157,3 +163,7 @@ export type MenuItem = {
 
 export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
 export type Languages = typeof LANGUAGES_TYPES[number];
+
+export interface Salam {
+    f: any[] | []
+}

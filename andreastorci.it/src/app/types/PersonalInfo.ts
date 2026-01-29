@@ -5,7 +5,8 @@ import type {
     ContactInfo,
     Experience,
     PersonalData,
-    ResponseFromAPI
+    ResponseFromAPI,
+    DeleteRouteProp
 } from "@ctypes";
 import OOB from "@ctypes/OOB";
 import { CommonData } from "@ctypes/CommonInfo";
@@ -69,7 +70,7 @@ class PersonalInfo extends OOB<PersonalData> {
         return this.data;
     }
 
-    async getContactInfo(): Promise<ContactInfo> {
+    async getContactInfo(): Promise<ContactInfo[]> {
         const data = await this.getPersonalData();
         return data.contact;
     }
@@ -90,7 +91,7 @@ class PersonalInfo extends OOB<PersonalData> {
     }
 
     async addOneSkill(newData: Skill): Promise<ResponseFromAPI> {
-        console.log(newData)
+        // console.log(newData)
         const update = await fetch("/api/data/addSkill", {
             method: 'POST',
             headers: this.headers,
@@ -98,7 +99,7 @@ class PersonalInfo extends OOB<PersonalData> {
         }); 
 
         const resp = await update.json();
-        console.log(resp)
+        // console.log(resp)
 
         return resp
     }
@@ -135,6 +136,19 @@ class PersonalInfo extends OOB<PersonalData> {
         }
 
         return commonData;
+    }
+
+    async delete({ attribute, index }: DeleteRouteProp): Promise<ResponseFromAPI> {
+        
+        const resp = await fetch("/api/delete", {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify({ attribute, index })
+        });
+
+        const json = await resp.json();
+        
+        return json;
     }
 
     async reload(): Promise<void> {
