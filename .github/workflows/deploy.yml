@@ -65,13 +65,17 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          
+
           # script_stop: true ferma tutto se un comando fallisce
           script_stop: true 
           script: |
-            cd /var/www/andreastorci.it
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use --lts
+            cd /var/www/andreastorci.it/andreastorci.it
+            npm install
+            npm run build
             git pull origin main
-            cd andreastorci.it
             
             npm ci
             npm run build
