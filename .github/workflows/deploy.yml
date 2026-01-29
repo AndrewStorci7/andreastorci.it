@@ -64,6 +64,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          
           # script_stop: true ferma tutto se un comando fallisce
           script_stop: true 
           script: |
