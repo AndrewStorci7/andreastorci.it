@@ -3,7 +3,7 @@ import { BarChart, Bar, YAxis, XAxis, Tooltip, CartesianGrid, Cell, ResponsiveCo
 import GeneralButtonsGroup from "@common/GeneralButtonsGroup";
 import React, { useEffect, useState } from "react";
 import { usePageSelector } from "@providers";
-import { Type, Range } from "@ctypes/index";
+import { Type, Range } from "@ctypes";
 import "@astyle/visitLogsWrapperStyle.css";
 
 type DateType = {

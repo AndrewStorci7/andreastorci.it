@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { VoicesProps } from './types';
+import React, { useState } from 'react'
 import "./style/main.css"
 import { styles } from './style/style';
 import { Trash2, Edit2, Plus, Ellipsis } from 'lucide-react';
 import TableAddNewItem from './TableAddNewItem';
 import { setStyleCol } from './inc/common';
 import { useTable } from './provider/TableContext';
+import PersonalInfo from '@ctypes/PersonalInfo';
+import { useNotification, usePageSelector } from '@providers';
+import Icon from '@inc/Icon';
 
 interface TableContentProps {
     content: any[],
@@ -21,11 +23,58 @@ export default function TableContent({
     // showAddRow
 }: TableContentProps) {
 
-    const { settings } = useTable();
+    const { setLoader } = usePageSelector();
+    const { settings, attribute, reload } = useTable();
+    const { showNotification, hideNotification } = useNotification();
 
     const [hoveredRow, setHoveredRow] = useState<number>(-1);
+    // const [deleted, setDeleted] = useState<number>(-1);
 
-    const handleDelete = (id: number) => {
+    const handleDelete = async (id: number, proceed: boolean = false) => {
+        try {
+            if (proceed) {
+                const pd = new PersonalInfo("it-IT");
+                const deleteResult = await pd.delete({ attribute: attribute, index: id });
+                
+                hideNotification()
+                
+                showNotification({
+                    title: (deleteResult.success) ? 
+                        "Eliminazione avvenuta con successo!" :
+                        "Errore durante l'elimina",
+                    message: (deleteResult.success) ? 
+                        <span>Elemento eliminato <span className='bold'>{id}</span></span> :
+                        <span>
+                            Non è stato possibile eliminare l'elemento <span className='bold'>{id}</span> <br/>
+                            Errore: <span style={{ fontSize: "10px", fontStyle: "italic" }}>
+                                {deleteResult.error}
+                            </span>
+                        </span>,
+                    purpose: "notification",
+                    type: (deleteResult.success) ? "completed" : "error",
+                    duration: 6000,
+                    customIcon: <Icon useFor="announce" width={25} height={25} />,
+                });
+        
+                reload();
+            } else {
+                showNotification({
+                    title: "Sei sicuro di voler eliminare il progetto ?",
+                    message: <p>Stai per eliminare il progetto <br/>Vuoi Procedere ?</p>,
+                    purpose: "alert",
+                    type: "error",
+                    buttons: [
+                        { text: "Annulla", type: "default", onClick: () => hideNotification() },
+                        { text: "Elimina", type: "cancel", onClick: () => handleDelete(id, true) },
+                    ]
+                })
+            }
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setLoader(false)
+        }
+
         //setData(data.filter(item => item.id !== id));
     };
 
@@ -54,6 +103,7 @@ export default function TableContent({
                     onMouseEnter={() => setHoveredRow(i)}
                     onMouseLeave={() => setHoveredRow(-1)}
                     style={{
+                        // ...(deleted === i ? styles.deleted : {}),
                         ...styles.tableRow,
                         ...(hoveredRow === i ? styles.tableRowHovered : {}),
                         animation: `slideIn 0.3s ease ${i * 0.1}s backwards`
@@ -110,7 +160,7 @@ export default function TableContent({
                                 <Edit2 size={18} />
                             </button>
                             <button
-                                onClick={() => handleDelete(i)}
+                                onClick={() => handleDelete(i, )}
                                 style={{
                                     ...styles.actionButton,
                                     ...styles.deleteButton,

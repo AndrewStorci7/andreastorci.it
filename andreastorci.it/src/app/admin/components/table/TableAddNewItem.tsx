@@ -80,7 +80,13 @@ export default function TableAddNewItem() {
                 <div style={{ ...styles.tableRow, ...styles.addingRow }}>
                     {renderInputs()}
                     <div style={styles.rowCol2}>
-                        <button onClick={() => handleSave("")} style={{ ...styles.actionButton, ...styles.saveButton }}>
+                        <button 
+                        onClick={() => {
+                            handleSave("")
+                            setShowAdd()
+                        }} 
+                        style={{ ...styles.actionButton, ...styles.saveButton }}
+                        >
                             <Check size={18} />
                         </button>
                         <button onClick={handleCancel} style={{ ...styles.actionButton, ...styles.cancelButton }}>

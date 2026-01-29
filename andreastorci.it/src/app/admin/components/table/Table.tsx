@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { VoicesProps } from './types'
-import TableHeader from './TableHeader';
+import { useTable } from './provider/TableContext';
 import TableContent from './TableContent';
+import TableHeader from './TableHeader';
+import React, { useState } from 'react';
 import { styles } from './style/style';
 import { Plus } from 'lucide-react';
-import { useTable } from './provider/TableContext';
 
 interface TableProps {
     // voices: VoicesProps[],
-    contents: any[],
+    // contents: any[],
     // addData?: Function
 }
 
 export default function Table({
     // voices,
-    contents,
+    // contents,
     // addData
 }: TableProps) {
 
-    const { settings, setShowAdd } = useTable();
+    const { settings, setShowAdd, contents } = useTable();
 
     const [hovered, setHovered] = useState<boolean>(false);
     // const [showAdd, setShowAdd] = useState<boolean>(false);
