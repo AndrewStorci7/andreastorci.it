@@ -24,23 +24,11 @@ export default function TableAddNewItem() {
         setShowAdd 
     } = useTable();
 
-    // const [newData, setNewData] = useState<DataInterface>({
-    //     dataKeys: data?.dataKeys || [],
-    //     dataValues: data?.dataValues || []
-    // });
-
-    // const setDatasFromProp = () => {
-    //     if (!data || data.dataKeys.length === 0)
-    //         throw new Error("La prop `data` non può essere `null` o vuota")
-    // } 
-
     const handleCancel = () => {
-        // setData({ data })
         setShowAdd()
     }
 
     const handleChange = (key: string, value: string | number) => {
-        // console.log(key)
         setData(key, value)
     }
 
