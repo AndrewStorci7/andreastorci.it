@@ -1,8 +1,23 @@
 .visit-log-wrapper {
-    padding: 10px 10px 10px 0 !important;
+    padding: 10px 10px 0 0 !important;
+    color: var(--charcoal);
+}
+
+.visit-logs-header {
+    margin-bottom: 20px;
 }
 
 .title-wrapper {
     margin-left: 20px;
     margin-bottom: 10px;
+}
+
+.error-message {
+    border-radius: 20px;
+    padding: 8px 10px;
+    /* box-shadow: ; */
+    background-color: var(--cancel);
+    color: var(--white);
+    font-size: 12px;
+    width: fit-content;
 }

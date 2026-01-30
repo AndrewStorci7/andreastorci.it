@@ -1,10 +1,14 @@
 'use client'
 import { BarChart, Bar, YAxis, XAxis, Tooltip, CartesianGrid, Cell, ResponsiveContainer } from "recharts";
 import GeneralButtonsGroup from "@common/GeneralButtonsGroup";
+import { Type, Range, ResponseFromAPI } from "@ctypes";
+import { MessageSquareWarning } from 'lucide-react';
 import React, { useEffect, useState } from "react";
 import { usePageSelector } from "@providers";
-import { Type, Range } from "@ctypes";
 import "@astyle/visitLogsWrapperStyle.css";
+import { LogsTable } from "@lib/mongodb";
+import Cookies from "js-cookie";
+// import { cookies } from "next/headers";
 
 type DateType = {
     country: string;
@@ -64,11 +68,9 @@ const getCurrentWeekDates = () => {
 
 const filterVisitsThisWeek = (days: string[]) => {
     const { start, end } = getCurrentWeekDates();
-    // console.log(start, end)
 
     return days.filter((isoDate) => {
         const visitDate = new Date(isoDate);
-        // console.log(visitDate >= start && visitDate <= end)
         return visitDate >= start && visitDate <= end;
     });
 };
@@ -79,6 +81,7 @@ const fillMissingDates = (range: Range, visitData: { date: string; count: number
     }
 
     switch (range) {
+        default:
         case "week": {
             const { start } = getCurrentWeekDates(); // lunedì
             const dates: string[] = [];
@@ -131,13 +134,12 @@ const coloredBar = (data: DateType[] | null) => {
 }
 
 const tickFormatterForDays = (dateStr: string, range: Range) => {
-    // console.log(dateStr, range)
     switch (range) {
+        default:
         case "week": {
             const date = new Date(dateStr);
             return date.toLocaleDateString("en-US", { weekday: "short" }); // "Mon", "Tue", etc.
         }
-        default:
         case "month": {
             const [, , day] = dateStr.split("-");
             return parseInt(day, 10).toString();
@@ -171,22 +173,25 @@ const VisitLogWrapper = ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [data, setData] = useState<any[]>()
     const [total, setTotal] = useState<number>()
-    // const data = aggregateVisitsByDay([]);
+    const [msgIpapiSaturated, setMsgIpapiSaturated] = useState<boolean>(false);
 
     const fetchData = async (range: Range) => {
-        // console.log(_range)
         try {
             setLoader(true);
             const req = await fetch(`/api/logs?type=${_type}&range=${_range}`) 
-            const res = await req.json()
-            const countries = res.data.alltime_visits.visits_country;
-            const visits = res.data.alltime_visits.visits; 
+            const res: ResponseFromAPI = await req.json()
+
+            // controllo api ipapi saturata
+            setMsgIpapiSaturated(res.ipapiSaturated ?? false);
+
+            const alltimeVisits = res.data as LogsTable;
+            const countries = alltimeVisits.alltime_visits.visits_country;
+            const visits = alltimeVisits.alltime_visits.visits; 
 
             if (res.success) {
                 if (type === "country") {
                     const aggr = aggregateVisitsByCountry(countries)
                     setData(aggr)
-                    // console.log(aggr)
                 } else {
                     let filtered;
                     if (range === "week") {
@@ -220,8 +225,19 @@ const VisitLogWrapper = ({
 
     return (
         <div className={`container visit-log-wrapper ${className}`}>
-            <div className="flex space-between">
-                <h3 className="title-wrapper">{title}</h3>
+            
+            {/* Header */}
+            <div className="flex space-between visit-logs-header">
+                <div className="flex column title-wrapper">
+                    <h3>{title}</h3>
+                    {/* Messaggi d'errore */}
+                    {msgIpapiSaturated && 
+                        (<div className="error-message flex center gap-4">
+                            <MessageSquareWarning width={15} height={15} />
+                            <p>Chiamate all&apos;API <span className="bold">ipapi</span>, saturate!</p>
+                        </div>)
+                    }
+                </div>
                 {type === "visits" && (
                     <div>
                         <GeneralButtonsGroup defaultSelected={"month"} onChange={(e: Range) => handleChange(e)} buttonsValues={["week", "month", "!year", "!alltime"]} />
@@ -229,7 +245,9 @@ const VisitLogWrapper = ({
                     </div>
                 )}
             </div>
-            <ResponsiveContainer width="100%" height="100%" style={{ paddingBottom: 40 }}>
+
+            {/* Chart */}
+            <ResponsiveContainer width={width} height={height}>
                 <BarChart width={width} height={height} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis 

@@ -1,6 +1,6 @@
 import db, { ObjectId, type LogsTable } from "@lib/mongodb";
+import { headers, cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { Type, Range } from "@ctypes";
 
 const ipapi_secret = process.env.IPAPI_SECRET;
@@ -21,6 +21,10 @@ export async function POST() {
         const now = new Date().toISOString();
 
         let body;
+        
+        // controllo che l'API non si saturata
+        setIpapiSatCookie(data.error?.code === 104);
+
         if (country === undefined || !country) {
             body = {
                 $inc: { 
@@ -43,7 +47,10 @@ export async function POST() {
             body
         );
 
-        return NextResponse.json({ success: true, data: updateLog })
+        return NextResponse.json({ 
+            success: true,
+            data: updateLog 
+        })
 
     } catch (err) {
         console.error(err);
@@ -66,8 +73,14 @@ export async function GET(req: Request) {
             { _id: new ObjectId(process.env.LOGS_ID) }
         );
 
+        const checkIpapiStatus = (await cookies()).get("ipapi_saturated");
+
         if (data) {
-            return NextResponse.json({ success: true, data: data });
+            return NextResponse.json({ 
+                success: true, 
+                data: data,
+                ipapiSaturated: checkIpapiStatus
+            });
         } else {
             return NextResponse.json({ success: false, error: "Qualcosa e' andato storto" })
         }
@@ -76,4 +89,14 @@ export async function GET(req: Request) {
         console.error(err);
         return NextResponse.json({ error: 'Errore interno durante l\'update del log file' }, { status: 500 });
     }
+}
+
+async function setIpapiSatCookie(val: boolean) {
+    (await cookies()).set('ipapi_saturated', String(val), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 24, // 24 ore
+        path: '/',
+    });
 }

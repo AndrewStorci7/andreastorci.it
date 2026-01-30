@@ -1,4 +1,5 @@
 import { ReactNode, MouseEventHandler } from "react";
+import { LogsTable } from "./DBTypes";
 
 export interface User {
     id: string,
@@ -33,10 +34,11 @@ export interface PersonalData {
 
 export interface ResponseFromAPI {
     success?: boolean,
-    data?: PersonalData | PossibleContent | null | undefined,
+    data?: PersonalData | PossibleContent | LogsTable | null | undefined,
     message?: string,
     error?: string,
-    user?: User
+    user?: User,
+    ipapiSaturated?: boolean,
 } 
 
 export interface DeleteRouteProp {
