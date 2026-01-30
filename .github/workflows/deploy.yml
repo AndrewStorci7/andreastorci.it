@@ -73,12 +73,11 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm use --lts
             cd /var/www/andreastorci.it/andreastorci.it
-            npm install
-            npm run build
             git pull origin master
             
             npm ci
             npm run build
             
-            pm2 reload andreastorci.it || pm2 start npm --name "andreastorci.it" -- start
+            pm2 delete andreastorci.it || true
+            pm2 start npm --name "andreastorci.it" -- start
             pm2 save
