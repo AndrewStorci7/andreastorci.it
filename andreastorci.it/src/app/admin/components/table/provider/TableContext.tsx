@@ -94,7 +94,7 @@ export const TableProvider = ({
             newData.dataKeys.map((key, i) => [key, newData.dataValues[i]])
         );
 
-        handleSave?.(finalDataParsed)
+        handleSave?.(finalDataParsed);
         
         // dopo il salvataggio 
         reload();
@@ -109,13 +109,14 @@ export const TableProvider = ({
         switch (attribute) {
             case "projects": {
                 content = await PersonalData.getProjects();
-                content = content.map((project: Project) => Object.values(project).slice(0, 4))
-                content.map((project: Project) => {
-                    const values = Object.values(project);
-                    const firstThree = values.slice(0, 3);
-                    const fourthElement = values[3]; 
-                    return [...firstThree, fourthElement];
-                });
+                // content = content.map((project: Project) => Object.values(project).slice(0, 4))
+                content = content.map((project: Project) => Object.values(project))
+                // content.map((project: Project) => {
+                //     const values = Object.values(project);
+                //     const firstThree = values.slice(0, 3);
+                //     const fourthElement = values[3]; 
+                //     return [...firstThree, fourthElement];
+                // });
                 break;
             }
             case "skills": {

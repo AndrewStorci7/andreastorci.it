@@ -88,7 +88,6 @@ class PersonalInfo extends OOB<PersonalData> {
     }
 
     async addOneSkill(newData: Skill): Promise<ResponseFromAPI> {
-        // console.log(newData)
         const update = await fetch("/api/data/addSkill", {
             method: 'POST',
             headers: this.headers,
@@ -96,7 +95,18 @@ class PersonalInfo extends OOB<PersonalData> {
         }); 
 
         const resp = await update.json();
-        // console.log(resp)
+
+        return resp
+    }
+
+    async addOneProject(newData: Project): Promise<ResponseFromAPI> {
+        const update = await fetch("/api/data/addProject", {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(newData)
+        }); 
+
+        const resp = await update.json();
 
         return resp
     }

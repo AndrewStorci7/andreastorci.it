@@ -34,7 +34,7 @@ export default function TableHeader({
     return (
         <div style={styles.tableHeader}>
             {renderVoices()}
-            <div style={styles.headerCol2}><p>Azioni</p></div>
+            <div style={styles.headerCol1}><p>Azioni</p></div>
         </div>
     )
 }

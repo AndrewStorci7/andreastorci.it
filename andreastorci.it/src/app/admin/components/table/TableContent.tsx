@@ -141,7 +141,7 @@ export default function TableContent({
                             </div>)
                         })}
     
-                        <div style={styles.rowCol2}>
+                        <div style={styles.rowCol1}>
                             <button style={{
                                 ...styles.actionButton,
                                 ...styles.editButton,

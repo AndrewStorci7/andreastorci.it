@@ -42,6 +42,29 @@ export default function TableAddNewItem() {
                 </div>
             )
         })
+
+        // return data.dataKeys.map((key: string, i: number) => { 
+        //     let index: number = i;
+        //     if (settings.length <= i)
+        //         index -= settings.length
+        //     console.log(index);
+        //     const rowCol = setStyleCol(settings[index], "row");
+
+        //     return (
+        //         <div key={i} style={rowCol}>
+        //             <div style={(i == 0) ? styles.cellWithIndicator : {}}>
+        //                 <div style={(i == 0) ? styles.indicatorNew : {}} />
+        //                 <input
+        //                     type="text"
+        //                     placeholder={`Inserisci ${key} ...`}
+        //                     value={data?.dataValues[i] as string}
+        //                     onChange={(e) => handleChange(key, e.target.value)}
+        //                     style={styles.input}
+        //                 />
+        //             </div>
+        //         </div>
+        //     )
+        // })
     }
 
     useEffect(() => {
@@ -56,7 +79,7 @@ export default function TableAddNewItem() {
             {showAdd && (
                 <div style={{ ...styles.tableRow, ...styles.addingRow }}>
                     {renderInputs()}
-                    <div style={styles.rowCol2}>
+                    <div style={styles.rowCol1}>
                         <button 
                         onClick={() => {
                             handleSave({})
