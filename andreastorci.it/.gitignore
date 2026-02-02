@@ -47,3 +47,5 @@ next-env.d.ts
 /public/data/
 
 /src/app/api/test
+
+srv-translation/lt*
