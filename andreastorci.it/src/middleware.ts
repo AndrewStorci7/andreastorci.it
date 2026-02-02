@@ -7,7 +7,6 @@ const PROTECTED_PATHS = [
     '/api/delete',
     '/api/translate',
     '/api/admin',
-    '/api/update',
     '/api/data/addSkill',
     '/api/files/upload',
     '/api/files/remove'
@@ -22,6 +21,12 @@ const RATE_LIMITED_PATHS = [
     '/api/update',
     '/api/data',
     '/api/data/addSkill',
+    '/api/files/upload',
+    '/api/files/remove'
+];
+
+// Rate limiting più severo per operazioni sui file
+const FILE_OPERATION_PATHS = [
     '/api/files/upload',
     '/api/files/remove'
 ];
@@ -56,6 +61,7 @@ function checkRateLimit(
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
+    // Protezione autenticazione
     const isProtected = PROTECTED_PATHS.some((path) =>
         pathname.startsWith(path)
     );
@@ -64,6 +70,7 @@ export async function middleware(request: NextRequest) {
         const token = request.cookies.get('auth_token')?.value;
 
         if (!token) {
+            console.warn(`[AUTH] Tentativo accesso non autorizzato: ${pathname}`);
             return NextResponse.json(
                 { error: 'Authentication required' },
                 { status: 401 }
@@ -73,6 +80,7 @@ export async function middleware(request: NextRequest) {
         const payload = await verifyAuthToken(token);
 
         if (!payload) {
+            console.warn(`[AUTH] Token non valido per: ${pathname}`);
             return NextResponse.json(
                 { error: 'Invalid or expired token' },
                 { status: 401 }
@@ -92,16 +100,19 @@ export async function middleware(request: NextRequest) {
         return response;
     }
 
+    // Rate limiting
     const isRateLimited = RATE_LIMITED_PATHS.some((path) =>
         pathname.startsWith(path)
     );
 
     if (isRateLimited) {
         const ip =
-            request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+            request.headers.get('x-forwarded-for')?.split(',')[0] || 
+            request.headers.get('x-real-ip') ||
+            'unknown';
+        
         const rateLimitKey = `${pathname}:${ip}`;
 
-        // Limiti specifici per endpoint
         let maxRequests = 30;
         const windowMs = 60000; // 1 minuto
 
@@ -109,7 +120,16 @@ export async function middleware(request: NextRequest) {
             maxRequests = 10;
         }
 
+        const isFileOperation = FILE_OPERATION_PATHS.some((path) =>
+            pathname.startsWith(path)
+        );
+
+        if (isFileOperation) {
+            maxRequests = 20;
+        }
+
         if (!checkRateLimit(rateLimitKey, maxRequests, windowMs)) {
+            console.warn(`[RATE_LIMIT] Superato limite per IP ${ip} su ${pathname}`);
             return NextResponse.json(
                 {
                     error: 'Rate limit exceeded',
@@ -119,14 +139,41 @@ export async function middleware(request: NextRequest) {
                     status: 429,
                     headers: {
                         'Retry-After': '60',
+                        'X-RateLimit-Limit': maxRequests.toString(),
+                        'X-RateLimit-Remaining': '0',
                     },
                 }
             );
         }
     }
 
+    // Validazione Content-Type per upload
+    if (pathname === '/api/files/upload' && request.method === 'POST') {
+        const contentType = request.headers.get('content-type') || '';
+        if (!contentType.includes('multipart/form-data')) {
+            console.warn(`[SECURITY] Content-Type non valido per upload: ${contentType}`);
+            return NextResponse.json(
+                { error: 'Invalid Content-Type for file upload' },
+                { status: 400 }
+            );
+        }
+    }
+
+    // Validazione Content-Type per delete
+    if (pathname === '/api/files/remove' && request.method === 'POST') {
+        const contentType = request.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+            console.warn(`[SECURITY] Content-Type non valido per delete: ${contentType}`);
+            return NextResponse.json(
+                { error: 'Invalid Content-Type. Expected application/json' },
+                { status: 400 }
+            );
+        }
+    }
+
     const response = NextResponse.next();
 
+    // Security headers
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('X-Frame-Options', 'DENY');
     response.headers.set('X-XSS-Protection', '1; mode=block');
@@ -134,18 +181,12 @@ export async function middleware(request: NextRequest) {
         'Referrer-Policy',
         'strict-origin-when-cross-origin'
     );
-    response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
+    response.headers.set(
+        'Permissions-Policy', 
+        'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+    );
 
-    // response.headers.set(
-    //     'Content-Security-Policy',
-    //     "default-src 'self'; " + 
-    //     "script-src 'self' 'unsafe-inline'; " + 
-    //     "style-src 'self' 'unsafe-inline'; " + 
-    //     "img-src 'self' data:; " + 
-    //     "font-src 'self' data:; " + 
-    //     "object-src 'none';"
-    // );
-
+    // Content Security Policy
     const cspHeader = [
         "default-src 'self'",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
@@ -160,21 +201,13 @@ export async function middleware(request: NextRequest) {
         "frame-ancestors 'none'" 
     ].join('; ');
 
-    response.headers.set(
-        'Content-Security-Policy', cspHeader
-        // "default-src 'self'; " +
-        // "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " + 
-        // "font-src 'self' data: https://fonts.gstatic.com; " +
-        // "img-src 'self' data: https://d2908q01vomqb2.cloudfront.net; " +
-        // (process.env.NODE_ENV !== "production") ? 
-        // "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " : "" + 
-        // "object-src 'none';"
-    );
+    response.headers.set('Content-Security-Policy', cspHeader);
 
+    // HSTS in produzione
     if (process.env.NODE_ENV === 'production') {
         response.headers.set(
             'Strict-Transport-Security',
-            'max-age=31536000; includeSubDomains'
+            'max-age=31536000; includeSubDomains; preload'
         );
     }
 
@@ -182,9 +215,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    // matcher: [
-    //     '/((?!_next/static|_next/image|favicon.ico).*)',
-    // ],
     matcher: [
         '/api/:path*',
         '/((?!_next/static|_next/image|favicon.ico).*)',

@@ -30,6 +30,9 @@ body {
     font-style: normal;
     font-variation-settings: "wdth" 100;
 }
+.text-consola {
+    font-family: "Consolas", monospace;
+}
 
 .text-white {
     color: var(--light-sage);

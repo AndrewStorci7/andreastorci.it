@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import LoadingOverlay from '@inc/animated/Loader';
 import Cookies from 'js-cookie';
-import { jsonParseCookie } from '@common/functions';
+import { jsonParseCookie } from '@/admin/inc/functions';
 
 type PageState = {
     page: string;

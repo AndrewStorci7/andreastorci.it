@@ -44,7 +44,7 @@ const Notification = ({
             case "alert": {
                 return (
                     <div 
-                    onClick={() => hideNotification()}
+                    // onClick={() => hideNotification()}
                     className={`alert-container mozilla-font ${show ? "show" : ""}`}
                     >
                         <div className={`alert ${show ? "show-alert" : ""} bg-${bgColor}`}>

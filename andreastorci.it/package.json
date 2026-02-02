@@ -11,6 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "clamscan": "^2.4.0",
     "framer-motion": "^11.15.0",
     "isomorphic-dompurify": "^2.30.0",
     "jose": "^6.1.3",

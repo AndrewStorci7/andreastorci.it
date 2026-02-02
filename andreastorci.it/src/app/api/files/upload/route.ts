@@ -1,52 +1,103 @@
-import { writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir, access } from "fs/promises";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import path from "path";
+import { z } from "zod";
 
-const allowedTypes = ['image/jpeg', 'image/png'];
+const allowedTypes = ['image/jpeg', 'image/png'] as const;
+const allowedExtensions = ['jpg', 'jpeg', 'png'] as const;
+
+// Schema di validazione
+const UploadSchema = z.object({
+    file: z.custom<File>((val) => val instanceof File, {
+        message: "File non valido"
+    })
+});
+
+// Validazione dimensione e tipo
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 export async function POST(req: Request) {
     try {
         const formData = await req.formData();
-        const file = formData.get('file') as File;
+        const file = formData.get('file');
 
-        if (!file) {
-            return NextResponse.json({ error: "Nessun file fornito" }, { status: 400 });
+        // Validazione con Zod
+        const validation = UploadSchema.safeParse({ file });
+        if (!validation.success) {
+            return NextResponse.json({ 
+                error: `File non valido, ${validation.error}`,
+            }, { status: 400 });
         }
 
-        if (!allowedTypes.includes(file.type)) {
-            return NextResponse.json({ error: "Tipo di file non supportato" }, { status: 400 });
+        const validFile = validation.data.file;
+
+        // Controllo tipo MIME
+        if (!allowedTypes.includes(validFile.type as any)) {
+            return NextResponse.json({ 
+                error: "Tipo di file non supportato. Ammessi solo: " + allowedTypes.join(", ")
+            }, { status: 400 });
         }
 
-        // masismo 5MB
-        if (file.size > 5 * 1024 * 1024) {
-            return NextResponse.json({ error: "File troppo grande" }, { status: 400 });
+        // Controllo dimensione
+        if (validFile.size > MAX_FILE_SIZE) {
+            return NextResponse.json({ 
+                error: `File troppo grande. Massimo ${MAX_FILE_SIZE / 1024 / 1024}MB` 
+            }, { status: 400 });
         }
 
-        const fileExtension = file.name.split('.').pop();
+        // Estrazione e validazione estensione
+        const fileExtension = validFile.name.split('.').pop()?.toLowerCase();
+        if (!fileExtension || !allowedExtensions.includes(fileExtension as any)) {
+            return NextResponse.json({ 
+                error: "Estensione non valida. Ammesse solo: " + allowedExtensions.join(", ")
+            }, { status: 400 });
+        }
+
+        // Generazione nome sicuro
         const safeName = `${crypto.randomUUID()}.${fileExtension}`;
         
-        // Definiamo un percorso FUORI dalla cartella del codice, se possibile
+        // Verifica UPLOAD_DIR
         const uploadDir = process.env.UPLOAD_DIR;
         if (!uploadDir) {
-            return NextResponse.json({ error: "Variabile d'ambiente `UPLOAD_DIR` non definita" }, { status: 500 });
+            console.error("UPLOAD_DIR non definita");
+            return NextResponse.json({ 
+                error: "Configurazione server non valida" 
+            }, { status: 500 });
         }
 
-        await mkdir(uploadDir, { recursive: true });
+        // Verifica che UPLOAD_DIR sia un percorso assoluto e sicuro
+        const resolvedUploadDir = path.resolve(uploadDir);
+        
+        // Crea directory se non esiste
+        await mkdir(resolvedUploadDir, { recursive: true });
 
-        const bytes = await file.arrayBuffer();
+        const filePath = path.join(resolvedUploadDir, safeName);
+
+        // Verifica che il file finale sia effettivamente dentro UPLOAD_DIR
+        if (!filePath.startsWith(resolvedUploadDir + path.sep)) {
+            console.error("Tentativo di path traversal:", filePath);
+            return NextResponse.json({ 
+                error: "Percorso file non valido" 
+            }, { status: 400 });
+        }
+
+        // Scrivi file
+        const bytes = await validFile.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const filePath = path.join(uploadDir, safeName);
+        await writeFile(filePath, buffer, { mode: 0o644 });
 
-        await writeFile(filePath, buffer);
+        console.log(`[UPLOAD SUCCESS] File: ${safeName}, Size: ${validFile.size}, Type: ${validFile.type}`);
 
-        // Salva il riferimento nel DB (es. il nome del file o l'URL relativo)
-        // db.collection('projects').updateOne(...)
-
-        return NextResponse.json({ success: true, fileName: safeName });
+        return NextResponse.json({ 
+            success: true, 
+            fileName: safeName 
+        });
 
     } catch (err) {
-        console.error(err)
-        return NextResponse.json({ error: `Errore interno durante il fetch dei dati: ${err}` }, { status: 500 });
+        console.error("[UPLOAD ERROR]", err);
+        return NextResponse.json({ 
+            error: "Errore interno del server" 
+        }, { status: 500 });
     }
 }

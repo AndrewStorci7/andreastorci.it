@@ -9,7 +9,7 @@ import PersonalInfo from '@ctypes/PersonalInfo';
 import { useNotification, usePageSelector } from '@providers';
 import Icon from '@inc/Icon';
 import { PossibleContent } from '@ctypes';
-import { removeUpload } from '@/admin/inc/manageFiles';
+import { removeUpload } from '@admin/inc/manageFiles';
 
 interface TableContentProps {
     content: PossibleContent,
@@ -80,6 +80,31 @@ export default function TableContent({
         }
     };
 
+    const handleSeeMoreClick = (content: string | string[], title: string) => {
+        
+        let contentJSX: React.ReactNode | null = content;
+        if (Array.isArray(content)) {
+            contentJSX = (
+                <ul style={{ paddingLeft: "20px" }}>
+                    {content.map((e: string, i: number) => (
+                        <li key={i}>{e}</li>
+                    ))}
+                </ul>
+            )
+        }
+
+        showNotification({
+            title,
+            message: (contentJSX) ?? <p className='text-consola text-sm'>{content}</p>,
+            purpose: "alert",
+            type: "info",
+            buttons: [
+                { text: "Annulla", type: "default", onClick: () => hideNotification() },
+                // { text: "Procedi", type: "confirm", onClick: () => hideNotification() },
+            ]
+        })
+    };
+
     const renderContents = () => {
         if (!content || !Array.isArray(content)) {
             return (
@@ -114,6 +139,7 @@ export default function TableContent({
                             const setting = settings[val_i] ?? {};
                             const rowCol = setStyleCol(setting, "row");
                             const showContent = setting.show ?? true;
+                            const title = setting.name;
                             
                             let textSliced = val;
                             let sliced = false;
@@ -142,7 +168,7 @@ export default function TableContent({
                                         </span>
                                     ) : (
                                         <button
-                                        className='' 
+                                        onClick={() => handleSeeMoreClick(val, title)}
                                         style={{
                                             ...styles.actionButton,
                                             ...styles.seeMoreButton,
@@ -154,6 +180,7 @@ export default function TableContent({
                                     {sliced && (
                                         <button
                                         className='absolute see-more-button' 
+                                        onClick={() => handleSeeMoreClick(val, title)}
                                         style={{
                                             ...styles.actionButtonMini,
                                             ...styles.seeMoreButton,

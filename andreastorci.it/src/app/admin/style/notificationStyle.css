@@ -70,8 +70,11 @@
 .alert {
     opacity: 0;
     height: fit-content;
-    width: 350px;
-    min-height: 200px;
+    /* width: 350px; */
+    width: fit-content;
+    max-width: 450px;
+    height: auto;
+    /* min-height: 200px; */
     padding: 15px;
     padding-top: 23px;
     /* background-color: aqua; */
@@ -94,9 +97,11 @@
 }
 
 .title {
+    padding-right: 30px;
     font-size: large;
     font-weight: 600;
 }
+
 .title > span {
     margin: 0 5px;
 }
@@ -130,12 +135,14 @@
 }
 
 .button-container {
-    width: calc(100% - 30px);
+    /* width: calc(100% - 30px); */
     display: flex;
-    position: absolute;
-    bottom: 15;
+    /* position: absolute; */
+    /* bottom: 15; */
     justify-content: space-evenly;
+    margin-top: 10px;
 }
+
 .button-container button {
     padding: 4px 20px;
     margin-bottom: 0;
