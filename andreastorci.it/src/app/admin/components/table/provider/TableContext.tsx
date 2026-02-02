@@ -78,12 +78,6 @@ export const TableProvider = ({
 
     useEffect(() => {}, [contents])
 
-    // useEffect(() => {
-    //     if (!isUploading) {
-    //         _handleSave();
-    //     }
-    // }, [isUploading])
-
     const handleSetUpload = (val: string | null) => {
         setIsUploading(val);
     }
@@ -109,7 +103,7 @@ export const TableProvider = ({
 
     const _handleSave = async () => {
 
-        setLoader(true);
+        setLoader(true, "Caricando i file ...");
         let finalFileName = null;
 
         const fileIndex = newData.dataKeys.findIndex(key => key === 'image' || key === 'file');
@@ -127,6 +121,7 @@ export const TableProvider = ({
             }
         }
 
+        setLoader(true, "Salvando i dati ...");
         const finalDataParsed = Object.fromEntries(
             newData.dataKeys.map((key, i) => {
                 if ((key === 'image' || key === 'file') && finalFileName) {
@@ -137,6 +132,7 @@ export const TableProvider = ({
         );
 
         try {
+            setLoader(true, "Traduzione in corso ...");
             await handleSave?.(finalDataParsed);
             reload(); 
             setShowAdd(false);

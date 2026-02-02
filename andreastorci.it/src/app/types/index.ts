@@ -1,6 +1,25 @@
 import { ReactNode, MouseEventHandler } from "react";
 import { LogsTable } from "./DBTypes";
 
+export interface LanguageToTranslate {
+    lang?: Languages
+}
+
+export interface ResponseFromAPI {
+    success?: boolean,
+    data?: PersonalData | PossibleContent | LogsTable | null | undefined,
+    translation?: PossibleContent | string,
+    message?: string,
+    error?: string,
+    user?: User,
+    ipapiSaturated?: boolean,
+} 
+
+export interface DeleteRouteProp {
+    attribute: Attributes,
+    index: number,
+}
+
 export interface User {
     id: string,
     name: string,
@@ -18,10 +37,7 @@ export interface PersonalData {
     education: Education[];
     projects: Project[];
     skills: Skill[];
-    languages: {
-        name: string;
-        level: string;
-    }[];
+    languages: LanguagesAttr[];
 
     /// Dati delle sezioni
     menu_section: MenuItemsName,
@@ -30,20 +46,6 @@ export interface PersonalData {
     projects_section: ProjectsSectionData,
     contacts_section: ContactSectionData,
     fuckWordpress: GeneralData
-}
-
-export interface ResponseFromAPI {
-    success?: boolean,
-    data?: PersonalData | PossibleContent | LogsTable | null | undefined,
-    message?: string,
-    error?: string,
-    user?: User,
-    ipapiSaturated?: boolean,
-} 
-
-export interface DeleteRouteProp {
-    attribute: 'projects' | 'contact' | 'education' | 'experience' | 'skills' | 'languages',
-    index: number,
 }
 
 export interface GeneralData {
@@ -71,7 +73,7 @@ export interface Experience {
     technologies?: string[];
 }
 
-export interface Education {
+export interface Education extends LanguageToTranslate {
     degree: string;
     institution: string;
     year: string;
@@ -79,7 +81,7 @@ export interface Education {
 }
 
 //#region Skills Section
-export interface Skill {
+export interface Skill extends LanguageToTranslate{
     // data: SkillsSectionData;
     name: string;
     level: number | ReactNode; // 1-5 o 1-10
@@ -93,7 +95,7 @@ export interface ProjectsSectionData extends GeneralData {
     button: string;
 }
 
-export interface Project {
+export interface Project extends LanguageToTranslate{
     // data: ProjectsSectionData;
     name: string;
     type: string;
@@ -112,7 +114,7 @@ export interface ContactSectionData extends GeneralData {
     button: string;
 }
 
-export interface ContactInfo {
+export interface ContactInfo extends LanguageToTranslate{
     // data: ContactSectionData;
     email: string;
     phone?: string;
@@ -124,6 +126,11 @@ export interface ContactInfo {
 }
 
 //#endregion Contact Section
+
+export interface LanguagesAttr extends LanguageToTranslate {
+    name: string;
+    level: string;
+}
 
 export interface LanguageData<Type> {
     [key: string]: Type;
@@ -167,10 +174,23 @@ export type MenuItem = {
 export const LANGUAGES_TYPES = ['it-IT', 'es-ES', 'en-GB'] as const;
 export type Languages = typeof LANGUAGES_TYPES[number];
 
+export const ATTRIBUTES = ['projects', 'contact', 'education', 'experience', 'skills', 'languages'] as const;
+export type Attributes = typeof ATTRIBUTES[number];
+
+export const SKIP_TRANS_ATTRIBUTES_PROJECT = new Set(['name', 'technologies', 'link', 'image', 'sku']);
+export const SKIP_TRANS_ATTRIBUTES_SKILL = new Set(['name', 'level']);
+
 export type PossibleContent = 
     | Project[]
+    | Project
     | ContactInfo
     | Experience[]
+    | Experience
     | Skill[]
+    | Skill
     | Education[]
+    | Education
+    | LanguagesAttr[]
+    | LanguagesAttr
+    | string
     | null

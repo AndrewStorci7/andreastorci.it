@@ -1,11 +1,10 @@
-import { PersonalData, Skill } from "@ctypes";
+import { LANGUAGES_TYPES, PersonalData, Skill } from "@ctypes";
 import { NextResponse } from "next/server";
 import db from "@lib/mongodb";
 import z from "zod"
 
-const collection = db.collection<PersonalData>("it-IT");
-
 const SkillSchema = z.object({
+    lang: z.enum(LANGUAGES_TYPES, "Lingua non valida"),
     name: z.string().max(50),
     level: z.coerce.number().max(10),
     category: z.string().max(50),
@@ -20,8 +19,11 @@ export async function POST(req: Request) {
         if (!check.success)
             return NextResponse.json({ success: false, message: "Non è stato possibile aggiungere alcun dato" }, { status: 400 })
 
+        const collection = db.collection<PersonalData>(check.data.lang);
+        const { lang, ...realData } = check.data;
+
         await collection.updateOne({}, {
-            $push: { skills: check.data }
+            $push: { skills: realData }
         });
 
         return NextResponse.json({ success: true })

@@ -1,28 +1,105 @@
+import { unlink, access, stat } from "fs/promises";
 import { NextResponse } from "next/server";
-import { unlink } from "fs/promises";
+import { constants } from "fs";
 import path from "path";
+import { z } from "zod";
 
-const folderUpload = process.env.UPLOAD_DIR || path.join(process.cwd(), 'uploads'); 
+const allowedExtensions = ['jpg', 'jpeg', 'png'] as const;
+
+// Schema di validazione
+const DeleteSchema = z.object({
+    filename: z.string()
+        .min(1, "Nome file richiesto")
+        .max(255, "Nome file troppo lungo")
+        .regex(
+            /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\.(jpg|jpeg|png)$/i,
+            "Nome file non valido. Formato atteso: UUID.estensione"
+        )
+});
 
 export async function POST(req: Request) {
     try {
         const request = await req.json();
 
-        if (!request.filename)
-            return NextResponse.json({ error: "Non specificato il nome del file" }, { status: 400 })
+        // Validazione con Zod
+        const validation = DeleteSchema.safeParse(request);
+        if (!validation.success) {
+            return NextResponse.json({ 
+                error: `"Richiesta non valida, ${validation.error}`,
+            }, { status: 400 });
+        }
 
-        const { filename } = request;
+        const { filename } = validation.data;
 
+        // Verifica UPLOAD_DIR
+        const uploadDir = process.env.UPLOAD_DIR;
+        if (!uploadDir) {
+            console.error("UPLOAD_DIR non definita");
+            return NextResponse.json({ 
+                error: "Configurazione server non valida" 
+            }, { status: 500 });
+        }
+
+        const resolvedUploadDir = path.resolve(uploadDir);
+
+        // Usa basename per prevenire path traversal
         const safeFileName = path.basename(filename);
-        const filePath = path.join(folderUpload, safeFileName);
+        
+        // Doppio controllo: il nome deve coincidere con l'input validato
+        if (safeFileName !== filename) {
+            console.error("Tentativo di path traversal:", filename);
+            return NextResponse.json({ 
+                error: "Nome file non valido" 
+            }, { status: 400 });
+        }
 
+        const filePath = path.join(resolvedUploadDir, safeFileName);
+
+        // Verifica che il percorso finale sia dentro UPLOAD_DIR
+        if (!filePath.startsWith(resolvedUploadDir + path.sep)) {
+            console.error("Tentativo di path traversal:", filePath);
+            return NextResponse.json({ 
+                error: "Percorso file non valido" 
+            }, { status: 400 });
+        }
+
+        // Verifica che il file esista e sia un file normale (non directory, symlink, etc.)
+        try {
+            await access(filePath, constants.F_OK);
+            const stats = await stat(filePath);
+            
+            if (!stats.isFile()) {
+                console.error("Non è un file regolare:", filePath);
+                return NextResponse.json({ 
+                    error: "Il percorso non corrisponde a un file valido" 
+                }, { status: 400 });
+            }
+        } catch {
+            return NextResponse.json({ 
+                error: "File non trovato" 
+            }, { status: 404 });
+        }
+
+        // Verifica estensione ancora una volta
+        const ext = path.extname(safeFileName).toLowerCase().slice(1);
+        if (!allowedExtensions.includes(ext as any)) {
+            return NextResponse.json({ 
+                error: "Tipo di file non permesso per eliminazione" 
+            }, { status: 403 });
+        }
+
+        // Elimina il file
         await unlink(filePath);
-        console.log(`File ${safeFileName} rimosso con successo`);
+        
+        // Log successo
+        console.log(`[DELETE SUCCESS] File: ${safeFileName}`);
 
         return NextResponse.json({ success: true });
         
     } catch (err) {
-        console.error(err)
-        return NextResponse.json({ error: `Errore interno durante il fetch dei dati: ${err}` }, { status: 500 });
+        console.error("[DELETE ERROR]", err);
+        return NextResponse.json({ 
+            error: "Errore interno del server" 
+        }, { status: 500 });
     }
 }

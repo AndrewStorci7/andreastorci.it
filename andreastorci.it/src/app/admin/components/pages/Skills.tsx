@@ -1,10 +1,10 @@
 import React from "react";
-import { useNotification } from "@providers";
+import { useNotification, usePageSelector } from "@providers";
 import "@astyle/skillsStyle.css"
 import Table from "../table/Table";
 import { VoicesProps } from "../table/types";
 import PersonalInfo from "@ctypes/PersonalInfo";
-import { Skill } from "@ctypes";
+import { ResponseFromAPI, Skill } from "@ctypes";
 import { TableProvider } from "../table/provider/TableContext";
 
 const SkillsPage = () => {
@@ -18,7 +18,12 @@ const SkillsPage = () => {
     ];
 
     const handlerForSave = async (newData: Skill) => {
-        const test = await PersonalData.addOneSkill(newData);
+        let test: ResponseFromAPI = { success: false }
+        try {
+            test = await PersonalData.addOneSkill(newData);
+        } catch (err) {
+            console.log(err);
+        }
         
         showNotification({
             purpose: "notification",
@@ -27,7 +32,7 @@ const SkillsPage = () => {
                 "Errore nell'inserimento di un nuovo dato",
             message: (test.success) ? 
                 "Inserimento avvenuto con successo!" : 
-                "Non è stato possibile aggiugnere un nuovo dato per la tabella `skills`, controlla che i dati siano corretti e che non abbiano caratteri speciali non accettati",
+                `Non è stato possibile aggiugnere un nuovo dato per la tabella \`skills\`, controlla che i dati siano corretti e che non abbiano caratteri speciali non accettati: ${test.error}`,
             duration: (test.success) ? 4000 : 6000,
             type: (test.success) ? "completed" : "error"
         })

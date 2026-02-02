@@ -1,12 +1,15 @@
-import type { 
-    Project, 
-    Education, 
-    Skill,
-    ContactInfo,
-    Experience,
-    PersonalData,
-    ResponseFromAPI,
-    DeleteRouteProp
+import { 
+    type Project, 
+    type Education, 
+    type Skill,
+    type ContactInfo,
+    type Experience,
+    type PersonalData,
+    type ResponseFromAPI,
+    type DeleteRouteProp,
+    type PossibleContent,
+    LANGUAGES_TYPES,
+    Attributes
 } from "@ctypes";
 import OOB from "@ctypes/OOB";
 import { CommonData } from "@ctypes/CommonInfo";
@@ -88,27 +91,21 @@ class PersonalInfo extends OOB<PersonalData> {
     }
 
     async addOneSkill(newData: Skill): Promise<ResponseFromAPI> {
-        const update = await fetch("/api/data/addSkill", {
-            method: 'POST',
-            headers: this.headers,
-            body: JSON.stringify(newData)
-        }); 
-
-        const resp = await update.json();
-
-        return resp
+        try {
+            return await this.add('skills', newData);
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
 
     async addOneProject(newData: Project): Promise<ResponseFromAPI> {
-        const update = await fetch("/api/data/addProject", {
-            method: 'POST',
-            headers: this.headers,
-            body: JSON.stringify(newData)
-        }); 
-
-        const resp = await update.json();
-
-        return resp
+        try {
+            return await this.add('projects', newData);
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
 
     // async getSkillsByCategory(category: Skill['data'][number]['category']): Promise<Skill[]> {
@@ -145,6 +142,47 @@ class PersonalInfo extends OOB<PersonalData> {
         return commonData;
     }
 
+    async add(attribute: Attributes, newData: PossibleContent): Promise<ResponseFromAPI> {
+        try {
+            const route = await this.getRoute(attribute);
+
+            LANGUAGES_TYPES.forEach(async element => {
+                if (element !== this.currentLang) {
+                    try {
+                        newData = await this.translate(element, newData);
+                        if (!newData) {
+                            throw `Errore durante la traduzione nella lingua: "${element}"`
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        throw error;
+                    }
+                }
+    
+                const bodyToSend = typeof newData === 'object' && newData !== null
+                    ? { ...newData, lang: element }
+                    : { data: newData, lang: element };
+
+                const update = await fetch(route, {
+                    method: 'POST',
+                    headers: this.headers,
+                    body: JSON.stringify(bodyToSend)
+                }); 
+        
+                const resp = await update.json();
+    
+                if (!resp.success)
+                    throw `Errore durante l'aggiunta del progetto nella lingua: "${element}"`
+            });
+    
+            return { success: true } as ResponseFromAPI;
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async delete({ attribute, index }: DeleteRouteProp): Promise<ResponseFromAPI> {
         
         const resp = await fetch("/api/delete", {
@@ -158,11 +196,53 @@ class PersonalInfo extends OOB<PersonalData> {
         return json;
     }
 
+    async translate(lang: string, data: PossibleContent): Promise<PossibleContent | string> {
+        try {
+            const resp = await fetch("/api/translate", {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify({ lang, data })
+            });
+    
+            const result: ResponseFromAPI = await resp.json();
+            if (result.error) {
+                return result.error;
+            } else {
+                if (result.translation === undefined)
+                    throw "La traduzione e' null"
+
+                return result.translation;
+            }
+        } catch (err) {
+            console.error(err);
+            throw err
+        }
+    }
+
     async reload(): Promise<void> {
         this.data = null;
         this.isLoaded = false;
         this.loadingPromise = null;
         await this.loadPersonalData();
+    }
+
+    private async getRoute(attribute: Attributes): Promise<string> {
+        switch (attribute) {
+            case 'projects':
+                return '/api/data/addProject';
+            case 'contact':
+                return '/api/data/addContact';
+            case 'education':
+                return '/api/data/addEducation';
+            case 'experience':
+                return '/api/data/addExperience';
+            case 'skills':
+                return '/api/data/addSkill';
+            case 'languages':
+                return '/api/data/addLanguage';
+            default:
+                throw new Error(`Unknown attribute: ${attribute}`);
+        }
     }
 }
 

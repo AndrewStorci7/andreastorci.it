@@ -1,11 +1,10 @@
-import { PersonalData, Project } from "@ctypes";
+import { LANGUAGES_TYPES, PersonalData, Project } from "@ctypes";
 import { NextResponse } from "next/server";
 import db from "@lib/mongodb";
 import z from "zod"
 
-const collection = db.collection<PersonalData>("it-IT");
-
 const ProjectSchema = z.object({
+    lang: z.enum(LANGUAGES_TYPES, "Lingua non valida"),
     name: z.string().max(50),
     type: z.string().max(50),
     description: z.string().max(20000),
@@ -19,7 +18,6 @@ const ProjectSchema = z.object({
 export async function POST(req: Request) {
     try {
         const newData: Project = await req.json();
-        console.log(newData);
 
         const check = ProjectSchema.safeParse(newData);
         // console.log(check)
@@ -27,8 +25,11 @@ export async function POST(req: Request) {
         if (!check.success)
             return NextResponse.json({ success: false, message: "Non è stato possibile aggiungere alcun dato" }, { status: 400 })
 
+        const collection = db.collection<PersonalData>(check.data.lang);
+        const { lang, ...realData } = check.data;
+
         await collection.updateOne({}, {
-            $push: { projects: check.data }
+            $push: { projects: realData }
         })
 
         return NextResponse.json({ success: true })

@@ -44,7 +44,7 @@ export default function TableContent({
                         <span>Elemento eliminato <span className='bold'>{id}</span></span> :
                         <span>
                             Non è stato possibile eliminare l&apos;elemento <span className='bold'>{id}</span> <br/>
-                            Errore: <span style={{ fontSize: "10px", fontStyle: "italic" }}>
+                            Errore: <span style={{ fontSize: "12px", fontStyle: "italic" }}>
                                 {deleteResult.error}
                             </span>
                         </span>,

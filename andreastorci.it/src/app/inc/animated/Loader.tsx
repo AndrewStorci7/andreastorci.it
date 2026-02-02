@@ -9,13 +9,18 @@ import React from 'react';
 
 interface LoadingOverlayProps {
     onLoadingComplete?: () => void;
-    show: boolean
+    show: boolean,
+    text?: string
 }
 
-const LoadingOverlay = ({ show }: LoadingOverlayProps) => {
+const LoadingOverlay = ({ 
+    show,
+    text = "" 
+}: LoadingOverlayProps) => {
     return (
-        <div className={`loading-overlay ${!show ? 'hidden' : ''}`}>
+        <div className={`loading-overlay flex center column ${!show ? 'hidden' : ''}`}>
             <div className="loader"></div>
+            <p>{text}</p>
         </div>
     );
 };

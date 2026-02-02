@@ -9,12 +9,13 @@ type PageState = {
     title: string;
     subtitle?: string
     showLoader?: boolean
+    loaderText?: string
 };
 
 type PageSelectorContextType = {
     currentPage: PageState;
     setPage: (page: string, title: string, subtitle?: string) => void;
-    setLoader: (value: boolean) => void;
+    setLoader: (value: boolean, text?: string) => void;
     setTitle: (title: string) => void;
     setSubTitle: (subtitle: string) => void; 
 };
@@ -67,11 +68,12 @@ export const PageSelectorProvider = ({ children }: { children: ReactNode }) => {
         });
     }
 
-    const setLoader = (value: boolean) => {
+    const setLoader = (value: boolean, text?: string) => {
         setCurrentState(prev => {
             return {
                 ...prev,
-                showLoader: value
+                showLoader: value,
+                loaderText: text
             }
         });
     }
@@ -87,7 +89,7 @@ export const PageSelectorProvider = ({ children }: { children: ReactNode }) => {
             }}
         >
             {children}
-            <LoadingOverlay show={currentState.showLoader ?? false} />
+            <LoadingOverlay show={currentState.showLoader ?? false} text={currentState.loaderText} />
         </PageSelectorContext.Provider>
     );
 };

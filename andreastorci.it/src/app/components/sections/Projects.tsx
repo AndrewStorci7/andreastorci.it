@@ -11,6 +11,8 @@ import Techtag from '@inc/TechTag';
 import Image from 'next/image';
 import React from 'react';
 
+const uploadDir = process.env.NEXT_PUBLIC_IMAGE_PREFIX;
+
 const ProjectsSection = ({
     preview = false,
     data,
@@ -29,7 +31,19 @@ const ProjectsSection = ({
         return data.map((project: Project, index: number) => (
             <div key={index} className="project-card fade-in">
                 <div className={`project-image ${project.sku}`}>
-                    {project.image && <Image style={{ objectFit: "contain", width: "70%", height: "auto" }} width={400} height={0} src={project.image} alt={project.name} />}
+                    {project.image && 
+                        <Image 
+                        style={{ 
+                            objectFit: "contain", 
+                            width: "70%", 
+                            height: "auto" 
+                        }} 
+                        width={400} 
+                        height={0} 
+                        src={`${uploadDir}/${project.image}`} 
+                        alt={project.name} 
+                        />
+                    }
                 </div>
                 <div className='project-content'>
                     <div className='flex'>
