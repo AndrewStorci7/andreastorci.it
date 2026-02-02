@@ -1,23 +1,27 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { LevelSelector } from '@components/edit/skill/LevelSelector';
+import { useNotification, usePageSelector } from '@providers';
 import { PossibleContent, Project, Skill } from '@ctypes';
 import { DataInterface, VoicesProps } from '../types';
+import { handleUpload, removeUpload } from '@admin/inc/manageFiles';
 import PersonalInfo from '@ctypes/PersonalInfo';
 
 interface TableContextType extends TableProviderInterface {
     showAdd: boolean,           // visibilità della row di aggiunta
     setShowAdd: () => void      // switcha la visibilità della row di aggiunta 
     data: DataInterface         // oggetto con i dati nuovi del formato chaivi[], valori[]
-    setData: (key: string, val: string | number) => void
+    setData: (key: string, val: File | string | string[] | number) => void
     indexToDelete: number       // indice dell'elemento da eliminare
     setIndexToDelete: (i: number) => void // setter dell'indice
     contents: PossibleContent   // dati effettivi da visualizzare nella tabella
     reload: () => void          // ricarica i dati specifici della tabella con attributo impostata con `attribute`
+    upload?: string | null       // indica se è in corso un upload
+    setUpload?: (upload: string | null) => void // setter per l'upload
 }
 
 interface TableProviderInterface {
     // apiEndpoint: string     // uri dell'endopint per aggiunta
-    handleSave: (e: object) => void     // funzione gancio da eseguire in caso di salvataggio
+    handleSave: (e: object) => Promise<void>     // funzione gancio da eseguire in caso di salvataggio
 
     handleCancel: (...args: unknown[]) => unknown  // funzione gancio da eseguire in caso di annullamento
     data: DataInterface     // oggetto con i dati nuovi del formato chaivi[], valori[]
@@ -49,10 +53,15 @@ export const TableProvider = ({
     children
 }: Extra) => {
 
+    // dati generali
     const PersonalData = new PersonalInfo("it-IT"); 
+    const { showNotification } = useNotification();
+    const { setLoader } = usePageSelector();
+
     const [contents, setContents] = useState<PossibleContent>(null);
     const [index, setIndex] = useState<number>(-1);
     const [showAdd, setShowAdd] = useState<boolean>(false);
+    const [isUploading, setIsUploading] = useState<string | null>(null);
     const [newData, setNewData] = useState<DataInterface>({
         dataKeys: data.dataKeys,
         dataValues: data?.dataValues.length == 0 ? 
@@ -64,16 +73,26 @@ export const TableProvider = ({
         if (settings.length == 0)
             throw new Error("La props `voices` deve almeno contenere un elemento, non può essere vuota");
 
-        reload()
+        reload();
     }, [])
 
     useEffect(() => {}, [contents])
 
-    const handleSetShowAdd = () => {
-        setShowAdd(prev => !prev)
+    // useEffect(() => {
+    //     if (!isUploading) {
+    //         _handleSave();
+    //     }
+    // }, [isUploading])
+
+    const handleSetUpload = (val: string | null) => {
+        setIsUploading(val);
     }
 
-    const handleSetData = (key: string, value: string | number) => {
+    const handleSetShowAdd = () => {
+        setShowAdd(prev => !prev);
+    }
+
+    const handleSetData = (key: string, value: File | string | string[] | number) => {
         // aggiungere dopo validazione di `key` e `value`
         setNewData(prev => {
             const indexKey = prev.dataKeys.findIndex((k) => k === key);
@@ -88,35 +107,64 @@ export const TableProvider = ({
         });
     }
 
-    const _handleSave = () => {
+    const _handleSave = async () => {
+
+        setLoader(true);
+        let finalFileName = null;
+
+        const fileIndex = newData.dataKeys.findIndex(key => key === 'image' || key === 'file');
+        const fileObject = fileIndex !== -1 ? newData.dataValues[fileIndex] : null;
+
+        if (fileObject instanceof File) {
+            finalFileName = await handleUpload(
+                fileObject,
+                showNotification
+            );
+
+            if (!finalFileName) {
+                setLoader(false);
+                return; 
+            }
+        }
 
         const finalDataParsed = Object.fromEntries(
-            newData.dataKeys.map((key, i) => [key, newData.dataValues[i]])
+            newData.dataKeys.map((key, i) => {
+                if ((key === 'image' || key === 'file') && finalFileName) {
+                    return [key, finalFileName];
+                }
+                return [key, newData.dataValues[i]];
+            })
         );
 
-        handleSave?.(finalDataParsed);
-        
-        // dopo il salvataggio 
-        reload();
+        try {
+            await handleSave?.(finalDataParsed);
+            reload(); 
+            setShowAdd(false);
+        } catch (err) {
+            console.error("Errore salvataggio DB:", err);
+            await removeUpload(finalFileName, showNotification);
+        } finally {
+            setLoader(false);
+        }
     }
 
     const reload = async () => {
         // ricaricando i dati
         PersonalData.reload();
+        // resetto i dati dell'aggiunta
+        setNewData({
+            dataKeys: data.dataKeys,
+            dataValues: data?.dataValues.length == 0 ?
+                data.dataKeys.map(() => "") :
+                data.dataValues
+        });
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let content: PossibleContent | any[] = null;
         switch (attribute) {
             case "projects": {
                 content = await PersonalData.getProjects();
-                // content = content.map((project: Project) => Object.values(project).slice(0, 4))
                 content = content.map((project: Project) => Object.values(project))
-                // content.map((project: Project) => {
-                //     const values = Object.values(project);
-                //     const firstThree = values.slice(0, 3);
-                //     const fourthElement = values[3]; 
-                //     return [...firstThree, fourthElement];
-                // });
                 break;
             }
             case "skills": {
@@ -160,7 +208,9 @@ export const TableProvider = ({
             handleCancel,
             handleSave: _handleSave,
             contents,
-            reload
+            reload,
+            upload: isUploading,
+            setUpload: handleSetUpload
         }}>
             {children}
         </TableContext.Provider>

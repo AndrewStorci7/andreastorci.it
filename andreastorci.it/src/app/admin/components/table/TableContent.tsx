@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./style/main.css"
 import { styles } from './style/style';
-import { Trash2, Edit2, Plus, Ellipsis } from 'lucide-react';
+import { Trash2, Edit2, Plus, Ellipsis, Eye } from 'lucide-react';
 import TableAddNewItem from './TableAddNewItem';
 import { setStyleCol } from './inc/common';
 import { useTable } from './provider/TableContext';
@@ -9,6 +9,7 @@ import PersonalInfo from '@ctypes/PersonalInfo';
 import { useNotification, usePageSelector } from '@providers';
 import Icon from '@inc/Icon';
 import { PossibleContent } from '@ctypes';
+import { removeUpload } from '@/admin/inc/manageFiles';
 
 interface TableContentProps {
     content: PossibleContent,
@@ -25,9 +26,12 @@ export default function TableContent({
     const [hoveredRow, setHoveredRow] = useState<number>(-1);
 
     const handleDelete = async (id: number, proceed: boolean = false) => {
+        let filename: string | null = null;
         try {
             if (proceed) {
                 const pd = new PersonalInfo("it-IT");
+                const promiseProjects = await pd.getProjects();
+                filename = promiseProjects[id]?.image ?? null;
                 const deleteResult = await pd.delete({ attribute: attribute, index: id });
                 
                 hideNotification()
@@ -50,7 +54,13 @@ export default function TableContent({
                     customIcon: <Icon useFor="announce" width={25} height={25} />,
                 });
         
+                // elimino l'immagine caricata sul server
+                if (attribute === "projects") {
+                    await removeUpload(filename, showNotification)
+                }
+                
                 reload();
+                
             } else {
                 showNotification({
                     title: "Sei sicuro di voler eliminare il progetto ?",
@@ -64,9 +74,9 @@ export default function TableContent({
                 })
             }
         } catch (err) {
-            console.error(err)
+            console.error(err);
         } finally {
-            setLoader(false)
+            setLoader(false);
         }
     };
 
@@ -103,6 +113,7 @@ export default function TableContent({
                         {e.map((val: any, val_i: number) => {
                             const setting = settings[val_i] ?? {};
                             const rowCol = setStyleCol(setting, "row");
+                            const showContent = setting.show ?? true;
                             
                             let textSliced = val;
                             let sliced = false;
@@ -125,16 +136,30 @@ export default function TableContent({
                                             ...(hoveredRow === i ? styles.indicatorActive : {})
                                         }} />
                                     )}
-                                    <span style={styles.cellTextBold}>{textSliced}</span>
+                                    {showContent ? (
+                                        <span style={styles.cellTextBold}>
+                                            {textSliced} 
+                                        </span>
+                                    ) : (
+                                        <button
+                                        className='' 
+                                        style={{
+                                            ...styles.actionButton,
+                                            ...styles.seeMoreButton,
+                                            ...styles.actionButtonVisible
+                                        }}>
+                                            <Eye size={18} />
+                                        </button>
+                                    )}
                                     {sliced && (
                                         <button
                                         className='absolute see-more-button' 
                                         style={{
-                                            ...styles.actionButton,
+                                            ...styles.actionButtonMini,
                                             ...styles.seeMoreButton,
                                             ...(hoveredRow === i ? styles.actionButtonVisible : styles.actionButtonHidden)
                                         }}>
-                                            <Ellipsis size={18} />
+                                            <Ellipsis size={10} />
                                         </button>
                                     )}
                                 </div>

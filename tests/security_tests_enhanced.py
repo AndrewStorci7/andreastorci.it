@@ -782,7 +782,7 @@ class SecurityTester:
             try:
                 files = {'file': (filename, content, mime_type)}
                 response = self.session.post(
-                    f"{self.base_url}/api/upload",
+                    f"{self.base_url}/api/files/upload",
                     files=files,
                     timeout=10
                 )

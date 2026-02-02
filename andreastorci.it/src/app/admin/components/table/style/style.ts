@@ -227,6 +227,13 @@ export const styles: Record<string, React.CSSProperties> = {
         border: 'none',
         cursor: 'pointer'
     },
+    actionButtonMini: {
+        padding: '0.4rem 0.5rem',
+        borderRadius: '0.5rem',
+        transition: 'all 0.3s',
+        border: 'none',
+        cursor: 'pointer'
+    },
     actionButtonVisible: {
         transform: 'scale(1)',
         opacity: 1

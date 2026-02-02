@@ -97,10 +97,10 @@ export interface Project {
     // data: ProjectsSectionData;
     name: string;
     type: string;
-    role: string[];
     description: string;
     technologies: string[];
     link?: string;
+    role: string[];
     image?: string;
     sku?: string;
 }

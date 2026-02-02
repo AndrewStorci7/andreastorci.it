@@ -263,11 +263,11 @@ select {
 button {
     cursor: pointer;
     text-decoration: none;
-    font-size: large;
+    /* font-size: large; */
     color: var(--charcoal);
     border: 1px solid var(--deep-sage);
     border-radius: 10px;
-    padding: 5px 7px;
+    /* padding: 5px 7px; */
     /* margin-bottom: 20px; */
     background-color: var(--warm-cream);
     transition: background-color .1s ease,

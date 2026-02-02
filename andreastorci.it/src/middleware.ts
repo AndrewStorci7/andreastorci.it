@@ -8,7 +8,9 @@ const PROTECTED_PATHS = [
     '/api/translate',
     '/api/admin',
     '/api/update',
-    '/api/data/addSkill'
+    '/api/data/addSkill',
+    '/api/files/upload',
+    '/api/files/remove'
 ];
 
 // Endpoint con rate limiting stringente
@@ -19,7 +21,9 @@ const RATE_LIMITED_PATHS = [
     '/api/delete',
     '/api/update',
     '/api/data',
-    '/api/data/addSkill'
+    '/api/data/addSkill',
+    '/api/files/upload',
+    '/api/files/remove'
 ];
 
 // Rate limiting storage
