@@ -1,0 +1,12 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: andreastorciit-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/andrew/Docker/andreastorciit-mongodb.bkp:/data/db
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
