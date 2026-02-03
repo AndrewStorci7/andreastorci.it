@@ -28,7 +28,9 @@ const Techtag: React.FC<TechTagProps> = ({
 }
 
 const setupStyle = (type: string) => {
-    switch (type.toLowerCase()) {
+    const lowType = type.toLowerCase().replace(" ", "");
+    console.log(lowType)
+    switch (lowType) {
         case 'javascript':
             return "tech-tag bg-js";
         case "node.js":
@@ -37,6 +39,7 @@ const setupStyle = (type: string) => {
             return "tech-tag bg-ts color-white";
         case 'react':
             return 'tech-tag bg-react color-white';
+        case 'reactnative':
         case 'react native':
             return 'tech-tag bg-reactnative';
         case 'three.js':
@@ -46,9 +49,9 @@ const setupStyle = (type: string) => {
         case 'next.js':
             return 'tech-tag bg-next color-white';
         case 'mongodb':
-            return 'tech-tag bg-mongodb color-white'
+            return 'tech-tag bg-mongodb color-white';
         default:
-            return "tech-tag"
+            return "tech-tag bg-default color-white";
     }
 }
 

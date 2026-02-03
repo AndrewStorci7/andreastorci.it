@@ -1,5 +1,4 @@
 import { TableProvider } from "@components/table/provider/TableContext";
-import { useFadeInObserver } from "@inc/animated/FadeIn";
 import { VoicesProps } from "@components/table/types";
 import PersonalInfo from "@ctypes/PersonalInfo";
 import { useNotification } from "../provider";
@@ -22,8 +21,6 @@ const ProjectsPage = () => {
         { name: "Immagine", width: 1, show: false, typeContent: "image" },
         { name: "Sku", width: 1, show: false },
     ]
-
-    useFadeInObserver('.fade-in');
 
     const handleSave = async (newData: Project) => {
 

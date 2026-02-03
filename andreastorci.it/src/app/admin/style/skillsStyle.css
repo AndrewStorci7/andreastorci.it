@@ -3,10 +3,9 @@
     margin-bottom: 100px;
 }
 
-.skills-section-admin > .skill-card-admin {
+/* .skills-section-admin > .skill-card-admin {
     border: 1px solid var(--neutral-grey);
     border-radius: 10px;
-    /* padding: 10px; */
     margin: 5px 0;
     background-color: var(--soft-blue-light);
 }
@@ -52,7 +51,6 @@
     color: var(--white);
     font-weight: bold;
     gap: 0.6rem;
-    /* border: 1px solid var(--neutral-grey); */
 }
 
 .skill-card-admin > .flex .fix-padding {
@@ -61,8 +59,6 @@
 }
 
 .level-pointer {
-    /* width: 20px;
-    height: 20px; */
     padding: 2px 6px;
     color: var(--charcoal);
 }
@@ -82,4 +78,4 @@
 .level-container-admin {
     border-radius: 10px;
     border: 1px solid var(--neutral-grey);
-}
+} */

@@ -19,6 +19,15 @@
   --deep-sage: #5A6B4F;     /* Verde salvia scuro */
   --white: #FFFFFF;
   --black: #1A1A1A;
+
+  /* Colori delle tecnologie */
+  /* --bg-javascript: #ffd600;
+  --bg-react: #5580bf;
+  --bg-node: #24a464;
+  --bg-next: #242424;
+  --bg-mysql: #E46D04;
+  --bg-mongodb: #13AA52;
+  --bg-reactnative: #61DAFB; */
 }
 
 * {
@@ -55,12 +64,40 @@ body {
   flex-direction: row;
 }
 
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.gap-2 {
+  gap: 0.1em;
+}
+
+.gap-3 {
+  gap: 0.3em;
+}
+
+.gap-4 {
+  gap: 0.4em;
+}
+
+.gap-5 {
+  gap: 0.7em;
+}
+
+.gap-max {
+  gap: 1rem;
+}
+
 .color-white {
   color: white !important;
 }
 
 .color-black {
   color: black !important;
+}
+
+.justify {
+  text-align: justify;
 }
 
 .center {
@@ -170,62 +207,6 @@ body {
   50% { transform: translateY(-20px) rotate(180deg); }
 }
 
-/* Skills Section */
-.skills-section {
-  padding: 8rem 0;
-  background: var(--white);
-  position: relative;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--charcoal);
-  margin-bottom: 4rem;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.skill-card {
-  background: linear-gradient(135deg, var(--light-sage), var(--warm-cream));
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 50px rgba(156, 175, 136, 0.2);
-}
-
-.skill-card h3 {
-  color: var(--deep-sage);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.skill-tag {
-  background: var(--sage-green);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
 .margin-l-auto {
   margin-left: auto;
 }
@@ -325,3 +306,57 @@ html {
   transform: translateY(0);
 }
 
+/* Prova tootlip */
+/* Selettore globale per qualsiasi elemento con data-tooltip */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+  transition: all 0.2s ease-in-out 0.5s;
+}
+
+/* Il corpo del messaggio */
+[data-tooltip]::after {
+  content: attr(data-tooltip); /* Prende il testo dall'attributo HTML */
+  position: absolute;
+  bottom: 125%; /* Lo posiziona sopra l'elemento */
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  
+  /* Stile usando le tue variabili */
+  background-color: var(--charcoal);
+  color: var(--warm-cream);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 1000;
+  
+  /* Animazione e visibilità */
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* La freccina (triangolo) */
+[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--charcoal) transparent transparent transparent;
+  
+  opacity: 0;
+  /* transition: all 0.2s ease-in-out 1s; */
+}
+
+/* Mostra al passaggio del mouse */
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition: all 0.2s ease-in-out 0.5s;
+}

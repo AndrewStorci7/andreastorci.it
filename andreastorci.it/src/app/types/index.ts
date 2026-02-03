@@ -86,6 +86,7 @@ export interface Skill extends LanguageToTranslate{
     name: string;
     level: number | ReactNode; // 1-5 o 1-10
     category: string;
+    new?: boolean;
 }
 
 //#endregion Skills Section

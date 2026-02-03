@@ -50,8 +50,20 @@ export const useFadeInObserver = (
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
+                    // // console.log(entry.target)
+                    // if (entry.isIntersecting) {
+                    //     entry.target.classList.add('visible');
+                    //     observer.unobserve(entry.target);
+                    // }
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        
+                        // Spediamo un evento custom che la componente può ascoltare
+                        entry.target.dispatchEvent(new CustomEvent('elementVisible', {
+                            bubbles: true,
+                            detail: { target: entry.target }
+                        }));
+
                         observer.unobserve(entry.target);
                     }
                 });

@@ -23,10 +23,13 @@ const CircularLoader: React.FC<CircularLoaderProps> = ({
     useEffect(() => {
         let startTime: number;
         const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
+            
+            if (!startTime) startTime = timestamp;
+
             const elapsed = timestamp - startTime;
             const percentage = Math.min(elapsed / duration, 1);
             setProgress(percentage);
+
             if (percentage < 1) {
                 requestAnimationFrame(animate);
             }
