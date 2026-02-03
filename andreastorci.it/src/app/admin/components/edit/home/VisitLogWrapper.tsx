@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { usePageSelector } from "@providers";
 import "@astyle/visitLogsWrapperStyle.css";
 import { LogsTable } from "@lib/mongodb";
-import Cookies from "js-cookie";
 // import { cookies } from "next/headers";
 
 type DateType = {

@@ -15,8 +15,8 @@ interface TableContextType extends TableProviderInterface {
     setIndexToDelete: (i: number) => void // setter dell'indice
     contents: PossibleContent   // dati effettivi da visualizzare nella tabella
     reload: () => void          // ricarica i dati specifici della tabella con attributo impostata con `attribute`
-    upload?: string | null       // indica se è in corso un upload
-    setUpload?: (upload: string | null) => void // setter per l'upload
+    // upload?: string | null       // indica se è in corso un upload
+    // setUpload?: (upload: string | null) => void // setter per l'upload
 }
 
 interface TableProviderInterface {
@@ -61,7 +61,7 @@ export const TableProvider = ({
     const [contents, setContents] = useState<PossibleContent>(null);
     const [index, setIndex] = useState<number>(-1);
     const [showAdd, setShowAdd] = useState<boolean>(false);
-    const [isUploading, setIsUploading] = useState<string | null>(null);
+    // const [isUploading, setIsUploading] = useState<string | null>(null);
     const [newData, setNewData] = useState<DataInterface>({
         dataKeys: data.dataKeys,
         dataValues: data?.dataValues.length == 0 ? 
@@ -78,9 +78,9 @@ export const TableProvider = ({
 
     useEffect(() => {}, [contents])
 
-    const handleSetUpload = (val: string | null) => {
-        setIsUploading(val);
-    }
+    // const handleSetUpload = (val: string | null) => {
+    //     setIsUploading(val);
+    // }
 
     const handleSetShowAdd = () => {
         setShowAdd(prev => !prev);
@@ -165,12 +165,12 @@ export const TableProvider = ({
             }
             case "skills": {
                 content = await PersonalData.getSkills();
-                content = content.map((skill: Skill) => Object.values(skill));
+                content = content.map((skill: Skill) => Object.values(skill).splice(0, 3));
                 if (Array.isArray(content)) {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     content.map((e: any[]) => {
                         const backup = e;
-                        backup[1] = <LevelSelector currentLevel={backup[1]} />
+                        backup[1] = <LevelSelector admin currentLevel={backup[1]} />
                         return backup
                     })
                 }
@@ -205,8 +205,8 @@ export const TableProvider = ({
             handleSave: _handleSave,
             contents,
             reload,
-            upload: isUploading,
-            setUpload: handleSetUpload
+            // upload: isUploading,
+            // setUpload: handleSetUpload
         }}>
             {children}
         </TableContext.Provider>

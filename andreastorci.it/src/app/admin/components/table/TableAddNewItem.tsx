@@ -14,8 +14,7 @@ export default function TableAddNewItem() {
         handleSave, 
         showAdd, 
         setShowAdd,
-        upload,
-        setUpload
+        // setUpload
     } = useTable();
 
     const handleCancel = () => {
@@ -39,7 +38,7 @@ export default function TableAddNewItem() {
         return settings.map((e, i) => {
 
             const rowCol = setStyleCol(e, "row");
-            const showInfoContent = e.infoContent ? true : false;
+            // const showInfoContent = e.infoContent ? true : false;
             const isArray = e.contentIsArray;
             const typeContent: TypesContent = e.typeContent ?? "text";
 
@@ -90,7 +89,7 @@ export default function TableAddNewItem() {
                     <div style={styles.rowCol1}>
                         <button 
                         onClick={() => {
-                            setUpload?.("uploading");
+                            // setUpload?.("uploading");
                             handleSave({})
                             setShowAdd()
                         }} 

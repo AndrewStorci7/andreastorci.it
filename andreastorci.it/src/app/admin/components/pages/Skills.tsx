@@ -1,5 +1,5 @@
 import React from "react";
-import { useNotification, usePageSelector } from "@providers";
+import { useNotification } from "@providers";
 import "@astyle/skillsStyle.css"
 import Table from "../table/Table";
 import { VoicesProps } from "../table/types";

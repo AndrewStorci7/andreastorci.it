@@ -26,7 +26,7 @@
  */
 export const handleUpload = async (
     file: File | null, 
-    // setUpload: (val: string | null) => void,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleError: (...args: any | any[]) => void
 ): Promise<string | null> => {
 
@@ -46,14 +46,6 @@ export const handleUpload = async (
         console.log(json)
         filename = json.fileName;
 
-        // if (res.ok) {
-        //     showNotification({
-        //         title: "Successo",
-        //         message: "File caricato correttamente",
-        //         type: "completed"
-
-        //     });
-        // }
     } catch (error) {
         console.log(error)
         handleError({
@@ -90,6 +82,7 @@ export const handleUpload = async (
  */
 export const removeUpload = async (
     filename: string | null, 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleError: (...args: any | any[]) => void
 ) => {
     if (!filename) return;
@@ -107,10 +100,9 @@ export const removeUpload = async (
         console.log(error)
         handleError({
             title: "Errore",
-            message: <span>Errore nell'eliminazione del file</span>,
+            message: <span>Errore nell&apos;eliminazione del file</span>,
             type: "error",
             purpose: "notification"
         });
-        // return null;
     }
 }

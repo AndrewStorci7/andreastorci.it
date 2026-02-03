@@ -1,4 +1,4 @@
-import { writeFile, mkdir, access } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import path from "path";
@@ -33,6 +33,7 @@ export async function POST(req: Request) {
         const validFile = validation.data.file;
 
         // Controllo tipo MIME
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!allowedTypes.includes(validFile.type as any)) {
             return NextResponse.json({ 
                 error: "Tipo di file non supportato. Ammessi solo: " + allowedTypes.join(", ")
@@ -48,6 +49,7 @@ export async function POST(req: Request) {
 
         // Estrazione e validazione estensione
         const fileExtension = validFile.name.split('.').pop()?.toLowerCase();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!fileExtension || !allowedExtensions.includes(fileExtension as any)) {
             return NextResponse.json({ 
                 error: "Estensione non valida. Ammesse solo: " + allowedExtensions.join(", ")

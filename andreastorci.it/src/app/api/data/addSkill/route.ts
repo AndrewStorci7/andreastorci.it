@@ -21,6 +21,7 @@ export async function POST(req: Request) {
 
         const collection = db.collection<PersonalData>(check.data.lang);
         const { lang, ...realData } = check.data;
+        console.log(`[ADD SKILL] Lingua: ${lang}, Dati: ${JSON.stringify(realData)}`);
 
         await collection.updateOne({}, {
             $push: { skills: realData }

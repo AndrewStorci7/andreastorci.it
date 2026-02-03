@@ -82,6 +82,7 @@ export async function POST(req: Request) {
 
         // Verifica estensione ancora una volta
         const ext = path.extname(safeFileName).toLowerCase().slice(1);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!allowedExtensions.includes(ext as any)) {
             return NextResponse.json({ 
                 error: "Tipo di file non permesso per eliminazione" 

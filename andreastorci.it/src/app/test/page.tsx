@@ -7,7 +7,7 @@ import React, { useEffect } from "react"
 function TestWrapped() {
 
     const { setLoader } = usePageSelector();
-    const pd = new PersonalInfo("it-IT");
+    // const pd = new PersonalInfo("it-IT");
 
     const testTranslate = async () => {
         const pd = new PersonalInfo("it-IT");

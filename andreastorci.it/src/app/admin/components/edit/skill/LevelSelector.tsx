@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 
 interface LevelSelectorProps {
+    admin?: boolean // usato per togliere l'effetto fade-in
     currentLevel: number
     // children: React.ReactNode
     size?: number,
@@ -9,25 +10,13 @@ interface LevelSelectorProps {
 } 
 
 export const LevelSelector = ({
+    admin = false,
     currentLevel,
     // children,
     size = 50,
     strokeWidth = 5,
     timeEffect = 2000,
 }: LevelSelectorProps) => {
-
-    // const [animatedLevel, setAnimatedLevel] = useState(0);
-
-    // const background = `hsl(${animatedLevel * 12}, 80%, 50%)`;
-    // const radius = (size - strokeWidth) / 2;
-    // const circumference = 2 * Math.PI * radius;
-    // const effectiveLevel = animatedLevel / 10;
-    // const offset = circumference * (1 - effectiveLevel);
-
-    // useEffect(() => {
-    //     // Update the level indicator when the currentLevel changes
-    //     setAnimatedLevel(currentLevel);
-    // }, [currentLevel, timeEffect]);
 
     const [animatedLevel, setAnimatedLevel] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null); // Ref per l'ascolto
@@ -49,24 +38,21 @@ export const LevelSelector = ({
             }, 100); 
         };
 
-        // Ascoltiamo l'evento personalizzato lanciato dall'hook
-        node.addEventListener('elementVisible' as any, handleVisible);
+        node.addEventListener('elementVisible' as string, handleVisible);
 
-        // Se per caso la componente è già visibile (o non ha la classe fade-in)
-        // facciamo un controllo di sicurezza
-        if (node.classList.contains('visible')) {
+        if (node.classList.contains('visible') || admin) {
             handleVisible();
         }
 
-        return () => node.removeEventListener('elementVisible' as any, handleVisible);
-    }, [currentLevel]);
+        return () => node.removeEventListener('elementVisible' as string, handleVisible);
+    }, [currentLevel, admin]);
 
     const renderLevels = () => {
         return (
             <div 
             data-tooltip={`Livello di competenza: ${currentLevel}/10`}
             ref={containerRef}
-            className="fade-in" 
+            className={`${admin ? '' : 'fade-in'}`} 
             style={{ 
                 position: "relative", 
                 width: size, 
