@@ -124,10 +124,10 @@ const coloredBar = (data: DateType[] | null) => {
         const count = entry?.count;
         let fillColor = "#E0E0E0";
 
-        if (count > 0 && count <= 2) fillColor = "#8FAE84";
-        else if (count <= 5) fillColor = "#7BA46C";
-        else if (count <= 10) fillColor = "#639550";
-        else fillColor = "#44892B";
+        if (count > 0 && count <= 2) fillColor = "#686ADE";
+        else if (count <= 5) fillColor = "#3639D3";
+        else if (count <= 20) fillColor = "#2527A7";
+        else fillColor = "#18196E";
 
         return <Cell key={`cell-${index}`} fill={fillColor} />;
     })

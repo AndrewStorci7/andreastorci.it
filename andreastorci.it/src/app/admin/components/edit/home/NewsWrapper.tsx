@@ -13,7 +13,7 @@ type NewsType = {
     description: string;
     url: string;
     urlToImage: string;
-    publishedAt: Date;
+    publishedAt: Date | null;
     content: string;
 }
 
@@ -58,20 +58,20 @@ const NewsWrapper = ({
         }
 
         const currentNews = news[currentIndex]
-        const day = new Date(currentNews.publishedAt)
+        const day = currentNews?.publishedAt ? new Date(currentNews.publishedAt) : new Date();
 
         return (
             <div key={currentIndex} id={String(currentIndex)} className="wrapper-container expose">
                 <div className="news-left-side" style={{
-                    backgroundImage: `url(${currentNews.urlToImage}`
+                    backgroundImage: `url(${currentNews?.urlToImage}`
                 }} />
                 <div className="flex news-right-side grid-span-2">
                     <div className="space-y-4">
-                        <h3>{currentNews.title}</h3>
-                        <h5>{currentNews.author?? "Anonimous"} - <span>{day.toDateString()}</span></h5>
-                        <p>{currentNews.content}</p>
+                        <h3>{currentNews?.title}</h3>
+                        <h5>{currentNews?.author ?? "Anonimous"} - <span>{day.toDateString()}</span></h5>
+                        <p>{currentNews?.content}</p>
                         <div className="flex grid-col-2 space-between fix-to-bottom">
-                            <a href={currentNews.url} className="see-full-article">
+                            <a href={currentNews?.url} className="see-full-article">
                                 Vai all&apos;articolo
                             </a>
                             <CircularLoader start={clock} size={35} duration={DURATION} strokeWidth={4} />
