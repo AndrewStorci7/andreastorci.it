@@ -29,7 +29,7 @@ const Techtag: React.FC<TechTagProps> = ({
 
 const setupStyle = (type: string) => {
     const lowType = type.toLowerCase().replace(" ", "");
-    console.log(lowType)
+    // console.log(lowType)
     switch (lowType) {
         case 'javascript':
             return "tech-tag bg-js";

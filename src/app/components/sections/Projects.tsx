@@ -79,7 +79,9 @@ const ProjectsSection = ({
         preview={preview} 
         className='projects-section' 
         title={commonData?.title} >
-            <div onMouseMove={(e) => console.log(e.clientX, e.clientY)} >
+            <div 
+            // onMouseMove={(e) => console.log(e.clientX, e.clientY)} 
+            >
                 {renderContent(data)}
             </div>
         </Section>
