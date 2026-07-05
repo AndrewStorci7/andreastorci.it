@@ -4,7 +4,7 @@ import {
     type UserTable
 } from "@ctypes/DBTypes";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.NODE_ENV == "production" ? process.env.MONGODB_URI : process.env.MONGODB_URI_DEV;
 const options = {
     serverApi: {
         version: ServerApiVersion.v1,

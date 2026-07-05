@@ -69,12 +69,24 @@ export async function POST(req: Request) {
         }
 
         // Verifica che UPLOAD_DIR sia un percorso assoluto e sicuro
-        const resolvedUploadDir = path.resolve(uploadDir);
-        
-        // Crea directory se non esiste
+        // const resolvedUploadDir = path.resolve(uploadDir);
+        const resolvedUploadDir = path.isAbsolute(uploadDir) 
+        ? uploadDir 
+        : path.resolve(process.cwd(), uploadDir);
+
         await mkdir(resolvedUploadDir, { recursive: true });
 
         const filePath = path.join(resolvedUploadDir, safeName);
+
+        const normalizedDir = path.normalize(resolvedUploadDir) + path.sep;
+        const normalizedFilePath = path.normalize(filePath);
+
+        if (!normalizedFilePath.startsWith(normalizedDir)) {
+            console.error("Tentativo di path traversal:", filePath);
+            return NextResponse.json({ 
+                error: "Percorso file non valido" 
+            }, { status: 400 });
+        }
 
         // Verifica che il file finale sia effettivamente dentro UPLOAD_DIR
         if (!filePath.startsWith(resolvedUploadDir + path.sep)) {

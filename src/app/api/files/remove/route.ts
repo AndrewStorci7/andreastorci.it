@@ -1,4 +1,4 @@
-import { unlink, access, stat } from "fs/promises";
+import { unlink, access, stat, mkdir } from "fs/promises";
 import { NextResponse } from "next/server";
 import { constants } from "fs";
 import path from "path";
@@ -40,7 +40,12 @@ export async function POST(req: Request) {
             }, { status: 500 });
         }
 
-        const resolvedUploadDir = path.resolve(uploadDir);
+        // const resolvedUploadDir = path.resolve(uploadDir);
+        const resolvedUploadDir = path.isAbsolute(uploadDir) 
+        ? uploadDir 
+        : path.resolve(process.cwd(), uploadDir);
+
+        // await mkdir(resolvedUploadDir, { recursive: true });
 
         // Usa basename per prevenire path traversal
         const safeFileName = path.basename(filename);
@@ -57,6 +62,16 @@ export async function POST(req: Request) {
 
         // Verifica che il percorso finale sia dentro UPLOAD_DIR
         if (!filePath.startsWith(resolvedUploadDir + path.sep)) {
+            console.error("Tentativo di path traversal:", filePath);
+            return NextResponse.json({ 
+                error: "Percorso file non valido" 
+            }, { status: 400 });
+        }
+
+        const normalizedDir = path.normalize(resolvedUploadDir) + path.sep;
+        const normalizedFilePath = path.normalize(filePath);
+
+        if (!normalizedFilePath.startsWith(normalizedDir)) {
             console.error("Tentativo di path traversal:", filePath);
             return NextResponse.json({ 
                 error: "Percorso file non valido" 

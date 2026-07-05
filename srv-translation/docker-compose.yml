@@ -12,8 +12,13 @@ services:
       - ./lt-config:/home/libretranslate/.config
       - ./lt-cache:/home/libretranslate/.cache
     environment:
-      - LT_LOAD_ONLY=en,it
+      - LT_LOAD_ONLY=en,it,es
+    networks:
+      - coolify-network
 
+networks:
+  coolify-network:
+    external: true
 # volumes:
 #   lt-local:
 #   lt-config:
