@@ -47,6 +47,7 @@ next-env.d.ts
 /public/data/
 
 /src/app/api/test
+/src/app/test
 
 srv-translation/lt*
 
@@ -64,3 +65,5 @@ configurazione-server.md
 secret.md
 
 tmp
+
+local-uploads

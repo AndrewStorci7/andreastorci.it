@@ -28,7 +28,8 @@ const RATE_LIMITED_PATHS = [
 // Rate limiting più severo per operazioni sui file
 const FILE_OPERATION_PATHS = [
     '/api/files/upload',
-    '/api/files/remove'
+    '/api/files/remove',
+    '/api/uploads'
 ];
 
 // Rate limiting storage
